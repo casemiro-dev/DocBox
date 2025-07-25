@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>DocBox</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      padding: 40px;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(255,255,255,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: #00ffcc;
+    }
+
+    h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00bfff;
+    }
+
+    .cpf-input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #555;
+      border-radius: 6px;
+      background-color: #333;
+      color: #fff;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      flex: 1;
+      padding: 10px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      color: #fff;
+    }
+
+    .formatar { background-color: #4CAF50; }
+    .remover { background-color: #f44336; }
+    .salvar  { background-color: #0077cc; }
+    .limpar  { background-color: #999; }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      background-color: #333;
+      padding: 8px;
+      margin-bottom: 5px;
+      border-radius: 6px;
+      color: #00ffcc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cpf-actions {
+      display: flex;
+      gap: 5px;
+    }
+
+    .cpf-actions button {
+      background-color: #555;
+      padding: 4px 8px;
+      font-size: 12px;
+      border-radius: 4px;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cpf-actions button:hover {
+      background-color: #777;
+    }
+
+    .mensagem {
+      text-align: center;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .mensagem.sucesso { color: #4CAF50; }
+    .mensagem.erro    { color: #f44336; }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>DocBox</h2>
+
+    <div class="cpf-input-group">
+      <input type="text" id="docInput" placeholder="Digite o CPF ou CNPJ">
+    </div>
+
+    <div class="buttons">
+      <button class="formatar" id="btnFormatar">Aplicar pontuação</button>
+      <button class="remover" id="btnRemover">Tirar pontuação</button>
+      <button class="salvar" id="btnSalvar">Salvar</button>
+      <button class="limpar" id="btnLimpar">Limpar</button>
+      <button class="salvar" id="btnCopiarAtual">📋 Copiar atual</button>
+    </div>
+
+    <div id="mensagem" class="mensagem"></div>
+
+    <h3>📋 Documentos Salvos:</h3>
+    <ul id="listaDocumentos"></ul>
+
+    <footer>
+      Desenvolvido por Casemiro Alves – Operador de telemarketing<br>
+      New Call Comunicação NCC – DocBox – Versão 2.0 – Julho de 2025
+    </footer>
+
+  <script>
+    const docInput = document.getElementById("docInput");
+    const mensagem = document.getElementById("mensagem");
+    const listaDocumentos = document.getElementById("listaDocumentos");
+    const documentosSalvos = [];
+
+    document.getElementById("btnFormatar").onclick = formatarDocumento;
+    document.getElementById("btnRemover").onclick = removerFormatacao;
+    document.getElementById("btnSalvar").onclick = salvarDocumento;
+    document.getElementById("btnLimpar").onclick = limparCampo;
+    document.getElementById("btnCopiarAtual").onclick = copiarDocumentoAtual;
+
+    function formatarDocumento() {
+      let doc = docInput.value.replace(/\D/g, "");
+      if (doc.length === 11) {
+        docInput.value = doc.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+        mostrarMensagem("CPF formatado com sucesso!", "sucesso");
+      } else if (doc.length === 14) {
+        docInput.value = doc.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
+        mostrarMensagem("CNPJ formatado com sucesso!", "sucesso");
+      } else {
+        mostrarMensagem("Documento deve conter 11 (CPF) ou 14 (CNPJ) dígitos.", "erro");
+      }
+    }
+
+    function removerFormatacao() {
+      docInput.value = docInput.value.replace(/\D/g, "");
+      mostrarMensagem("Pontuação removida.", "sucesso");
+    }
+
+    function validarDocumento(doc) {
+      doc = doc.replace(/\D/g, "");
+      if (doc.length === 11) return validarCPF(doc);
+      if (doc.length === 14) return validarCNPJ(doc);
+      return false;
+    }
+
+    function validarCPF(cpf) {
+      if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+      let soma = 0;
+      for (let i = 0; i < 9; i++) soma += parseInt(cpf[i]) * (10 - i);
+      let resto = (soma * 10) % 11;
+      if (resto === 10 || resto === 11) resto = 0;
+      if (resto !== parseInt(cpf[9])) return false;
+      soma = 0;
+      for (let i = 0; i < 10; i++) soma += parseInt(cpf[i]) * (11 - i);
+      resto = (soma * 10) % 11;
+      if (resto === 10 || resto === 11) resto = 0;
+      return resto === parseInt(cpf[10]);
+    }
+
+    function validarCNPJ(cnpj) {
+      if (cnpj.length !== 14 || /^(\d)\1+$/.test(cnpj)) return false;
+      let tamanho = cnpj.length - 2;
+      let numeros = cnpj.substring(0, tamanho);
+      let digitos = cnpj.substring(tamanho);
+      let soma = 0;
+      let pos = tamanho - 7;
+      for (let i = tamanho; i >= 1; i--) {
+        soma += parseInt(numeros.charAt(tamanho - i)) * pos--;
+        if (pos < 2) pos = 9;
+      }
+      let resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+      if (resultado !== parseInt(digitos.charAt(0))) return false;
+      tamanho += 1;
+      numeros = cnpj.substring(0, tamanho);
+      soma = 0;
+      pos = tamanho - 7;
+      for (let i = tamanho; i >= 1; i--) {
+        soma += parseInt(numeros.charAt(tamanho - i)) * pos--;
+        if (pos < 2) pos = 9;
+      }
+      resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+      return resultado === parseInt(digitos.charAt(1));
+    }
+
+    function salvarDocumento() {
+      const doc = docInput.value;
+      const docLimpo = doc.replace(/\D/g, "");
+      if (docLimpo && validarDocumento(docLimpo)) {
+        documentosSalvos.push(doc);
+        atualizarLista();
+        mostrarMensagem("Documento salvo com sucesso!", "sucesso");
+      } else {
+        mostrarMensagem("Documento inválido ou vazio.", "erro");
+      }
+    }
+
+    function atualizarLista() {
+      listaDocumentos.innerHTML = "";
+      documentosSalvos.forEach((doc, index) => {
+        const li = document.createElement("li");
+        li.textContent = doc;
+
+        const actions = document.createElement("div");
+        actions.className = "cpf-actions";
+
+        const btnCopiar = document.createElement("button");
+        btnCopiar.textContent = "📋 Copiar";
+        btnCopiar.onclick = () => copiarDocumento(doc);
+
+        const btnRemover = document.createElement("button");
+        btnRemover.textContent = "❌";
+        btnRemover.onclick = () => removerDocumento(index);
+
+        actions.appendChild(btnCopiar);
+        actions.appendChild(btnRemover);
+        li.appendChild(actions);
+        listaDocumentos.appendChild(li);
+      });
+    }
+
+    function copiarDocumento(doc) {
+      navigator.clipboard.writeText(doc).then(() => {
+        mostrarMensagem("Documento copiado para a área de transferência!", "sucesso");
+      }).catch(() => {
+        mostrarMensagem("Erro ao copiar documento.", "erro");
+      });
+    }
+
+    function copiarDocumentoAtual() {
+      const doc = docInput.value;
+      const docLimpo = doc.replace(/\D/g, "");
+      if (!docLimpo) {
+        mostrarMensagem("Nenhum documento digitado para copiar.", "erro");
+        return;
+      }
+      if (!validarDocumento(docLimpo)) {
+        mostrarMensagem("Documento inválido. Não foi copiado.", "erro");
+        return;
+      }
+      navigator.clipboard.writeText(doc).then(() => {
+        mostrarMensagem("Documento atual copiado!", "sucesso");
+      }).catch(() => {
+        mostrarMensagem("Erro ao copiar documento atual.", "erro");
+      });
+    }
+
+    function removerDocumento(index) {
+      documentosSalvos.splice(index, 1);
+      atualizarLista();
+      mostrarMensagem("Documento removido da lista.", "sucesso");
+    }
+
+    function limparCampo() {
+      docInput.value = "";
+      mostrarMensagem("", "sucesso");
+    }
+
+    function mostrarMensagem(msg, tipo) {
+      mensagem.textContent = msg;
+      mensagem.className = `mensagem ${tipo}`;
+    }
+  </script>
+</body>
+</html>
