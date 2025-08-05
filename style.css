@@ -1,0 +1,390 @@
+/* ── Globais ───────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #191c2c;
+  margin: 0;
+  padding: 20px;
+  color: #ffffff;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  background: #2a2f4a;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid #1e2238;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #ffffff;
+}
+
+/* ── Grid ─────────────────────────────────────────────── */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Inputs & Textareas ───────────────────────────────── */
+input,
+textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  background-color: #f3f3f3;
+  color: #232946;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6c757d;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ── Botões principais ───────────────────────────────── */
+.button-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  background-color: #e2870f;
+  color: #1d2136;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #cf6f0d;
+}
+
+button img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* ── Mensagem de cópia ─────────────────────────────── */
+.copiado-msg {
+  margin-top: 15px;
+  color: #8bd3dd;
+  font-weight: bold;
+}
+
+/* ── Campos específicos ─────────────────────────────── */
+input#telefone {
+  background-color: #f3f3f3 !important;
+  color: #232946;
+}
+
+input#chat-protocolo {
+  color: #007bff;
+  font-weight: 300;
+}
+
+input#doc-id {
+  background-color: #f3f3f3;
+  color: #232946;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+}
+
+textarea#anotacoes {
+  margin-top: 10px;
+}
+
+.info-grid .protocols-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+input#prot-gerado {
+  width: calc(50% - 5px);
+  margin-right: auto;
+  color: #dc3545;
+  font-weight: 300;
+}
+
+input#prot-ref-adm {
+  width: calc(50% - 5px);
+}
+
+/* ── Botão de alternância de tema ───────────────────── */
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+#btn-tema {
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  background-color: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#btn-tema:hover {
+  background-color: #005fa3;
+}
+
+/* ── Tema claro ─────────────────────────────────────── */
+body.tema-claro {
+  background: #f5f5f5;
+  color: #232946;
+}
+
+body.tema-claro .container {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body.tema-claro h1 {
+  color: #232946;
+}
+
+body.tema-claro input,
+body.tema-claro textarea {
+  background-color: #ffffff;
+  color: #232946;
+  border: 1px solid #ccc;
+}
+
+body.tema-claro .copiado-msg {
+  color: #0077cc;
+}
+
+body.tema-claro button {
+  background-color: #0077cc;
+  color: #fff;
+}
+
+body.tema-claro button:hover {
+  background-color: #005fa3;
+}
+
+/* ── Campo CPF/CNPJ ─────────────────────────────────── */
+.cpf-wrapper {
+  position: relative;
+  margin-bottom: 0px;
+  overflow: hidden;
+}
+
+.field {
+  margin-bottom: 2px;
+}
+
+.cpf-wrapper input#doc-id {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 75px;
+  height: 40px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* ── Botões icônicos (CPF/CNPJ) ─────────────────────── */
+.cpf-wrapper .btn-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -16px;
+  background-color: #2a2f4a;
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 18px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease; /* Adicionada animação shrink */
+  z-index: 1;
+}
+
+.cpf-wrapper .btn-icon { /*Deixa os dois botões do mesmo tamanho*/
+  width: 28px;
+  height: 32px;
+  padding: 0;
+  line-height: 32px;
+  text-align: center;
+}
+
+.cpf-wrapper .btn-icon.left {
+  right: 45px;
+}
+
+.cpf-wrapper .btn-icon.right {
+  right: 10px;
+  color: #ffffff;
+}
+
+/* ── Efeito Shrink no hover ───────────────────────────── */
+.cpf-wrapper .btn-icon:hover {
+  transform: scale(0.9);
+}
+
+/* ── Campo Nome com botão Titular ────────────────────── */
+.titular-wrapper {
+  position: relative;
+  margin-bottom: 2px;
+  overflow: hidden;
+}
+
+.titular-wrapper input#cliente-nome {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 45px;
+  height: 40px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.titular-wrapper .btn-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -16px;
+  right: 10px;
+  background-color: #2a2f4a;
+  border-radius: 6px;
+  padding: 0;
+  width: 28px;
+  height: 32px;
+  font-size: 18px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 32px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.titular-wrapper .btn-icon:hover {
+  transform: scale(0.9);
+}
+
+/* Botões de TAG */
+.html-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.html-buttons button {
+  padding: 6px 10px;
+  font-size: 16px;
+  background-color: #4c5270;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.html-buttons button:hover {
+  transform: scale(1.08);
+  background-color: #343957;
+}
+
+/* ── Correção de botões internos no modo claro ───────────────────────────── */
+body.tema-claro .cpf-wrapper .btn-icon,
+body.tema-claro .titular-wrapper .btn-icon {
+  background-color: #0077cc;
+  color: #ffffff;
+}
+
+body.tema-claro .cpf-wrapper .btn-icon:hover,
+body.tema-claro .titular-wrapper .btn-icon:hover {
+  background-color: #005fa3;
+}
+
+/* ── Modo Claro: deixa imagens dos botões brancas ── */
+body.tema-claro button img {
+  filter: brightness(0) invert(1);
+}
+
+/* ── Botões de Interface ────────────────────── */
+#btn-faster-desk,
+#btn-tema {
+  font-size: 16px;
+  padding: 12px 20px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 2px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#btn-faster-desk {
+  margin-left: 10px; /* específico do botão Faster */
+}
+
+#btn-faster-desk:hover,
+#btn-tema:hover {
+  background-color: #005fa3;
+  transform: scale(1.15);
+}
+
+/* ── Tema claro para botões ─────────────────── */
+body.tema-claro #btn-faster-desk,
+body.tema-claro #btn-tema {
+  background-color: #0077cc;
+  color: white;
+}
+
+body.tema-claro #btn-faster-desk:hover,
+body.tema-claro #btn-tema:hover {
+  background-color: #005fa3;
+}
+
+/* ── Barra de botões ────────────────────────── */
+.top-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.linha-superior,
+.linha-inferior {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}

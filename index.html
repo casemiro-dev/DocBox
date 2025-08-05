@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro de Atendimento</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <!-- 🔲 Botão quadrado de alternância de tema -->
+    <div class="top-bar">
+      <div class="linha-superior">
+        <button id="btn-faster-desk">Faster/Desk</button>
+      </div>
+      <div class="linha-inferior">
+        <button id="btn-tema">💡</button>
+      </div>
+    </div>
+
+
+    <div class="info-grid">
+      <div class="field">
+        <input type="text" id="chat-protocolo" placeholder="Protocolo do Chat" />
+      </div>
+      <div class="protocols-row">
+        <input type="text" id="prot-gerado" placeholder="Prot. Gerado" />
+        <input type="text" id="prot-ref-adm" placeholder="Prot. Ref. ADM" />
+      </div>
+      <div class="field input-wrapper titular-wrapper">
+        <input type="text" id="cliente-nome" placeholder="Nome do Cliente" />
+        <button type="button" id="btn-titular" class="btn-icon right animado" title="Titular">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffffff" viewBox="0 0 24 24">
+            <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5S7 4.24 7 7s2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="field">
+        <input type="tel" id="telefone" placeholder="(xx) y xxxx-xxxx"/>
+      </div>
+      <div class="field input-wrapper cpf-wrapper">
+        <input type="text" id="doc-id" placeholder="CPF ou CNPJ" />
+        <button type="button" id="btn-validar" class="btn-icon right animado">✎</button>
+        <button type="button" id="btn-limpar" class="btn-icon left animado">⊘</button>
+      </div>
+
+      <div class="html-buttons" style="display: flex; gap: 6px;">
+        <button type="button" onclick="addToTextArea('<hr>')">&lt;hr&gt;</button>
+        <button type="button" onclick="addToTextArea('<br>')">&lt;br&gt;</button>
+        <button type="button" onclick="addToTextArea('<b>')">&lt;b&gt;</button>
+        <button type="button" onclick="addToTextArea('</b>')">&lt;/b&gt;</button>
+      </div>
+    </div>
+
+    <div class="field full-width">
+      <textarea id="anotacoes" placeholder="Registre o atendimento..."></textarea>
+    </div>
+
+    <div class="button-group">
+      <button id="btn-copiar-protocolo">
+        Protocolo
+        <img src="protocolo.png" alt="Protocolo" class="btn-icon" />
+      </button>
+
+      <button id="btn-copiar-atendimento">
+        Copiar
+        <img src="copiar.png" alt="Copiar" class="btn-icon" />
+      </button>
+
+      <button id="btn-transferir">
+        Transferir
+        <img src="transferir.png" alt="Transferir" class="btn-icon" />
+      </button>
+
+      <button id="btn-apagar">
+        Apagar
+        <img src="excluir.png" alt="Apagar" class="btn-icon" />
+      </button>
+    </div>
+
+    <p id="mensagem-copiado" class="copiado-msg"></p>
+  </div>
+</body>
+</html>
