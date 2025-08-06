@@ -4,7 +4,7 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   background: #191c2c;
   margin: 0;
   padding: 20px;
@@ -19,6 +19,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   border: 1px solid #1e2238;
+  margin-top: 40px;
 }
 
 h1 {
@@ -27,11 +28,18 @@ h1 {
   color: #ffffff;
 }
 
+textarea { /*Fonte da caixa de registro*/
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px; /* opcional */
+  color: #333;     /* cor do texto digitado */
+}
+
 /* ── Grid ─────────────────────────────────────────────── */
 .info-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
+  margin-top: 55px;
 }
 
 .field {
@@ -55,8 +63,8 @@ textarea::placeholder {
   color: #6c757d;
 }
 
-textarea {
-  min-height: 120px;
+textarea {                 /*Tamanho da caixa de registro de atendimento*/ 
+  min-height: 200px;
   resize: vertical;
 }
 
@@ -68,6 +76,7 @@ textarea {
   gap: 10px;
   margin-top: 20px;
   flex-wrap: wrap;
+  position: relative;
 }
 
 button {
@@ -83,6 +92,7 @@ button {
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 button:hover {
@@ -93,6 +103,30 @@ button img {
   width: 20px;
   height: 20px;
   object-fit: contain;
+}
+
+/* ── Linha de separação abaixo dos botões principais ───────────── */
+
+/* Modo escuro */
+body:not(.tema-claro) .button-group::after {
+  content: "";
+  position: absolute;
+  bottom: -42px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+}
+
+/* Modo claro */
+body.tema-claro .button-group::after {
+  content: "";
+  position: absolute;
+  bottom: -42px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #A9A9A9;
 }
 
 /* ── Mensagem de cópia ─────────────────────────────── */
@@ -147,7 +181,34 @@ input#prot-ref-adm {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
+  position: relative; /* necessário para posicionar a linha */
 }
+
+
+/* ── Linha de separação superior ───────────────────────────── */
+
+/* Modo escuro */
+body:not(.tema-claro) .top-bar::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #5c7a9c; /* azul acinzentado com contraste */
+}
+
+/* Modo claro */
+body.tema-claro .top-bar::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #A9A9A9; /* cinza médio para contraste no fundo claro */
+}
+
 
 #btn-tema {
   width: 32px;
@@ -199,6 +260,7 @@ body.tema-claro button {
 body.tema-claro button:hover {
   background-color: #005fa3;
 }
+
 
 /* ── Campo CPF/CNPJ ─────────────────────────────────── */
 .cpf-wrapper {
@@ -349,6 +411,7 @@ body.tema-claro button img {
   cursor: pointer;
   margin: 2px;
   transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 #btn-faster-desk {
@@ -371,6 +434,7 @@ body.tema-claro #btn-tema {
 body.tema-claro #btn-faster-desk:hover,
 body.tema-claro #btn-tema:hover {
   background-color: #005fa3;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 /* ── Barra de botões ────────────────────────── */
