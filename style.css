@@ -4,8 +4,9 @@
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   background: #191c2c;
+  font-weight: 300;
   margin: 0;
   padding: 20px;
   color: #ffffff;
@@ -63,7 +64,7 @@ textarea::placeholder {
   color: #6c757d;
 }
 
-textarea {                 /*Tamanho da caixa de registro de atendimento*/ 
+textarea {                 /*Tamanho da caixa de registro de atendimento*/
   min-height: 200px;
   resize: vertical;
 }
@@ -103,6 +104,17 @@ button img {
   width: 20px;
   height: 20px;
   object-fit: contain;
+}
+/*Mensagem de informação dos botões*/
+.copiado-msg {
+  height: 24px; /* reserva espaço mesmo sem mensagem */
+  margin-top: 8px;
+  font-size: 14px;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+.copiado-msg.ativo {
+  opacity: 1;
 }
 
 /* ── Linha de separação abaixo dos botões principais ───────────── */
@@ -357,7 +369,7 @@ body.tema-claro button:hover {
   transform: scale(0.9);
 }
 
-/* Botões de TAG */
+/* Botões de TAG ____________________________________________________________*/
 .html-buttons {
   display: flex;
   gap: 6px;
@@ -399,43 +411,132 @@ body.tema-claro button img {
   filter: brightness(0) invert(1);
 }
 
-/* ── Botões de Interface ────────────────────── */
-#btn-faster-desk,
+/* ── Botão: Tema ───────────────────────────────── */
 #btn-tema {
   font-size: 16px;
   padding: 12px 20px;
-  background-color: #0077cc;
+  background-color: #345995; /* azul escuro elegante */
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   margin: 2px;
   transition: background-color 0.2s ease, transform 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-#btn-faster-desk {
-  margin-left: 10px; /* específico do botão Faster */
-}
-
-#btn-faster-desk:hover,
 #btn-tema:hover {
-  background-color: #005fa3;
+  background-color: #28487a;
   transform: scale(1.15);
 }
 
-/* ── Tema claro para botões ─────────────────── */
-body.tema-claro #btn-faster-desk,
 body.tema-claro #btn-tema {
-  background-color: #0077cc;
+  background-color: #345995;
   color: white;
 }
 
-body.tema-claro #btn-faster-desk:hover,
 body.tema-claro #btn-tema:hover {
-  background-color: #005fa3;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  background-color: #28487a;
 }
+
+/* ── Botão: Faster Desk ───────────────────────── */
+#btn-faster-desk {
+  font-size: 16px;
+  padding: 12px 20px;
+  background-color: #c82333; /* laranja vibrante */
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 2px 2px 2px 10px; /* inclui margem esquerda */
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#btn-faster-desk:hover {
+  background-color: rgb(210, 8, 1);
+  transform: scale(1.15);
+}
+
+body.tema-claro #btn-faster-desk {
+  background-color: #c82333;
+  color: #ffffff;
+}
+
+body.tema-claro #btn-faster-desk:hover {
+  background-color: rgb(210, 8, 1);
+}
+
+/* ── Botão: M.P ───────────────────────── */
+/* 🟠 M.P */
+#btn-mp {
+  font-size: 16px;
+  padding: 12px 20px;
+  background-color: #563d7c;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 2px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#btn-mp:hover {
+  background-color: #483368;
+  transform: scale(1.17);
+}
+
+body.tema-claro #btn-mp {
+  background-color: #563d7c;
+  color: #ffffff;
+}
+
+body.tema-claro #btn-mp:hover {
+  background-color: #483368;
+}
+
+
+/* ── Botão: M.P DESK ───────────────────────── */
+/* 🔵 M.P Desk */
+#btn-mpdesk {
+  font-size: 16px;
+  padding: 12px 20px;
+  background-color: #1c86ee;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 2px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#btn-mpdesk:hover {
+  background-color: #166fc2;
+  transform: scale(1.17);
+}
+
+body.tema-claro #btn-mpdesk {
+  background-color: #1c86ee;
+  color: #ffffff;
+}
+
+body.tema-claro #btn-mpdesk:hover {
+  background-color: #166fc2;
+}
+
+/*Emoji SVG*/
+#btn-mp::before,
+#btn-mpdesk::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-image: url('journal.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 6px;
+  vertical-align: middle;
+  filter: brightness(0) invert(1); /* só no ícone */
+}
+
 
 /* ── Barra de botões ────────────────────────── */
 .top-bar {
@@ -449,6 +550,72 @@ body.tema-claro #btn-tema:hover {
 .linha-superior,
 .linha-inferior {
   display: flex;
-  gap: 10px;
+  gap: 1px;
   justify-content: center;
+}
+
+.agendamento-wrapper {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Título Agendamento alinhado com os campos ______________________________*/
+.agendamento-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 3px; /* 👈 isso desce o bloco inteiro */
+  margin-bottom: -6px; /* 👈 reduz o espaço entre esse bloco e os campos abaixo */
+}
+
+
+/* Caixa de turno */
+#periodo-agendamento {
+  padding: 8px 12px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #f3f3f3;
+  color: #232946;
+}
+
+/* Blocos de data */
+.blocos-data {
+  display: flex;
+  gap: 8px;
+  margin-bottom: -1px; /* 👈 isso desce os campos de data */
+}
+
+
+.blocos-data input[type="date"] {
+  padding: 8px 12px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #f3f3f3;
+  color: #232946;
+}
+
+/* Campos de texto abaixo */
+.field.full-width input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #f3f3f3;
+  color: #232946;
+  margin-bottom: -10px; /* 👈 isso desce os campos de texto */
+}
+
+
+/* Checkboxes (mantidos como estão) */
+.checkboxes label {
+  color: #ffffff;
+  font-size: 15px;
+  margin-bottom: 8px;
+  display: block;
+  margin-bottom: -6px;
 }
