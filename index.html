@@ -4,16 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Registro de Atendimento</title>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
 <body>
+
   <div class="container">
     <!-- 🔲 Botão quadrado de alternância de tema -->
     <div class="top-bar">
       <div class="linha-superior">
         <button id="btn-faster-desk">Faster/Desk</button>
+        <button id="btn-mp" class="btn-personalizado">M.P</button>
+        <button id="btn-mpdesk" class="btn-personalizado">M.P Desk</button>
       </div>
       <div class="linha-inferior">
         <button id="btn-tema">💡</button>
@@ -58,6 +61,7 @@
       <textarea id="anotacoes" placeholder="Registre o atendimento..."></textarea>
     </div>
 
+
     <div class="button-group">
       <button id="btn-copiar-protocolo">
         Protocolo
@@ -81,6 +85,44 @@
     </div>
 
     <p id="mensagem-copiado" class="copiado-msg"></p>
+
+    <div class="agendamento-wrapper">
+
+      <!-- Caixa de seleção com opções -->
+      <div class="agendamento-top">
+        <select id="periodo-agendamento">
+          <option value="">Turno</option>
+          <option value="manha">Manhã</option>
+          <option value="tarde">Tarde</option>
+          <option value="noite">Noite</option>
+        </select>
+
+        <!-- Três blocos de data -->
+        <div class="blocos-data">
+          <input type="date" id="data1" placeholder="dd/mm/aaaa">
+          <input type="date" id="data2" placeholder="dd/mm/aaaa">
+          <input type="date" id="data3" placeholder="dd/mm/aaaa">
+        </div>
+      </div>
+
+      <!-- Campo de Disponibilidade Geral (sem label) -->
+      <div class="field full-width">
+        <input type="text" id="disponibilidade" placeholder="Disponibilidade Geral">
+      </div>
+
+      <!-- Campo de Ponto de Referência (sem label) -->
+      <div class="field full-width">
+        <input type="text" id="referencia" placeholder="Ponto de referência">
+    </div>
+
+      <!-- Checkboxes (mantidos como estão) -->
+      <div class="checkboxes">
+        <label><input type="checkbox"> Cliente ciente de que deve haver uma pessoa maior de idade.</label><br>
+        <label><input type="checkbox"> Garantia de Instalação (30 dias).</label><br>
+        <label><input type="checkbox"> Cliente empresarial.</label>
+      </div>
+    </div>
+
   </div>
 </body>
 </html>
