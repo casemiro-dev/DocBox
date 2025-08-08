@@ -141,6 +141,20 @@ body.tema-claro .button-group::after {
   background-color: #A9A9A9;
 }
 
+/*Linha de baixo do agendamento:__________________*/
+.linha-divisoria {
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff; /* ou a cor que você usou na linha de cima */
+  margin-top: 40px;
+  margin: 16px 0; /* espaçamento acima e abaixo */
+  margin-bottom: 10px;
+}
+/* Modo claro: linha divisória */
+body.tema-claro .linha-divisoria {
+  background-color: #A9A9A9; /* mesma cor das outras linhas no modo claro */
+}
+
 /* ── Mensagem de cópia ─────────────────────────────── */
 .copiado-msg {
   margin-top: 15px;
@@ -559,6 +573,7 @@ body.tema-claro #btn-mpdesk:hover {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding-bottom: 18px;  /*Controla a distância da linha de baixo.*/
 }
 
 /* Título Agendamento alinhado com os campos ______________________________*/
@@ -618,4 +633,41 @@ body.tema-claro #btn-mpdesk:hover {
   margin-bottom: 8px;
   display: block;
   margin-bottom: -6px;
+}
+/* Modo claro: texto das checkboxes */
+body.tema-claro .checkboxes label {
+  color: #232946; /* cor escura visível no fundo claro */
+}
+
+/*Botão LGPD___________________________________________*/
+.lgpd-wrapper {
+  display: flex;
+  justify-content: flex-start; /* alinha à esquerda */
+  margin-top: 20px;
+}
+
+#btn-lgpd {
+  width: 50%; /* ocupa da esquerda até o centro */
+  padding: 12px 16px;
+  font-size: 16px;
+  background-color: #4c5270;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#btn-lgpd:hover {
+  background-color: #343957;
+  transform: scale(1.05);
+}
+/*MODO CLARO______________________________________*/
+body.tema-claro #btn-lgpd {
+  background-color: #0077cc;
+  color: #ffffff;
+}
+
+body.tema-claro #btn-lgpd:hover {
+  background-color: #005fa3;
 }
