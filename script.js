@@ -54,12 +54,13 @@ function copiarAtendimento() {
   } else {
     // ⚡ Modo Faster
     if (protocoloChat !== "") {
-    resultado += `<b><font color=blue>Protocolo do Chat: ${protocoloChat}</font></b><hr>`;
-    resultado += `<b><font color=blue>Padrão Fibra</font></b><hr>`;
-  } else {
-    resultado += `</b></font><hr> <b><font color=blue> Padrão Fibra </b></font><hr>`;
-  }
-    resultado += `${dataFormatada}→ Atendimento realizado com Sr(a). ${nomeCliente} no nº ${telefone}.<br>`;
+      resultado += `<b><font color=blue>Protocolo do Chat: ${protocoloChat}</font></b><hr>`;
+      resultado += `<b><font color=blue>Padrão Fibra</font></b><hr>`;
+      resultado += `${dataFormatada}→ Atendimento realizado com Sr(a). ${nomeCliente} via chat no nº ${telefone}.<br>`;
+    } else {
+      resultado += `</b></font><hr> <b><font color=blue> Padrão Fibra </b></font><hr>`;
+      resultado += `${dataFormatada}→ Atendimento realizado com Sr(a). ${nomeCliente} via tel no nº ${telefone}.<br>`;
+    }
     resultado += anotacoes;
     if (protocoloADM !== "") {
       resultado += `<hr><b>Protocolo ADM:</b> ${protocoloADM}.`;
