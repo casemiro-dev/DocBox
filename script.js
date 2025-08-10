@@ -17,13 +17,21 @@ let modoDesk = false;
 function copiarProtocolo() {
   const anotacoes = document.getElementById("anotacoes").value.trim();
   const protocoloChat = document.getElementById("chat-protocolo").value.trim();
+  const empresarial = document.querySelectorAll(".checkboxes input")[2].checked;
+
   const pontoFinal = anotacoes.indexOf(".");
   const textoInicial = pontoFinal !== -1 ? anotacoes.slice(0, pontoFinal + 1) : anotacoes;
 
   let resultado = `${textoInicial}<hr>`;
+
   if (protocoloChat !== "") {
     resultado += `<b><font color=blue> Protocolo do Chat: ${protocoloChat} </font></b><hr>`;
   }
+
+  if (empresarial) {
+    resultado += `<b>EMPRESA</b><hr>`;
+  }
+
   copiarTexto(resultado);
 }
 
@@ -35,6 +43,15 @@ function copiarAtendimento() {
   const telefone = formatarTelefone(telefoneRaw);
   const protocoloADM = document.getElementById("prot-gerado").value.trim();
   const protocoloReferente = document.getElementById("prot-ref-adm").value.trim();
+  const turno = document.getElementById("periodo-agendamento").value;
+  const data1 = document.getElementById("data1").value;
+  const data2 = document.getElementById("data2").value;
+  const data3 = document.getElementById("data3").value;
+  const disponibilidade = document.getElementById("disponibilidade").value.trim();
+  const referencia = document.getElementById("referencia").value.trim();
+  const maiorIdade = document.querySelectorAll(".checkboxes input")[0].checked;
+  const garantia = document.querySelectorAll(".checkboxes input")[1].checked;
+
   const hoje = new Date();
   const dia = String(hoje.getDate()).padStart(2, '0');
   const mes = String(hoje.getMonth() + 1).padStart(2, '0');
@@ -55,16 +72,36 @@ function copiarAtendimento() {
     // ⚡ Modo Faster
     if (protocoloChat !== "") {
       resultado += `<b><font color=blue>Protocolo do Chat: ${protocoloChat}</font></b><hr>`;
-      resultado += `<b><font color=blue>Padrão Fibra</font></b><hr>`;
-      resultado += `${dataFormatada}→ Atendimento realizado com Sr(a). ${nomeCliente} via chat no nº ${telefone}.<br>`;
-    } else {
-      resultado += `</b></font><hr> <b><font color=blue> Padrão Fibra </b></font><hr>`;
-      resultado += `${dataFormatada}→ Atendimento realizado com Sr(a). ${nomeCliente} via tel no nº ${telefone}.<br>`;
     }
+    resultado += `<b><font color=blue>Padrão Fibra</font></b><hr>`;
+    resultado += `${dataFormatada}→ Atendimento realizado com Sr(a). ${nomeCliente} via ${protocoloChat !== "" ? "chat" : "tel"} no nº ${telefone}.<br>`;
     resultado += anotacoes;
+
+  // 🗓️ Agendamento
+if (turno || data1 || data2 || data3 || disponibilidade || referencia) {
+  if (turno) {
+    resultado += `<hr><b>Agendamento:</b> ${formatarTurno(turno)}`;
+  }
+  if (data1) resultado += `  - ${formatarData(data1)}`;
+  if (data2) resultado += ` - ${formatarData(data2)}`;
+  if (data3) resultado += ` - ${formatarData(data3)}`;
+  resultado += `<br>`;
+  if (disponibilidade) resultado += `<b>Disponibilidade geral:</b> ${disponibilidade}<br>`;
+  if (referencia) resultado += `<b>Ponto de referência:</b> ${referencia}<br>`;
+}
+
+    if (maiorIdade) {
+      resultado += `<hr>Cliente ficou ciente de que deve ter um maior de idade no local no dia da visita.`;
+    }
+
+    if (garantia) {
+      resultado += `<b>GARANTIA DE INSTALAÇÃO.</b>`;
+    }
+
     if (protocoloADM !== "") {
       resultado += `<hr><b>Protocolo ADM:</b> ${protocoloADM}.`;
     }
+
     if (protocoloReferente !== "") {
       resultado += `<br><b>Protocolo Referente:</b> ${protocoloReferente}.`;
     }
@@ -73,16 +110,43 @@ function copiarAtendimento() {
   copiarTexto(resultado);
 }
 
+function formatarData(dataISO) {
+  const [ano, mes, dia] = dataISO.split("-");
+  return `${dia}/${mes}/${ano}`;
+}
+function formatarTurno(turno) {
+  switch (turno.toLowerCase()) {
+    case "manha": return "Manhã";
+    case "tarde": return "Tarde";
+    case "noite": return "Noite";
+    default: return turno;
+  }
+}
+
+
 // ── Utilitários extras ──
 function apagar() {
+  // Campos principais
   document.getElementById("chat-protocolo").value = "";
   document.getElementById("prot-gerado").value = "";
+  document.getElementById("prot-ref-adm").value = "";
   document.getElementById("cliente-nome").value = "";
   document.getElementById("telefone").value = "";
   document.getElementById("doc-id").value = "";
   document.getElementById("anotacoes").value = "";
   document.getElementById("mensagem-copiado").textContent = "";
-  document.getElementById("prot-ref-adm").value = "";
+
+  // Campos de agendamento
+  document.getElementById("periodo-agendamento").value = "";
+  document.getElementById("data1").value = "";
+  document.getElementById("data2").value = "";
+  document.getElementById("data3").value = "";
+  document.getElementById("disponibilidade").value = "";
+  document.getElementById("referencia").value = "";
+
+  // Checkboxes
+  const checkboxes = document.querySelectorAll(".checkboxes input");
+  checkboxes.forEach(checkbox => checkbox.checked = false);
 }
 
 function transferir() {
