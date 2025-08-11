@@ -6,6 +6,31 @@
   <title>Registro de Atendimento</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+
+  <!-- 🔐 Verificação de login -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA4vzmTjrt27KisKnFZd7M2legSrt3ee6E",
+      authDomain: "docbox-a20c2.firebaseapp.com",
+      projectId: "docbox-a20c2",
+      storageBucket: "docbox-a20c2.firebasestorage.app",
+      messagingSenderId: "85276909046",
+      appId: "1:85276909046:web:625043716c1d695c22bbd7",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, user => {
+      if (!user) {
+        window.location.href = "login.html"; // 🔁 redireciona se não estiver logado
+      }
+    });
+  </script>
+
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -22,7 +47,6 @@
         <button id="btn-tema">💡</button>
       </div>
     </div>
-
 
     <div class="info-grid">
       <div class="field">
@@ -61,7 +85,6 @@
       <textarea id="anotacoes" placeholder="Registre o atendimento..."></textarea>
     </div>
 
-
     <div class="button-group">
       <button id="btn-copiar-protocolo">
         Protocolo
@@ -87,8 +110,6 @@
     <p id="mensagem-copiado" class="copiado-msg"></p>
 
     <div class="agendamento-wrapper">
-
-      <!-- Caixa de seleção com opções -->
       <div class="agendamento-top">
         <select id="periodo-agendamento">
           <option value="">Turno</option>
@@ -97,7 +118,6 @@
           <option value="noite">Noite</option>
         </select>
 
-        <!-- Três blocos de data -->
         <div class="blocos-data">
           <input type="date" id="data1" placeholder="dd/mm/aaaa">
           <input type="date" id="data2" placeholder="dd/mm/aaaa">
@@ -105,17 +125,14 @@
         </div>
       </div>
 
-      <!-- Campo de Disponibilidade Geral (sem label) -->
       <div class="field full-width">
         <input type="text" id="disponibilidade" placeholder="Disponibilidade Geral">
       </div>
 
-      <!-- Campo de Ponto de Referência (sem label) -->
       <div class="field full-width">
         <input type="text" id="referencia" placeholder="Ponto de referência">
-    </div>
+      </div>
 
-      <!-- Checkboxes (mantidos como estão) -->
       <div class="checkboxes">
         <label><input type="checkbox"> Cliente ciente de que deve haver uma pessoa maior de idade.</label><br>
         <label><input type="checkbox"> Garantia de Instalação (30 dias).</label><br>
@@ -129,7 +146,6 @@
         LGPD
       </button>
     </div>
-
   </div>
 </body>
 </html>
