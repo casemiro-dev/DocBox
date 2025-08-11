@@ -483,7 +483,7 @@ body.tema-claro #btn-faster-desk:hover {
 /* 🟣 M.P */
 #btn-mp {
   font-size: 16px;
-  padding: 12px 26px 12px 1px; /* top, right, bottom, left */
+  padding: 12px 20px;
   background-color: #563d7c;
   color: #ffffff;
   border: none;
@@ -491,14 +491,6 @@ body.tema-claro #btn-faster-desk:hover {
   cursor: pointer;
   margin: 2px;
   transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-#btn-mp img {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-  vertical-align: middle;
-  filter: brightness(0) invert(1);
 }
 
 #btn-mp:hover {
@@ -515,19 +507,12 @@ body.tema-claro #btn-mp:hover {
   background-color: #483368;
 }
 
-#btn-mp,
-#btn-mpdesk {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
 
 /* ── Botão: M.P DESK ───────────────────────── */
 /* 🔵 M.P Desk */
 #btn-mpdesk {
   font-size: 16px;
-  padding: 12px 20px 12px 1px;
+  padding: 12px 20px;
   background-color: #1c86ee;
   color: #ffffff;
   border: none;
@@ -535,13 +520,6 @@ body.tema-claro #btn-mp:hover {
   cursor: pointer;
   margin: 2px;
   transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-#btn-mpdesk img {
-  width: 20px;
-  height: 20px;
-  margin-right: 4px;
-  filter: brightness(0) invert(1);
 }
 
 #btn-mpdesk:hover {
@@ -556,20 +534,6 @@ body.tema-claro #btn-mpdesk {
 
 body.tema-claro #btn-mpdesk:hover {
   background-color: #166fc2;
-}
-
-#btn-mp,
-#btn-mpdesk {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-#btn-mp,
-#btn-mpdesk {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
 }
 
 /*Emoji SVG*/
