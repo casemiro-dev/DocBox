@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Registro de Atendimento</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/style-index.css" />
 
   <!-- 🔐 Verificação de login -->
   <script type="module">
@@ -31,22 +31,28 @@
     });
   </script>
 
-  <script src="script.js" defer></script>
+  <script src="js/script-index.js" defer></script>
 </head>
 <body>
 
   <div class="container">
-    <!-- 🔲 Botão quadrado de alternância de tema -->
-    <div class="top-bar">
-      <div class="linha-superior">
-        <button id="btn-faster-desk">Faster/Desk</button>
-        <button id="btn-mp" class="btn-personalizado">M.P</button>
-        <button id="btn-mpdesk" class="btn-personalizado">M.P Desk</button>
-      </div>
-      <div class="linha-inferior">
-        <button id="btn-tema">💡</button>
-      </div>
+  <!-- 🔲 Botão quadrado de alternância de tema -->
+  <div class="top-bar">
+    <div class="linha-superior">
+      <button id="btn-faster-desk">Faster/Desk</button>
+      <button id="btn-mp" class="btn-personalizado">
+        <img src="img/journal.svg" alt="MP" class="btn-icon" />
+        M.P
+      </button>
+      <button id="btn-mpdesk" class="btn-personalizado">
+        <img src="img/journal.svg" alt="MP Desk" class="btn-icon" />
+        M.P Desk
+      </button>
     </div>
+    <div class="linha-inferior">
+      <button id="btn-tema">💡</button>
+    </div>
+  </div>
 
     <div class="info-grid">
       <div class="field">
@@ -88,22 +94,22 @@
     <div class="button-group">
       <button id="btn-copiar-protocolo">
         Protocolo
-        <img src="protocolo.png" alt="Protocolo" class="btn-icon" />
+        <img src="img/protocolo.png" alt="Protocolo" class="btn-icon" />
       </button>
 
       <button id="btn-copiar-atendimento">
         Copiar
-        <img src="copiar.png" alt="Copiar" class="btn-icon" />
+        <img src="img/copiar.png" alt="Copiar" class="btn-icon" />
       </button>
 
       <button id="btn-transferir">
         Transferir
-        <img src="transferir.png" alt="Transferir" class="btn-icon" />
+        <img src="img/transferir.png" alt="Transferir" class="btn-icon" />
       </button>
 
       <button id="btn-apagar">
         Apagar
-        <img src="excluir.png" alt="Apagar" class="btn-icon" />
+        <img src="img/excluir.png" alt="Apagar" class="btn-icon" />
       </button>
     </div>
 
