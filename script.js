@@ -281,7 +281,61 @@ function validarDoc() {
   mostrarMensagem('Copiado com pontuação ✔');
 }
 
+// ── Modal de Faturas ──
+function abrirModal() {
+  document.getElementById('modalFatura').style.display = 'flex';
+  document.querySelector('.lgpd-wrapper').style.pointerEvents = 'none';
+  document.querySelector('.lgpd-wrapper').style.opacity = '0.3';
+}
+
+function fecharModal() {
+  document.getElementById('modalFatura').style.display = 'none';
+  document.querySelector('.lgpd-wrapper').style.pointerEvents = 'auto';
+  document.querySelector('.lgpd-wrapper').style.opacity = '1';
+}
+
+function copiarTodas() {
+  let mensagem = "Olá! Consta em seu cadastro as seguintes faturas em aberto:\n\n";
+  const linhas = document.querySelectorAll(".linha-fatura");
+
+  linhas.forEach((linha, index) => {
+    const data = linha.querySelector(".data")?.value.trim();
+    const valor = linha.querySelector(".valor")?.value.trim();
+    const link = linha.querySelector(".link")?.value.trim();
+
+    if (data || valor || link) {
+      mensagem += `🔹 Fatura ${index + 1}:\n`;
+      mensagem += `📅 Vencimento: ${data || "—"}\n`;
+      mensagem += `💰 Valor: ${valor || "—"}\n`;
+      mensagem += `🔗 Boleto: ${link || "—"}\n\n`;
+    }
+  });
+
+  mensagem += "Por favor, verifique os dados e nos avise caso já tenha efetuado o pagamento. Estamos à disposição para qualquer dúvida.";
+
+  navigator.clipboard.writeText(mensagem.trim());
+  mostrarMensagem("Mensagem copiada para a área de transferência!");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Botões de fatura
+  document.querySelectorAll(".btn-limpar-fatura").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const linha = btn.parentElement;
+      linha.querySelectorAll("input").forEach(input => input.value = "");
+    });
+  });
+
+  document.getElementById("btn-fatura")?.addEventListener("click", abrirModal);
+
+  // Fechar ao clicar fora da caixa
+  document.getElementById("modalFatura")?.addEventListener("click", (e) => {
+    if (e.target.id === "modalFatura") {
+      fecharModal();
+    }
+  });
+
+  // Botões principais
   document.getElementById("btn-copiar-protocolo")?.addEventListener("click", copiarProtocolo);
   document.getElementById("btn-copiar-atendimento")?.addEventListener("click", copiarAtendimento);
   document.getElementById("btn-apagar")?.addEventListener("click", apagar);
@@ -289,6 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btn-limpar")?.addEventListener("click", limparDoc);
   document.getElementById("btn-validar")?.addEventListener("click", validarDoc);
   document.getElementById("btn-titular")?.addEventListener("click", titular);
+});
 
   // 💡 Tema claro/escuro
   document.getElementById("btn-tema")?.addEventListener("click", () => {
@@ -301,7 +356,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const textoBotao = modoDesk ? "Desk" : "Faster";
     document.getElementById("btn-faster-desk").textContent = textoBotao;
   });
-});
 
 function titular() {
   const inputNome = document.getElementById("cliente-nome");
@@ -313,4 +367,3 @@ function mostrarMensagem(texto) {
   msg.textContent = texto;
   setTimeout(() => { msg.textContent = ""; }, 3000);
 }
-
