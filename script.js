@@ -313,3 +313,4 @@ function mostrarMensagem(texto) {
   msg.textContent = texto;
   setTimeout(() => { msg.textContent = ""; }, 3000);
 }
+
