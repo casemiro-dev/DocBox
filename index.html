@@ -20,6 +20,8 @@
       </div>
       <div class="linha-inferior">
         <button id="btn-tema">💡</button>
+        <!-- Botão de fatura ao lado do botão de tema -->
+        <button id="btn-fatura" title="Fatura" class="btn-icon">💲</button>
       </div>
     </div>
 
@@ -123,13 +125,49 @@
       </div>
     </div>
 
-    <div class="linha-divisoria"></div>
     <div class="lgpd-wrapper">
-      <button id="btn-lgpd" onclick="window.open('https://casemiro-dev.github.io/LGPD/', '_blank')">
-        LGPD
-      </button>
-    </div>
+  <button id="btn-lgpd" onclick="window.open('https://casemiro-dev.github.io/LGPD/', '_blank')">
+    LGPD
+  </button>
+</div>
 
+    <!-- Modal de Faturas -->
+<div id="modalFatura" class="modal-fatura-overlay" style="display:none;">
+  <div class="modal-fatura">
+    <div class="modal-content">
+      <h3>Faturas</h3>
+      <div id="faturasContainer">
+      <!-- 4 linhas fixas -->
+      <div class="linha-fatura">
+        <input type="text" placeholder="Data" class="campo-fatura data">
+        <input type="text" placeholder="R$ 0,00" class="campo-fatura valor">
+        <input type="text" placeholder="Link do boleto" class="campo-fatura link">
+        <button class="btn-limpar-fatura">🧹</button>
+      </div>
+      <div class="linha-fatura">
+        <input type="text" placeholder="Data" class="campo-fatura data">
+        <input type="text" placeholder="R$ 0,00" class="campo-fatura valor">
+        <input type="text" placeholder="Link do boleto" class="campo-fatura link">
+        <button class="btn-limpar-fatura">🧹</button>
+      </div>
+      <div class="linha-fatura">
+        <input type="text" placeholder="Data" class="campo-fatura data">
+        <input type="text" placeholder="R$ 0,00" class="campo-fatura valor">
+        <input type="text" placeholder="Link do boleto" class="campo-fatura link">
+        <button class="btn-limpar-fatura">🧹</button>
+      </div>
+      <div class="linha-fatura">
+        <input type="text" placeholder="Data" class="campo-fatura data">
+        <input type="text" placeholder="R$ 0,00" class="campo-fatura valor">
+        <input type="text" placeholder="Link do boleto" class="campo-fatura link">
+        <button class="btn-limpar-fatura">🧹</button>
+      </div>
+      <div class="botoes-modal">
+  <button onclick="copiarTodas()" class="btn-modal copiar">📋 Copiar todas</button>
+  <button onclick="fecharModal()" class="btn-modal fechar">❌ Fechar</button>
+</div>
+  </div>
+</div>
   </div>
 </body>
 </html>
