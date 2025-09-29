@@ -741,7 +741,7 @@ body.tema-claro #btn-lgpd:hover {
   width: 32px;
   height: 32px;
   font-size: 18px;
-  background-color: #fff34e;
+  background-color: #e38710;
   color: #fff;
   border: none;
   border-radius: 3,2px;
@@ -759,7 +759,7 @@ body.tema-claro #btn-lgpd:hover {
 
 #btn-fatura:hover {
   transform: scale(1.2); /* animação de zoom */
-  background-color: #ffef10;
+  background-color: #bf6c00;
 }
  
 
@@ -851,3 +851,4 @@ body.tema-claro #btn-lgpd:hover {
 .btn-modal:hover {
   opacity: 0.9;
 }
+
