@@ -672,71 +672,6 @@ body.tema-claro #btn-lgpd:hover {
   background-color: #005fa3;
 }
 
-
-/*MODAL FATURA______________________________________*/
-.modal-fatura {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-  background-color: #ffffff;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  padding: 20px;
-  width: 500px;
-  max-height: 80vh;
-  overflow-y: auto;
-}
-
-.modal-fatura h3 {
-  color: #333; /* ou qualquer cor visível no fundo branco */
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.modal-fatura .modal-content {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.linha-fatura {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 10px;
-  align-items: center;
-}
-
-.campo-fatura {
-  padding: 6px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-.campo-fatura.data {
-  width: 100px;
-}
-
-.campo-fatura.valor {
-  width: 100px;
-}
-
-.campo-fatura.link {
-  flex: 1;
-}
-
-.btn-limpar-fatura {
-  background-color: #005fa3;
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
 #btn-fatura {
   width: 32px;
   height: 32px;
@@ -761,94 +696,376 @@ body.tema-claro #btn-lgpd:hover {
   transform: scale(1.2); /* animação de zoom */
   background-color: #bf6c00;
 }
- 
 
-/* Campos lado a lado________________________________ */
-.campo-fatura {
-  padding: 6px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-/* Tamanhos específicos */
-.campo-fatura.data {
-  width: 100px;
-}
-
-.campo-fatura.valor {
-  width: 100px;
-}
-
-.campo-fatura.link {
-  flex: 1;
-}
-
-/* Botão de apagar */
-.btn-apagar-fatura {
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* Fundo escuro clicável */
-.modal-fatura-overlay {
+/* ── MODAL M.P. ─────────────────────────────────────── */
+.modal-overlay {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0,0,0,0.4);
-  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
 }
 
-/* Janela flutuante */
-.modal-fatura {
-  background-color: #ffffff;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  padding: 20px;
-  width: 500px;
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-content {
+  background: #2a2f4a;
+  border-radius: 12px;
+  padding: 0;
+  max-width: 600px;
+  width: 90%;
   max-height: 80vh;
   overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  border: 1px solid #1e2238;
+  position: relative;
 }
 
-
-/* .botoes-modal_______________________________ */
-.botoes-modal {
+.modal-header {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 10px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  border-bottom: 2px solid #5c7a9c;
+  background: #232946;
+  border-radius: 12px 12px 0 0;
 }
 
-.btn-modal {
-  padding: 8px 14px;
-  font-size: 14px;
+.modal-header h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.modal-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.modal-body {
+  padding: 25px;
+}
+
+.categoria {
+  margin-bottom: 30px;
+}
+
+.categoria h4 {
+  color: #8bd3dd;
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: 400;
+  border-bottom: 1px solid #5c7a9c;
+  padding-bottom: 8px;
+}
+
+.categoria {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.categoria-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.categoria button {
+  flex: 1;
+  min-width: 150px;
+  max-width: 200px;
+  padding: 12px 16px;
+  background-color: #563d7c;
+  color: #ffffff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-size: 14px;
+  text-align: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.btn-modal.copiar {
-  background-color: #4CAF50;
-  color: white;
+.categoria button:hover {
+  background-color: #483368;
+  transform: translateY(-1px);
 }
 
-.btn-modal.fechar {
-  background-color: #f44336;
-  color: white;
+.categoria button:active {
+  transform: translateY(0);
 }
 
-.btn-modal:hover {
-  opacity: 0.9;
+/* ── Tooltip ─────────────────────────────────────── */
+.tooltip {
+  position: absolute;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: pre-wrap;
+  z-index: 1001;
+  max-width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border: 1px solid #333;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.tooltip.show {
+  opacity: 1;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #1a1a1a transparent transparent transparent;
+}
+
+/* ── Modal M.P. - Modo Claro ─────────────────────────── */
+body.tema-claro .modal-content {
+  background: #ffffff;
+  border: 1px solid #ddd;
+}
+
+body.tema-claro .modal-header {
+  background: #f8f9fa;
+  border-bottom: 2px solid #A9A9A9;
+}
+
+body.tema-claro .modal-header h3 {
+  color: #232946;
+}
+
+body.tema-claro .modal-close {
+  color: #232946;
+}
+
+body.tema-claro .modal-close:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+body.tema-claro .categoria h4 {
+  color: #0077cc;
+  border-bottom: 1px solid #A9A9A9;
+}
+
+body.tema-claro .categoria button {
+  background-color: #0077cc;
+  color: #ffffff;
+}
+
+body.tema-claro .categoria button:hover {
+  background-color: #005fa3;
+}
+
+/* ── Tooltip - Modo Claro ─────────────────────────── */
+body.tema-claro .tooltip {
+  background-color: #f8f9fa;
+  color: #232946;
+  border: 1px solid #ddd;
+}
+
+body.tema-claro .tooltip::after {
+  border-color: #f8f9fa transparent transparent transparent;
+}
+
+/* Ajustes para os botões do modal M.P. */
+.modal-body .categoria-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px; /* Espaçamento entre os botões */
+  justify-content: flex-start; /* Alinha os botões ao início */
+}
+
+.modal-body .categoria-buttons button {
+  flex: 0 0 auto; /* Não cresce, não encolhe, largura automática */
+  max-width: 100%; /* Garante que o botão não ultrapasse a largura do contêiner */
+  white-space: normal; /* Permite que o texto quebre linha */
+  word-break: break-word; /* Quebra palavras longas */
+  text-align: center; /* Centraliza o texto */
+  padding: 8px 12px; /* Ajusta o padding para melhor visualização */
+  height: auto; /* Altura automática para acomodar o texto */
+}
+
+
+
+/* ── Modal Fatura ─────────────────────────────────────── */
+#modal-fatura {
+  display: none; /* Escondido por padrão */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+#modal-fatura.active {
+  display: flex;
+}
+
+#modal-fatura .modal-content {
+  background-color: #2a2f4a;
+  margin: auto;
+  padding: 20px;
+  padding-top: 40px; /* Ajusta o padding superior para o botão de fechar */
+  border: 1px solid #1e2238;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+#modal-fatura .modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+#modal-fatura .modal-close:hover,
+#modal-fatura .modal-close:focus {
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#modal-fatura .modal-body {
+  padding-top: 10px; /* Espaçamento para o botão de fechar */
+}
+
+#modal-fatura .fatura-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr; /* Data, Valor, Link */
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#modal-fatura .grid-header {
+  font-weight: bold;
+  color: #ffffff;
+  padding: 8px;
+  text-align: center;
+}
+
+#modal-fatura .fatura-linha {
+  display: contents; /* Faz com que os inputs se comportem como células da grid */
+}
+
+#modal-fatura .fatura-linha input {
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: #f3f3f3;
+  color: #232946;
+  font-size: 14px;
+}
+
+#modal-fatura .fatura-linha input::placeholder {
+  color: #6c757d;
+}
+
+/* Estilos para os botões de copiar/transferir faturas */
+#btn-copiar-faturas, #btn-transferir-faturas {
+  display: block;
+  width: fit-content;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #28a745; /* Verde para copiar */
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#btn-copiar-faturas:hover {
+  background-color: #218838;
+}
+
+#btn-transferir-faturas {
+  background-color: #007bff; /* Azul para transferir */
+}
+
+#btn-transferir-faturas:hover {
+  background-color: #0056b3;
+}
+
+/* Tema claro para o modal de fatura */
+body.tema-claro #modal-fatura .modal-content {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+}
+
+body.tema-claro #modal-fatura .grid-header {
+  color: #232946;
+}
+
+body.tema-claro #modal-fatura .fatura-linha input {
+  background-color: #ffffff;
+  color: #232946;
+  border: 1px solid #ccc;
+}
+
+body.tema-claro #btn-copiar-faturas {
+  background-color: #007bff;
+}
+
+body.tema-claro #btn-copiar-faturas:hover {
+  background-color: #0056b3;
+}
+
+body.tema-claro #btn-transferir-faturas {
+  background-color: #6c757d; /* Cinza para transferir no tema claro */
+}
+
+body.tema-claro #btn-transferir-faturas:hover {
+  background-color: #5a6268;
 }
 
