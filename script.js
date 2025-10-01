@@ -281,40 +281,103 @@ function validarDoc() {
   mostrarMensagem('Copiado com pontuação ✔');
 }
 
-// ── Modal de Faturas ──
-function abrirModal() {
-  document.getElementById('modalFatura').style.display = 'flex';
-  document.querySelector('.lgpd-wrapper').style.pointerEvents = 'none';
-  document.querySelector('.lgpd-wrapper').style.opacity = '0.3';
+// ── MODAL M.P. ──
+function abrirModalMP() {
+  const modal = document.getElementById('modal-mp');
+  modal.classList.add('active');
 }
 
-function fecharModal() {
-  document.getElementById('modalFatura').style.display = 'none';
-  document.querySelector('.lgpd-wrapper').style.pointerEvents = 'auto';
-  document.querySelector('.lgpd-wrapper').style.opacity = '1';
+function fecharModalMP() {
+  const modal = document.getElementById('modal-mp');
+  modal.classList.remove('active');
 }
 
-function copiarTodas() {
-  let mensagem = "Olá! Consta em seu cadastro as seguintes faturas em aberto:\n\n";
-  const linhas = document.querySelectorAll(".linha-fatura");
-
-  linhas.forEach((linha, index) => {
-    const data = linha.querySelector(".data")?.value.trim();
-    const valor = linha.querySelector(".valor")?.value.trim();
-    const link = linha.querySelector(".link")?.value.trim();
-
-    if (data || valor || link) {
-      mensagem += `🔹 Fatura ${index + 1}:\n`;
-      mensagem += `📅 Vencimento: ${data || "—"}\n`;
-      mensagem += `💰 Valor: ${valor || "—"}\n`;
-      mensagem += `🔗 Boleto: ${link || "—"}\n\n`;
+function inserirTexto(texto, categoria = null) {
+  const caixa = document.getElementById("anotacoes");
+  const posicaoAtual = caixa.selectionStart;
+  const valorAtual = caixa.value;
+  
+  let textoParaInserir;
+  
+  if (categoria === 'equipamentos') {
+    // Para equipamentos ópticos: sempre em nova linha
+    textoParaInserir = valorAtual && !valorAtual.endsWith('\n') ? '\n' + texto : texto;
+  } else {
+    // Para suporte e outras categorias: continua do ponto final
+    if (valorAtual.trim() === '') {
+      // Se não há texto, insere normalmente
+      textoParaInserir = texto;
+    } else {
+      // Se há texto, adiciona um espaço antes se não terminar com ponto ou espaço
+      const ultimoChar = valorAtual.charAt(valorAtual.length - 1);
+      if (ultimoChar === '.' || ultimoChar === ' ') {
+        textoParaInserir = ' ' + texto;
+      } else {
+        textoParaInserir = ' ' + texto;
+      }
     }
-  });
+  }
+  
+  // Insere o texto na posição do cursor
+  const novoValor = valorAtual.slice(0, posicaoAtual) + textoParaInserir + valorAtual.slice(caixa.selectionEnd);
+  caixa.value = novoValor;
+  
+  // Posiciona o cursor após o texto inserido
+  const novaPosicao = posicaoAtual + textoParaInserir.length;
+  caixa.setSelectionRange(novaPosicao, novaPosicao);
+  caixa.focus();
+}
 
-  mensagem += "Por favor, verifique os dados e nos avise caso já tenha efetuado o pagamento. Estamos à disposição para qualquer dúvida.";
+function inserirTextoComTooltip(botao) {
+  const texto = botao.getAttribute('data-texto');
+  const categoria = botao.getAttribute('data-categoria');
+  inserirTexto(texto, categoria);
+  
+  // Removida a funcionalidade de cópia para a área de transferência conforme solicitado.
+  mostrarMensagem('Texto inserido! ✔');
+}
 
-  navigator.clipboard.writeText(mensagem.trim());
-  mostrarMensagem("Mensagem copiada para a área de transferência!");
+// ── Tooltip ──
+let tooltipAtual = null;
+
+function criarTooltip(elemento, texto) {
+  // Remove tooltip anterior se existir
+  if (tooltipAtual) {
+    tooltipAtual.remove();
+    tooltipAtual = null;
+  }
+
+  const tooltip = document.createElement('div');
+  tooltip.className = 'tooltip';
+  tooltip.textContent = texto;
+  document.body.appendChild(tooltip);
+
+  const rect = elemento.getBoundingClientRect();
+  const tooltipRect = tooltip.getBoundingClientRect();
+  
+  // Posiciona o tooltip acima do botão
+  const left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+  const top = rect.top - tooltipRect.height - 10;
+  
+  tooltip.style.left = Math.max(10, Math.min(left, window.innerWidth - tooltipRect.width - 10)) + 'px';
+  tooltip.style.top = Math.max(10, top) + 'px';
+  
+  // Mostra o tooltip
+  setTimeout(() => tooltip.classList.add('show'), 10);
+  
+  tooltipAtual = tooltip;
+}
+
+function removerTooltip() {
+  if (tooltipAtual) {
+    tooltipAtual.classList.remove('show');
+    setTimeout(() => {
+      if (tooltipAtual) {
+        tooltipAtual.remove();
+        tooltipAtual = null;
+      }
+    }, 200);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -326,15 +389,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  document.getElementById("btn-fatura")?.addEventListener("click", abrirModal);
-
-  // Fechar ao clicar fora da caixa
-  document.getElementById("modalFatura")?.addEventListener("click", (e) => {
-    if (e.target.id === "modalFatura") {
-      fecharModal();
-    }
-  });
-
   // Botões principais
   document.getElementById("btn-copiar-protocolo")?.addEventListener("click", copiarProtocolo);
   document.getElementById("btn-copiar-atendimento")?.addEventListener("click", copiarAtendimento);
@@ -343,7 +397,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btn-limpar")?.addEventListener("click", limparDoc);
   document.getElementById("btn-validar")?.addEventListener("click", validarDoc);
   document.getElementById("btn-titular")?.addEventListener("click", titular);
-});
 
   // 💡 Tema claro/escuro
   document.getElementById("btn-tema")?.addEventListener("click", () => {
@@ -357,6 +410,38 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btn-faster-desk").textContent = textoBotao;
   });
 
+  // 🟣 Modal M.P.
+  document.getElementById("btn-mp")?.addEventListener("click", abrirModalMP);
+
+  // Fechar modal ao clicar no overlay (fora do conteúdo)
+  document.getElementById("modal-mp")?.addEventListener("click", (e) => {
+    if (e.target.classList.contains('modal-overlay')) {
+      fecharModalMP();
+    }
+  });
+
+  // Fechar modal com tecla ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      fecharModalMP();
+    }
+  });
+
+  // Event listeners para tooltips nos botões do modal
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.matches('.categoria button[data-texto]')) {
+      const texto = e.target.getAttribute('data-texto');
+      criarTooltip(e.target, texto);
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.matches('.categoria button[data-texto]')) {
+      removerTooltip();
+    }
+  });
+});
+
 function titular() {
   const inputNome = document.getElementById("cliente-nome");
   inputNome.value = "Titular";
@@ -367,3 +452,344 @@ function mostrarMensagem(texto) {
   msg.textContent = texto;
   setTimeout(() => { msg.textContent = ""; }, 3000);
 }
+
+// ── MODAL FATURA ──
+function abrirModalFatura() {
+  const modal = document.getElementById("modal-fatura");
+  modal.classList.add("active");
+}
+
+function fecharModalFatura() {
+  const modal = document.getElementById("modal-fatura");
+  modal.classList.remove("active");
+}
+
+function copiarFaturas() {
+  let textoFaturas = "Olá! Consta em seu cadastro as seguintes faturas em aberto:\n\n";
+  let faturasEncontradas = 0;
+
+  const linhasFatura = document.querySelectorAll(".fatura-linha");
+  linhasFatura.forEach((linha, index) => {
+    const dataInput = linha.querySelector(".fatura-data");
+    const valorInput = linha.querySelector(".fatura-valor");
+    const linkInput = linha.querySelector(".fatura-link");
+
+    const data = dataInput.value.trim();
+    const valor = valorInput.value.trim();
+    const link = linkInput.value.trim();
+
+    if (data || valor || link) {
+      faturasEncontradas++;
+      textoFaturas += `🔹 Fatura ${faturasEncontradas}:\n`;
+      if (data) {
+        textoFaturas += `📅 Vencimento: ${data}\n`;
+      }
+      if (valor) {
+        textoFaturas += `💰 Valor: ${valor}\n`;
+      }
+      if (link) {
+        textoFaturas += `🔗 Boleto: ${link}\n`;
+      }
+      textoFaturas += "\n";
+    }
+  });
+
+  if (faturasEncontradas > 0) {
+    textoFaturas += "Por favor, verifique os dados e nos avise caso já tenha efetuado o pagamento. Estamos à disposição para qualquer dúvida.";
+    copiarTexto(textoFaturas);
+  } else {
+    mostrarMensagem("Nenhuma fatura preenchida para copiar.");
+  }
+}
+
+function transferirFaturasParaRegistro() {
+  let textoRegistro = "<hr> <b> Pendências em atraso:</b>\n";
+  let faturasEncontradas = 0;
+
+  const linhasFatura = document.querySelectorAll(".fatura-linha");
+  linhasFatura.forEach((linha) => {
+    const dataInput = linha.querySelector(".fatura-data");
+    const valorInput = linha.querySelector(".fatura-valor");
+
+    const data = dataInput.value.trim();
+    const valor = valorInput.value.trim();
+
+    if (data || valor) {
+      faturasEncontradas++;
+            textoRegistro += `${data} / R$${valor}\n`;
+    }
+  });
+
+  if (faturasEncontradas > 0) {
+    const caixaAnotacoes = document.getElementById("anotacoes");
+    caixaAnotacoes.value += textoRegistro;
+    mostrarMensagem("Faturas transferidas para o registro! ✔");
+  } else {
+    mostrarMensagem("Nenhuma fatura preenchida para transferir.");
+  }
+}
+
+
+
+
+
+// ── MODAL FATURA ──
+function abrirModalFatura() {
+  const modal = document.getElementById("modal-fatura");
+  modal.classList.add("active");
+}
+
+function fecharModalFatura() {
+  const modal = document.getElementById("modal-fatura");
+  modal.classList.remove("active");
+}
+
+function copiarFaturas() {
+  let textoFaturas = "Olá! Consta em seu cadastro as seguintes faturas em aberto:\n\n";
+  let faturasEncontradas = 0;
+
+  const linhasFatura = document.querySelectorAll(".fatura-linha");
+  linhasFatura.forEach((linha, index) => {
+    const dataInput = linha.querySelector(".fatura-data");
+    const valorInput = linha.querySelector(".fatura-valor");
+    const linkInput = linha.querySelector(".fatura-link");
+
+    const data = dataInput.value.trim();
+    const valor = valorInput.value.trim();
+    const link = linkInput.value.trim();
+
+    if (data || valor || link) {
+      faturasEncontradas++;
+      textoFaturas += `🔹 Fatura ${faturasEncontradas}:\n`;
+      if (data) {
+        textoFaturas += `📅 Vencimento: ${data}\n`;
+      }
+      if (valor) {
+        textoFaturas += `💰 Valor: ${valor}\n`;
+      }
+      if (link) {
+        textoFaturas += `🔗 Boleto: ${link}\n`;
+      }
+      textoFaturas += "\n";
+    }
+  });
+
+  if (faturasEncontradas > 0) {
+    textoFaturas += "Por favor, verifique os dados e nos avise caso já tenha efetuado o pagamento. Estamos à disposição para qualquer dúvida.";
+    copiarTexto(textoFaturas);
+  } else {
+    mostrarMensagem("Nenhuma fatura preenchida para copiar.");
+  }
+}
+
+function transferirFaturasParaRegistro() {
+  let textoRegistro = "<hr> <b> Pendências em atraso:</b>\n";
+  let faturasEncontradas = 0;
+
+  const linhasFatura = document.querySelectorAll(".fatura-linha");
+  linhasFatura.forEach((linha) => {
+    const dataInput = linha.querySelector(".fatura-data");
+    const valorInput = linha.querySelector(".fatura-valor");
+
+    const data = dataInput.value.trim();
+    const valor = valorInput.value.trim();
+
+    if (data || valor) {
+      faturasEncontradas++;
+            textoRegistro += `${data} / R$${valor}\n`;
+    }
+  });
+
+  if (faturasEncontradas > 0) {
+    const caixaAnotacoes = document.getElementById("anotacoes");
+    caixaAnotacoes.value += textoRegistro;
+    mostrarMensagem("Faturas transferidas para o registro! ✔");
+  } else {
+    mostrarMensagem("Nenhuma fatura preenchida para transferir.");
+  }
+}
+
+
+
+
+
+// ── MODAL FATURA ──
+function abrirModalFatura() {
+  const modal = document.getElementById("modal-fatura");
+  modal.classList.add("active");
+}
+
+function fecharModalFatura() {
+  const modal = document.getElementById("modal-fatura");
+  modal.classList.remove("active");
+}
+
+function copiarFaturas() {
+  let textoFaturas = "Olá! Consta em seu cadastro as seguintes faturas em aberto:\n\n";
+  let faturasEncontradas = 0;
+
+  const linhasFatura = document.querySelectorAll(".fatura-linha");
+  linhasFatura.forEach((linha, index) => {
+    const dataInput = linha.querySelector(".fatura-data");
+    const valorInput = linha.querySelector(".fatura-valor");
+    const linkInput = linha.querySelector(".fatura-link");
+
+    const data = dataInput.value.trim();
+    const valor = valorInput.value.trim();
+    const link = linkInput.value.trim();
+
+    if (data || valor || link) {
+      faturasEncontradas++;
+      textoFaturas += `🔹 Fatura ${faturasEncontradas}:\n`;
+      if (data) {
+        textoFaturas += `📅 Vencimento: ${data}\n`;
+      }
+      if (valor) {
+        textoFaturas += `💰 Valor: ${valor}\n`;
+      }
+      if (link) {
+        textoFaturas += `🔗 Boleto: ${link}\n`;
+      }
+      textoFaturas += "\n";
+    }
+  });
+
+  if (faturasEncontradas > 0) {
+    textoFaturas += "Por favor, verifique os dados e nos avise caso já tenha efetuado o pagamento. Estamos à disposição para qualquer dúvida.";
+    copiarTexto(textoFaturas);
+  } else {
+    mostrarMensagem("Nenhuma fatura preenchida para copiar.");
+  }
+}
+
+function transferirFaturasParaRegistro() {
+  let textoRegistro = "<hr> <b> Pendências em atraso:</b>\n";
+  let faturasEncontradas = 0;
+
+  const linhasFatura = document.querySelectorAll(".fatura-linha");
+  linhasFatura.forEach((linha) => {
+    const dataInput = linha.querySelector(".fatura-data");
+    const valorInput = linha.querySelector(".fatura-valor");
+
+    const data = dataInput.value.trim();
+    const valor = valorInput.value.trim();
+
+    if (data || valor) {
+      faturasEncontradas++;
+            textoRegistro += `${data} / R$${valor}\n`;
+    }
+  });
+
+  if (faturasEncontradas > 0) {
+    const caixaAnotacoes = document.getElementById("anotacoes");
+    caixaAnotacoes.value += textoRegistro;
+    mostrarMensagem("Faturas transferidas para o registro! ✔");
+  } else {
+    mostrarMensagem("Nenhuma fatura preenchida para transferir.");
+  }
+}
+
+
+
+
+
+// ── MODAL FATURA ──
+function abrirModalFatura() {
+  const modal = document.getElementById("modal-fatura");
+  modal.classList.add("active");
+}
+
+function fecharModalFatura() {
+  const modal = document.getElementById("modal-fatura");
+  modal.classList.remove("active");
+}
+
+function copiarFaturas() {
+  let textoFaturas = "Olá! Consta em seu cadastro as seguintes faturas em aberto:\n\n";
+  let faturasEncontradas = 0;
+
+  const linhasFatura = document.querySelectorAll(".fatura-linha");
+  linhasFatura.forEach((linha, index) => {
+    const dataInput = linha.querySelector(".fatura-data");
+    const valorInput = linha.querySelector(".fatura-valor");
+    const linkInput = linha.querySelector(".fatura-link");
+
+    const data = dataInput.value.trim();
+    const valor = valorInput.value.trim();
+    const link = linkInput.value.trim();
+
+    if (data || valor || link) {
+      faturasEncontradas++;
+      textoFaturas += `🔹 Fatura ${faturasEncontradas}:\n`;
+      if (data) {
+        textoFaturas += `📅 Vencimento: ${data}\n`;
+      }
+      if (valor) {
+        textoFaturas += `💰 Valor: ${valor}\n`;
+      }
+      if (link) {
+        textoFaturas += `🔗 Boleto: ${link}\n`;
+      }
+      textoFaturas += "\n";
+    }
+  });
+
+  if (faturasEncontradas > 0) {
+    textoFaturas += "Por favor, verifique os dados e nos avise caso já tenha efetuado o pagamento. Estamos à disposição para qualquer dúvida.";
+    copiarTexto(textoFaturas);
+  } else {
+    mostrarMensagem("Nenhuma fatura preenchida para copiar.");
+  }
+}
+
+function transferirFaturasParaRegistro() {
+  let textoRegistro = "<hr> <b> Pendências em atraso:</b>\n";
+  let faturasEncontradas = 0;
+
+  const linhasFatura = document.querySelectorAll(".fatura-linha");
+  linhasFatura.forEach((linha) => {
+    const dataInput = linha.querySelector(".fatura-data");
+    const valorInput = linha.querySelector(".fatura-valor");
+
+    const data = dataInput.value.trim();
+    const valor = valorInput.value.trim();
+
+    if (data || valor) {
+      faturasEncontradas++;
+            textoRegistro += `${data} / R$${valor}\n`;
+    }
+  });
+
+  if (faturasEncontradas > 0) {
+    const caixaAnotacoes = document.getElementById("anotacoes");
+    caixaAnotacoes.value += textoRegistro;
+    mostrarMensagem("Faturas transferidas para o registro! ✔");
+  } else {
+    mostrarMensagem("Nenhuma fatura preenchida para transferir.");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  // 💲 Botão de Fatura
+  document.getElementById("btn-fatura")?.addEventListener("click", abrirModalFatura);
+
+  // Fechar modal de fatura ao clicar no overlay (fora do conteúdo)
+  document.getElementById("modal-fatura")?.addEventListener("click", (e) => {
+    if (e.target.classList.contains("modal-overlay")) {
+      fecharModalFatura();
+    }
+  });
+
+  // Fechar modal de fatura com tecla ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      fecharModalFatura();
+    }
+  });
+
+  // Botão de copiar faturas
+  document.getElementById("btn-copiar-faturas")?.addEventListener("click", copiarFaturas);
+  // Botão de transferir faturas para o registro
+  document.getElementById("btn-transferir-faturas")?.addEventListener("click", transferirFaturasParaRegistro);
+});
+
