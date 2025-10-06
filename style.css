@@ -1088,7 +1088,7 @@ button img {
 /* Estilo exclusivo para o modal de multa */
 #modal-multa .modal-content {
   background: #fff;
-  padding: 20px;
+  padding: 10px 20px 20px 20px;
   max-width: 600px;
   max-height: 90vh;
   overflow-y: auto;
@@ -1106,7 +1106,8 @@ button img {
 #modal-multa h2 {
   font-size: 20px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-top: 0;
+  margin-bottom: 4px;
 }
 
 .linha-divisoria {
