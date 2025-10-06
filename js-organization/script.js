@@ -6,6 +6,8 @@ import { abrirModalFatura, fecharModalFatura, copiarFaturas, transferirFaturasPa
 import { criarTooltip, removerTooltip } from './modules/tooltip.js';
 import "./modules/modal-verificacao-sup.js";
 import { formatarTelefone } from './utils/helpers.js';
+import { abrirModalMulta, fecharModalMulta } from './modules/modal-multa.js';
+import { abrirModalPonto, fecharModalPonto } from './modules/modal-ponto.js';
 
 
 // FUNÇÃO PARA AS TAGS HTML FUNCIONAREM
@@ -89,12 +91,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // Botões principais
-  document.getElementById("btn-copiar-protocolo")?.addEventListener("click", copiarProtocolo);
-  document.getElementById("btn-copiar-atendimento")?.addEventListener("click", copiarAtendimento);
-  document.getElementById("btn-apagar")?.addEventListener("click", apagar);
-  document.getElementById("btn-transferir")?.addEventListener("click", () => {
-  transferir();
+// Botões principais
+document.getElementById("btn-copiar-protocolo")?.addEventListener("click", copiarProtocolo);
+document.getElementById("btn-copiar-atendimento")?.addEventListener("click", copiarAtendimento);
+document.getElementById("btn-apagar")?.addEventListener("click", apagar);
+document.getElementById("btn-transferir")?.addEventListener("click", transferir);
+
+// 🧮 Modal Multa
+document.getElementById("btn-multa")?.addEventListener("click", abrirModalMulta);
+document.querySelector("#modal-multa .modal-close")?.addEventListener("click", fecharModalMulta);
+
+// 📡 Modal Ponto
+document.getElementById("btn-ponto")?.addEventListener("click", abrirModalPonto);
+document.querySelector("#modal-ponto .modal-close")?.addEventListener("click", fecharModalPonto);
+
 
   // Aplica formatação ao campo #telefone após transferência
   const campoTelefone = document.getElementById("telefone");
@@ -136,12 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Fechar modal com tecla ESC
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      fecharModalMP();
-    }
-  });
 
   // Event listeners para tooltips nos botões do modal
   document.addEventListener("mouseover", (e) => {
@@ -172,12 +176,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Fechar modal de fatura com tecla ESC
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      fecharModalFatura();
-    }
-  });
 
   // Botão de copiar faturas
   document.getElementById("btn-copiar-faturas")?.addEventListener("click", copiarFaturas);
@@ -194,9 +192,34 @@ document.addEventListener("DOMContentLoaded", () => {
     document.title = 'DocBox'; // ou deixe vazio: ''
   }
 });
-});
 
 //Duplicar a página_________________________________________
 document.getElementById("btn-duplicar")?.addEventListener("click", () => {
   window.open(window.location.href, "_blank");
+});
+
+
+//FECHAR OS MODAIS COM A TECLA ESC______________________
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    fecharModalMP();
+    fecharModalMulta();
+    fecharModalPonto();
+    fecharModalFatura();
+  }
+});
+
+
+// Fechar modal Multa ao clicar no overlay
+document.getElementById("modal-multa")?.addEventListener("click", (e) => {
+  if (e.target.classList.contains("modal-overlay")) {
+    fecharModalMulta();
+  }
+});
+
+// Fechar modal Ponto ao clicar no overlay
+document.getElementById("modal-ponto")?.addEventListener("click", (e) => {
+  if (e.target.classList.contains("modal-overlay")) {
+    fecharModalPonto();
+  }
 });
