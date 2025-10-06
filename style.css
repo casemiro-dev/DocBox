@@ -545,6 +545,22 @@ button img {
   transform: scale(1.2);
 }
 
+/*Botão de dentro do modal multa*/
+.btn-verde {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.btn-verde:hover {
+  background-color: #219150;
+}
+
 /* ── Botão: Ponto Adicional ───────────────────────── */
 #btn-ponto {
   width: 32px;
@@ -1067,6 +1083,128 @@ button img {
   background-color: #bb0000;
   transform: scale(1.05);
 }
+
+/* MODAL CALCULO DE MULTA CONTRATUAL ________________________________________________________*/
+/* Estilo exclusivo para o modal de multa */
+#modal-multa .modal-content {
+  background: #fff;
+  padding: 20px;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  position: relative;
+  font-size: 20px;
+  font-family: sans-serif;
+  color: #333;
+}
+
+#modal-multa ul li {
+  font-size: 17px; /* ou 16px, 17px... conforme seu gosto */
+}
+
+#modal-multa h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.linha-divisoria {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 16px;
+}
+
+.linha-campo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.linha-campo span {
+  margin-right: 6px;
+  font-weight: bold;
+}
+
+.linha-campo input[type="number"],
+.linha-campo input[type="date"] {
+  width: 125px;
+  padding: 4px;
+  margin-right: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.linha-campo input[type="number"] {
+  width: 100px; /* ou 70px, se quiser ainda menor */
+  padding: 4px;
+}
+
+.linha-campo label {
+  font-size: 14px;
+}
+
+.bloco-texto {
+  margin-top: 20px;
+}
+
+.bloco-texto strong {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.bloco-texto ul {
+  padding-left: 16px;
+}
+
+.bloco-texto li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+
+/* MODAL DE PONTO ADICIONAL ________________________________________________________*/
+/* Estilo exclusivo para o modal de ponto */
+#modal-ponto {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+}
+#modal-ponto.active {
+  display: flex;
+}
+#modal-ponto .modal-content {
+  background: #fff;
+  padding: 20px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  position: relative;
+}
+#modal-ponto .modal-close {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#modal-ponto .modal-content {
+  background: #fff;
+  padding: 20px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  position: relative;
+  color: #2980b9; /* 🔵 cor do texto dentro do modal de ponto */
+}
+
 
 /* ═══════════════════════════════════════════════════════════════════════════════════════
    1️⃣2️⃣ MENSAGENS E TOOLTIPS
