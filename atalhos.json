@@ -1,0 +1,14 @@
+{
+  "Instalação": [
+    "Instalação realizada com sucesso. Cliente ciente das condições.",
+    "Instalação reagendada por indisponibilidade do cliente."
+  ],
+  "Atendimento": [
+    "Cliente orientado sobre os procedimentos de suporte.",
+    "Encaminhado para setor responsável."
+  ],
+  "Financeiro": [
+    "Cliente informado sobre valores e formas de pagamento.",
+    "Encaminhado para setor financeiro para análise."
+  ]
+}
