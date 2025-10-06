@@ -14,7 +14,7 @@ export function copiarProtocolo() {
   let resultado = `${textoInicial}<hr>`;
 
   if (protocoloChat !== "") {
-    resultado += `<b><span style="color: blue;"> Protocolo do Chat: ${protocoloChat} </font></b><hr>`;
+    resultado += `<b><span style="color: blue;"> Protocolo do Chat: ${protocoloChat} </span></b><hr>`;
   }
 
   if (empresarial) {
