@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DocBox</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-organization/main.css" />
+  <script type="module" src="js-organization/script.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Barra Superior com Botões -->
+    <div class="top-bar">
+      <div class="linha-superior">
+        <button id="btn-faster-desk">Faster/Desk</button>
+        <button id="btn-mp"><img src="assets/journal.png" alt="Ícone Journal" />M. Padrões</button>
+        <button id="btn-mpdesk"><img src="assets/journal.png" alt="Ícone Journal" />M. Pessoais</button>
+      </div>
+      <div class="linha-inferior">
+        <button id="btn-usuario" title="Padrão de repasse de casos" class="btn-icon">
+  <i class="fas fa-chalkboard-user"></i>
+</button>
+        <button id="btn-tema" title="Tema" >💡</button>
+        <button id="btn-fatura" title="Fatura" class="btn-icon">$</button>
+        <button id="btn-duplicar" title="Duplicar" class="btn-icon">➕</button>
+        <button id="btn-multa" title="Cálculo de multa" class="btn-icon">
+  <i class="fas fa-calculator"></i>
+</button>
+        <button id="btn-ponto" title="Ponto adicional" class="btn-icon">
+  <img src="assets/roteador.png" alt="Roteador Wi-Fi" />
+</button>
+      </div>
+    </div>
+
+    <!-- Grade de Informações do Cliente -->
+    <div class="info-grid">
+      <div class="field">
+        <input type="text" id="chat-protocolo" placeholder="Protocolo do Chat" />
+      </div>
+      <div class="protocols-row">
+        <input type="text" id="prot-gerado" placeholder="Prot. Gerado" />
+        <input type="text" id="prot-ref-adm" placeholder="Prot. Ref. ADM" />
+      </div>
+      <div class="field input-wrapper titular-wrapper">
+        <input type="text" id="cliente-nome" placeholder="Nome do Cliente" />
+        <button type="button" id="btn-titular" class="btn-icon right animado" title="Titular">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffffff" viewBox="0 0 24 24">
+            <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5S7 4.24 7 7s2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="field">
+        <input type="tel" id="telefone" placeholder="(xx ) y xxxx-xxxx"/>
+      </div>
+      <div class="field input-wrapper cpf-wrapper">
+        <input type="text" id="doc-id" placeholder="CPF ou CNPJ" />
+        <button type="button" id="btn-validar" class="btn-icon right animado">✎</button>
+        <button type="button" id="btn-limpar" class="btn-icon left animado">⊘</button>
+      </div>
+      <div class="html-buttons" style="display: flex; gap: 6px;">
+        <button type="button" title="Adiciona a quebra de texto com uma linha" onclick="addToTextArea('<hr>')">&lt;hr&gt;</button>
+        <button type="button" title="Adiciona a quebra de linha" onclick="addToTextArea('<br>')">&lt;br&gt;</button>
+        <button type="button" title="Tag referente ao inicio do negrito" onclick="addToTextArea('<b>')">&lt;b&gt;</button>
+        <button type="button" title="Tag referente ao final do negrito" onclick="addToTextArea('</b>')">&lt;/b&gt;</button>
+      </div>
+    </div>
+
+    <!-- Campo de Anotações -->
+    <div class="field full-width">
+      <textarea id="anotacoes" placeholder="Registre o atendimento..."></textarea>
+    </div>
+    
+
+    <!-- Grupo de Botões de Ação -->
+    <div class="button-group">
+      <button id="btn-copiar-protocolo">Protocolo <img src="assets/protocolo.png" alt="Protocolo" class="btn-icon" /></button>
+      <button id="btn-copiar-atendimento">Copiar <img src="assets/copiar.png" alt="Copiar" class="btn-icon" /></button>
+      <button id="btn-transferir">Transferir <img src="assets/transferir.png" alt="Transferir" class="btn-icon" /></button>
+      <button id="btn-apagar">Apagar <img src="assets/excluir.png" alt="Apagar" class="btn-icon" /></button>
+    </div>
+
+    <p id="mensagem-copiado" class="copiado-msg"></p>
+
+    <!-- Seção de Agendamento -->
+    <div class="agendamento-wrapper">
+      <div class="agendamento-top">
+        <select id="periodo-agendamento">
+          <option value="">Turno</option>
+          <option value="manha">Manhã</option>
+          <option value="tarde">Tarde</option>
+          <option value="noite">Noite</option>
+        </select>
+        <div class="blocos-data">
+          <input type="date" id="data1" placeholder="dd/mm/aaaa">
+          <input type="date" id="data2" placeholder="dd/mm/aaaa">
+          <input type="date" id="data3" placeholder="dd/mm/aaaa">
+        </div>
+      </div>
+      <div class="field full-width">
+        <input type="text" id="disponibilidade" placeholder="Disponibilidade Geral">
+      </div>
+      <div class="field full-width">
+        <input type="text" id="referencia" placeholder="Ponto de referência">
+      </div>
+      <div class="checkboxes">
+        <label><input type="checkbox"> Cliente ciente de que deve haver uma pessoa maior de idade.</label>  
+
+        <label><input type="checkbox"> Garantia de Instalação (30 dias).</label>  
+
+        <label><input type="checkbox"> Cliente empresarial.</label>
+      </div>
+    </div>
+
+    <!-- Botão LGPD -->
+    <div class="lgpd-wrapper">
+      <button id="btn-lgpd" onclick="window.open('https://casemiro-dev.github.io/LGPD/', '_blank' )">LGPD</button>
+    </div>
+
+    <!-- Modal M.P. -->
+<div id="modal-mp" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Modelos Padrões</h3>
+      <button class="modal-close" onclick="fecharModalMP()">&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      <!-- Categorias com botões -->
+      <div class="categoria">
+        <h4>1. Equipamentos Opticos</h4>
+        <div class="categoria-buttons">
+          <button data-texto="<hr><b>Fiberhome:</b>
+• Power: On/Off
+• PON/LINK: On/Off/Piscando
+• LOS/Perda: Piscando/Apagado" data-categoria="equipamentos" onclick="inserirTextoComTooltip(this)">Fiberhome</button>
+          <button data-texto="<hr><b>ONU NOKIA:</b>
+• Power: Verde estático / vermelho estático / apagado.
+• LINK: Verde estático / Apagado.
+• AUTH: Verde estático / verde piscando / apagado." data-categoria="equipamentos" onclick="inserirTextoComTooltip(this)">ONU NOKIA</button>
+          <button data-texto="<hr><b>Conversor NOKIA:</b>
+• Power: Verde estático / apagado.
+• Alarm: Vermelho estático / apagado.
+• Connection: Verde estático / verde piscando / apagado.
+• ETH: Verde estático / verde piscando / apagado." data-categoria="equipamentos" onclick="inserirTextoComTooltip(this)">Conversor NOKIA</button>
+          <button data-texto="<hr><b>Datacom:</b>
+• Power: Verde estático / apagado.
+• PON: Verde estático / apagado.
+• ETH1: Verde estático / verde piscando / apagado." data-categoria="equipamentos" onclick="inserirTextoComTooltip(this)">Datacom</button>
+        </div>
+      </div>
+
+      <div class="categoria">
+        <h4>2. Suporte</h4>
+        <div class="categoria-buttons">
+          <button data-texto="Cliente relata falta de conexão." data-categoria="suporte" onclick="inserirTextoComTooltip(this)">Falta de conexão</button>
+          <button data-texto="Cliente relata lentidão." data-categoria="suporte" onclick="inserirTextoComTooltip(this)">Lentidão</button>
+          <button data-texto="Cliente relata quedas de conexão." data-categoria="suporte" onclick="inserirTextoComTooltip(this)">Quedas de conexão</button>
+          <button data-texto="Feito o reinício da conexão via sistema e solicitado o reinício manual dos equipamentos." data-categoria="suporte" onclick="inserirTextoComTooltip(this)">Reinicio</button>
+          <button data-texto="Realizado a checagem dos cabos nos dispositivos." data-categoria="suporte" onclick="inserirTextoComTooltip(this)">Checagem de cabos</button>
+          <button data-texto="Conexão normalizada." data-categoria="suporte" onclick="inserirTextoComTooltip(this)">Conexão normalizada</button>
+          <button data-texto="Conexão não normalizada." data-categoria="suporte" onclick="inserirTextoComTooltip(this)">Conexão não normalizada</button>
+          <button data-texto="Encaminhado para verificação técnica no local, ciente do prazo de até três dias úteis para ocorrer." data-categoria="suporte" onclick="inserirTextoComTooltip(this)">Envio de VS</button>
+          <button data-texto="Ciente da garantia do teste cabeado pelo site fast.com. Realizados três testes consecutivos.<hr>
+<b> Valores obtidos pelo teste cabeado no fast.com: </b>
+Download: XXX Mbps, XXX Mbps, XXX Mbps
+Upload: XXX Mbps, XXX Mbps, XXX Mbps
+Latência: XX ms, XX ms, XX ms." data-categoria="suporte" onclick="inserirTextoComTooltip(this)">Teste de velocidade</button>
+        </div>
+      </div>
+
+      <!-- Novas Categorias -->
+      <div class="categoria">
+        <h4>3. Serviços</h4>
+        <div class="categoria-buttons">
+          <button data-texto="Cliente solicita transferência de endereço. Ciente do prazo máximo de 7 dias úteis para ocorrer. Cliente já está no novo endereço. <hr> <b> Novo endereço:</b> Rua, n°, bairro, cidade, CEP: <hr> Ponto de referência: XXXXXXX. Melhor turno: Ligar antes. <hr> Confirmado a disponibilidade de conexão no local por: Inserir a forma de confirmação." data-categoria="servicos" onclick="inserirTextoComTooltip(this)">Transf. de endereço</button>
+          <button data-texto="Cliente solicita mudança de cômodo. Ciente do prazo máximo de 7 dias úteis para ocorrer. <hr> Ponto de referência: XXXXXXX. Melhor turno: Ligar antes. <hr>." data-categoria="servicos" onclick="inserirTextoComTooltip(this)">Mudança de cômodo</button>
+          <button data-texto="Cliente solicita montagem de rede interna.<hr> 
+
+<b>Serviço: Montagem de rede</b>
+Nº de pontos adicionais: X
+Configuração de roteador: (Sim / Não)
+Cliente ciente que acima de 20m será cobrado R$ 3,00 por metro adicional.
+Ficou ciente do prazo máximo de 7 dias úteis para ocorrer.<hr>"data-categoria="servicos" onclick="inserirTextoComTooltip(this)">Montagem de rede</button>
+        </div>
+      </div>
+
+      <div class="categoria">
+        <h4>4. Financeiro</h4>
+        <div class="categoria-buttons">
+          <button data-texto="Cliente entrou em contato solicitando o desbloqueio da conexão, ciente dos valores em pendência assim como o prazo de 3 a 5 dias corridos do desbloqueio. Orientado a realizar o reinicio manual do equipamento durante 15 minutos. Sem mais dúvidas." data-categoria="financeiro" onclick="inserirTextoComTooltip(this)">Desbl. 3001 disponível</button>
+          <button data-texto="Cliente solicita desbloqueio da conexão. Identificado bloqueio 3001. Ciente de que não é possível liberar o acesso em sistema em razão das pendências. Repassados os valores atualizados e prazos das pendências, assim como as formas de pagamento disponíveis, sem mais dúvidas." data-categoria="financeiro" onclick="inserirTextoComTooltip(this)">Desbl. 3001 indisponível</button>
+          <button data-texto="Cliente solicita desbloqueio da conexão. Identificado bloqueio verde. Ciente de que não é possível liberar o acesso em sistema e ciente dos valores atualizados e prazos das pendências. Repassadas as formas de pagamento disponíveis, sem mais dúvidas. " data-categoria="financeiro" onclick="inserirTextoComTooltip(this)">Bloqueio verde</button>
+          <button data-texto="Cliente solicita o bloqueio temporário da conexão. Ciente que o cadastro ficará bloqueado por [QUANTIDADE DE DIAS 30, 60 90 OU 120] dias corridos e que o desbloqueio será automático.
+Motivo do bloqueio azul: motivos financeiros/ saúde/ reforma/ viagem.
+Solicitação realizada no formulário financeiro." data-categoria="financeiro" onclick="inserirTextoComTooltip(this)">Bloqueio azul</button>
+          <button data-texto="Cliente relata falta de conexão após o pagamento da pendência. Identificado bloqueio 3001. Ciente de que ainda não ocorreu o reconhecimento bancário do pagamento realizado, sendo necessário aguardar o prazo máximo de 72 horas úteis. Instruído a realizar o pagamento das próximas faturas de uma das formas com compensação bancária mais rápida. Sem mais dúvidas." data-categoria="financeiro" onclick="inserirTextoComTooltip(this)">Desbl. 3001 indisponível - pagamento já efetuado</button>
+          <button data-texto="Cliente solicita informações sobre desconto na sua fatura. Identificado em sistema o protocolo XXXXX, registrando que o cliente enfrentou problemas de conexão dos dias DD/MM/AA até o dia DD/MM/AA. <hr>Feita a solicitação via formulário ao setor financeiro para que seja verificado sobre a possibilidade de desconto. <hr>Cliente ciente do prazo de até 72h úteis para que seja concluída a verificação. Sem mais dúvidas.  " data-categoria="financeiro" onclick="inserirTextoComTooltip(this)">Solicitação de desconto</button>
+        </div>
+      </div>
+
+      <div class="categoria">
+        <h4>5. Alteração de senha Wi-Fi</h4>
+        <div class="categoria-buttons">
+          <button data-texto="Cliente solicita troca de senha wi-fi. Feito o acesso às configurações do roteador pelo IP padrão. Alteração feita com sucesso. Sem mais dúvidas." data-categoria="senha-wifi" onclick="inserirTextoComTooltip(this)">Pelo IP de acesso</button>
+          <button data-texto="Cliente solicita troca de senha wi-fi. Feito o acesso às configurações do roteador pelo aplicativo. Repassadas as instruções, alteração feita com sucesso. Sem mais dúvidas." data-categoria="senha-wifi" onclick="inserirTextoComTooltip(this)">Pelo aplicativo</button>
+        </div>
+      </div>
+
+      <div class="categoria">
+        <h4>6. Cancelamento e Troca de Titularidade</h4>
+        <div class="categoria-buttons">
+          <button data-texto="Cliente solicita cancelamento da conexão. Não foi possível retê-lo com as ofertas disponíveis, então o atendimento foi transferido para o setor de retenção realizar a conclusão/negociação. Sem mais dúvidas. <hr> <b> Motivo do cancelamento: </b> <hr> <b>Ofertado: </b> XXXXXX <hr> <b>" data-categoria="cancelamento" onclick="inserirTextoComTooltip(this)">Solicitado pelo titular do cadastro</button>
+          <button data-texto="Cliente solicita cancelamento da conexão. Ciente de que tal procedimento deve ser tratado diretamente com o titular da conta. Solicitado novo contato. Sem mais dúvidas." data-categoria="troca-titularidade" onclick="inserirTextoComTooltip(this)">Solicitado por outra pessoa</button>
+          <button data-texto="Cliente solicitou informação sobre troca de titularidade. Repassado que é necessário o contato via chat entre 08h e 20h para ser tratado com o setor responsável (Retenção)." data-categoria="troca-titularidade" onclick="inserirTextoComTooltip(this)">Troca de titularidade TEL</button>
+          <button data-texto="Cliente solicitou informação sobre troca de titularidade. O atendimento foi transferido para o setor de retenção realizar as tratativas." data-categoria="troca-titularidade" onclick="inserirTextoComTooltip(this)">Troca de titularidade CHAT</button>
+          <button data-texto="Cliente solicita a reativação do cadastro cancelado há menos de 15 dias. Atendimento transferido para o setor de retenção. Sem mais." data-categoria="troca-titularidade" onclick="inserirTextoComTooltip(this)">Reativação</button>
+        </div>
+      </div>
+
+      <div class="categoria">
+        <h4>7. Problemas na Conexão</h4>
+        <div class="categoria-buttons">
+          <button data-texto="Cliente relata falta de conexão, porém não soube repassar o CPF do titular da conta. Solicitado novo contato. Sem mais dúvidas." data-categoria="problemas-conexao" onclick="inserirTextoComTooltip(this)">Não soube repassar o CPF</button>
+          <button data-texto="Cliente relata falta de conexão. Durante o atendimento, a conexão foi normalizada sem a necessidade de realizar os procedimentos padrão. Ciente que deve monitorar o acesso e que se o problema persistir, poderá ser feito novo contato. Sem mais dúvidas. <hr>" data-categoria="problemas-conexao" onclick="inserirTextoComTooltip(this)">Conexão normalizada sem procedimento</button>
+          <button data-texto="Cliente relata falta de conexão. Ao solicitar a realização de procedimentos padrão (reinício e verificação de cabos), afirmou que não tem interesse em realizá-los e solicitou visita técnica. Encaminhado para verificação técnica no local, ciente do prazo de até três dias úteis para ocorrer. <hr> Ponto de referência: XXXXX. Agendamento: xxxx. Disponibilidade: xxxx. <hr> [Status dos leds]." data-categoria="problemas-conexao" onclick="inserirTextoComTooltip(this)">Por recusa de procedimento</button>
+          <button data-texto="Cliente relata falta de conexão após o pagamento da pendência. Identificado IP de bloqueio. Feito o reinício dos dispositivos e verificação de cabos. Conexão normalizada. Ciente de que se o problema persistir, poderá ser feito novo contato. Sem mais dúvidas." data-categoria="problemas-conexao" onclick="inserirTextoComTooltip(this)">IP de bloqueio</button>
+          <button data-texto="Cliente relata falta de conexão. Identificado problema externo. Instruído a aguardar o reparo técnico ocorrer. Sem mais dúvidas. <hr> [Mensagem sobre o problema externo informado pela monitoria / supervisão]." data-categoria="problemas-conexao" onclick="inserirTextoComTooltip(this)">Problema externo (Conclusão de protocolo)</button>
+          <button data-texto="Cliente relata falta de conexão. Identificado problema externo. Instruído a aguardar o reparo técnico ocorrer e ciente de que será feito posterior contato após a normalização. Ligar no nº XXXXXXXXXXX - falar com Sr.(a) XXXXXXXXXX. Sem mais dúvidas. <hr> [Mensagem sobre o problema externo informado pela monitoria / supervisão]." data-categoria="problemas-conexao" onclick="inserirTextoComTooltip(this)">Problema externo (Protocolo em suporte)</button>
+          <button data-texto="Cliente relata falta de conexão, porém não está no local de instalação. Solicitado novo contato. Sem mais dúvidas." data-categoria="problemas-conexao" onclick="inserirTextoComTooltip(this)">Cliente não está no local de instalação</button>
+        </div>
+      </div>
+
+      <div class="categoria">
+        <h4>8. Problemas na TV Faster</h4>
+        <div class="categoria-buttons">
+          <button data-texto="Cliente relata falta de acesso na TV Faster. Foram realizados procedimentos de reinício e verificação de cabos do STB e dos equipamentos de fibra. Conexão não normalizada. Verificado com o Rodrigo Fragoso. Conexão normalizada. Ciente que deve monitorar o acesso e que se o problema persistir, poderá ser feito novo contato. Sem mais dúvidas. <hr> [Cópia da conversa via Spark com o Rodrigo Fragoso]." data-categoria="tv-faster" onclick="inserirTextoComTooltip(this)">Normalizada pós-procedimento e verf. com Rodrigo Frag.</button>
+          <button data-texto="Cliente relata falta de acesso na TV Faster. Foram realizados procedimentos de reinício e verificação de cabos do STB e dos equipamentos de fibra. Verificado com o Rodrigo Fragoso. Conexão não normalizada. Encaminhado para verificação técnica no local, ciente do prazo de até três dias úteis para ocorrer. <hr> Ponto de referência: XXXXX. Agendamento: xxxx. Disponibilidade: xxxx. <hr> [Cópia da conversa via Spark com o Rodrigo Fragoso]." data-categoria="tv-faster" onclick="inserirTextoComTooltip(this)">Não normalizada pós-procedimento e verf. com Rodrigo Frag.</button>
+          <button data-texto="Cliente relata falta de acesso na TV Faster. Foram realizados procedimentos de reinício e verificação de cabos. Conexão normalizada. Ciente que deve monitorar o acesso e que se o problema persistir, poderá ser feito novo contato. Sem mais dúvidas. <hr>" data-categoria="tv-faster" onclick="inserirTextoComTooltip(this)"> Normalizada pós-procedimento (sem verf. com Rodrigo Frag.)</button>
+        </div>
+      </div>
+
+      <div class="categoria">
+        <h4>9. Informação sobre Visita Técnica</h4>
+        <div class="categoria-buttons">
+          <button data-texto="Cliente solicita informação sobre a visita técnica referente ao protocolo [número do protocolo]. Instruído a aguardar a visita ocorrer, uma vez que está dentro do prazo máximo. Sem mais dúvidas." data-categoria="visita-tecnica" onclick="inserirTextoComTooltip(this)">Dentro do prazo de 3 dias úteis</button>
+          <button data-texto="Cliente solicita informação sobre a visita técnica referente ao protocolo [número do protocolo]. Instruído a aguardar a visita ocorrer, uma vez que o escritório local afirma que ocorrerá no dia de XX/XX. <hr> <b> Verificação com o escritório local </b>:" data-categoria="visita-tecnica" onclick="inserirTextoComTooltip(this)">Fora do prazo de 3 dias úteis</button>
+          <button data-texto="Cliente solicita informação sobre a visita técnica referente ao protocolo [número do protocolo]. Escritório indisponível para verificação. Solicitado posterior contato após às XX h, pois o escritório estará disponível. Sem mais dúvidas." data-categoria="visita-tecnica" onclick="inserirTextoComTooltip(this)">Escritório indisponivel para verificação</button>
+          <button data-texto="Cliente solicita o cancelamento da visita [número do protocolo], pois informou que o acesso normalizou. Feito o cancelamento e repassado para o cliente. Sem mais dúvidas." data-categoria="visita-tecnica" onclick="inserirTextoComTooltip(this)">Cancelamento da visita antes de ocorrer</button>
+        </div>
+      </div>
+
+      <div class="categoria">
+        <h4>10. Informação sobre Pendências</h4>
+        <div class="categoria-buttons">
+          <button data-texto="Cliente entrou em contato solicitando informações sobre pendências de boletos. Repassadas as informações sobre os valores e taxas, e as datas referentes aos meses de pendências. Sem mais dúvidas. <hr> <b> Pendências em atraso:</b>" data-categoria="pendencias" onclick="inserirTextoComTooltip(this)">Pendências em atraso</button>
+          <button data-texto="O cliente solicita a negociação de pendências, que estão em atraso há 91 dias. Ele está ciente de que a verificação será repassada ao setor financeiro e que, após esse repasse, será feito contato para apresentar uma possível oferta para a quitação dos débitos. O cliente também tem conhecimento dos valores de suas pendências e do prazo de até 72 horas úteis para o contato referente à negociação.
+
+O e-mail foi repassado para:
+- maria.caires@desktop.tec.br 
+- rayssa.silva@desktop.tec.br 
+- camila.vsilva@desktop.tec.br 
+- arlinda.reis@desktop.net.br" data-categoria="pendencias" onclick="inserirTextoComTooltip(this)">Negociação de pend. (91 dias)</button>
+          <button data-texto="Cliente relata pagamento em duplicidade. Solicitado contato via chat para envio dos comprovantes. Sem mais dúvidas." data-categoria="pendencias" onclick="inserirTextoComTooltip(this)">Pagamento duplicado TEL</button>
+          <button data-texto="Cliente relata pagamento em duplicidade. Colhidos os comprovantes e enviado o caso para o setor financeiro via e-mail solicitando a verificação dos pagamentos. Cliente informado que o caso está sob análise, e que será feito um contato posterior quando for obtido resposta pelo setor responsável. Sem mais dúvidas. <hr> [Registrar cópia do e-mail enviado]" data-categoria="pendencias" onclick="inserirTextoComTooltip(this)">Pagamento duplicado CHAT</button>
+          <button data-texto="Cliente solicita alteração da data de vencimento das faturas para o dia XX de cada mês. Instruído a fazer a devida alteração pelo site da empresa. Feito passo a passo. Sem mais dúvidas." data-categoria="pendencias" onclick="inserirTextoComTooltip(this)">Alterar data de vencimento das faturas</button>
+          <button data-texto="Cliente solicita informação sobre as formas de pagamento disponíveis. Ciente das informações, instruído a retirá-lo no site da empresa e pagar as pendências de forma on-line. Sem mais dúvidas. <hr> <b> Pendências em atraso:</b>" data-categoria="pendencias" onclick="inserirTextoComTooltip(this)">Formas de pagamento disponíveis</button>
+        </div>
+      </div>
+
+      <div class="categoria">
+        <h4>11. Emissão de 2ª via da Fatura</h4>
+        <div class="categoria-buttons">
+          <button data-texto="Cliente solicita segunda via do boleto. Instruído a retirá-lo no site da empresa ou via whatsapp. Ciente do passo a passo a ser realizado e feita a atualização dos dados para contato. Sem mais dúvidas. <hr> <b> Pendências em atraso:</b>" data-categoria="segunda-via" onclick="inserirTextoComTooltip(this)">Instrução atravéz do site</button>
+          <button data-texto="Cliente solicita segunda via do boleto. Enviado link da fatura por SMS através do ADM, ciente do passo a passo a ser realizado . Sem mais dúvidas. <hr> <b> Pendências em atraso:</b>" data-categoria="segunda-via" onclick="inserirTextoComTooltip(this)">Enviado via SMS</button>
+          <button data-texto="Cliente solicita segunda via do boleto. Enviado link da fatura através do WhatsApp, ciente do passo a passo a ser realizado . Sem mais dúvidas. <hr> <b> Pendências em atraso:</b>" data-categoria="segunda-via" onclick="inserirTextoComTooltip(this)">Enviado via CHAT</button>
+          <button data-texto="Cliente solicita segunda via da nota fiscal referente ao mês XX. Instruído a retirá-lo no site da empresa através da opção Painel de Controle. Ciente do passo a passo a ser realizado e feita a atualização dos dados para contato. Sem mais dúvidas." data-categoria="segunda-via" onclick="inserirTextoComTooltip(this)">Emissão de nota fiscal</button>
+          <button data-texto="Cliente solicita troca de plano. Repassados os planos em catálogo, cliente solicitou a troca de plano para XXX MEGA por R$ XX,XX. Feito a solicitação via formulário. Ficou ciente de que serão geradas duas faturas de mensalidade no mês posterior, cada uma referente ao período proporcional de uso de cada plano, e que a fidelidade será renovada por mais 12 meses." data-categoria="segunda-via" onclick="inserirTextoComTooltip(this)">Troca de plano</button>
+        </div>
+      </div>
+
+      <div class="categoria">
+        <h4>12. SVA e Token</h4>
+        <div class="categoria-buttons">
+          <button data-texto="Cliente solicitou informações sobre SVA’s inclusos no seu plano. Informado dos serviços adicionais disponíveis e repassado o passo a passo para ativação através do site da FasterNet. Sem mais dúvidas." data-categoria="sva-token" onclick="inserirTextoComTooltip(this)">Ativação de SVA's</button>
+          <button data-texto="Cliente solicita informações sobre o número de Token para acessar suas faturas. Repassado o Token ao cliente." data-categoria="sva-token" onclick="inserirTextoComTooltip(this)">Token para acessar as faturas</button>
+          <button data-texto="Cliente solicita informações sobre o número de Token para ativar os SVA. Repassado o Token ao cliente." data-categoria="sva-token" onclick="inserirTextoComTooltip(this)">Token para ativar os SVA</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+    <!-- Modal Fatura -->
+    <div id="modal-fatura" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Faturas em Aberto</h3>
+          <button class="modal-close" onclick="fecharModalFatura()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="fatura-grid">
+            <div class="grid-header">Vencimento</div>
+            <div class="grid-header">Valor</div>
+            <div class="grid-header">Link</div>
+            <!-- Linhas de faturas -->
+            <div class="fatura-linha">
+              <input type="text" class="fatura-data" placeholder="dd/mm/aaaa">
+              <input type="text" class="fatura-valor" placeholder="R$ 0,00">
+              <input type="text" class="fatura-link" placeholder="Link da fatura">
+            </div>
+            <div class="fatura-linha">
+              <input type="text" class="fatura-data" placeholder="dd/mm/aaaa">
+              <input type="text" class="fatura-valor" placeholder="R$ 0,00">
+              <input type="text" class="fatura-link" placeholder="Link da fatura">
+            </div>
+            <div class="fatura-linha">
+              <input type="text" class="fatura-data" placeholder="dd/mm/aaaa">
+              <input type="text" class="fatura-valor" placeholder="R$ 0,00">
+              <input type="text" class="fatura-link" placeholder="Link da fatura">
+            </div>
+            <div class="fatura-linha">
+              <input type="text" class="fatura-data" placeholder="dd/mm/aaaa">
+              <input type="text" class="fatura-valor" placeholder="R$ 0,00">
+              <input type="text" class="fatura-link" placeholder="Link da fatura">
+            </div>
+          </div>
+          <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+            <button id="btn-copiar-faturas" class="btn-personalizado">Copiar Faturas</button>
+            <button id="btn-transferir-faturas" class="btn-personalizado">Inserir no script</button>
+            <button id="btn-apagar-faturas" class="btn-personalizado">Apagar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Modal Verificação com a SUP -->
+    <div id="modal-usuario" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Padrão de repasse Noc/Monitoria</h3>
+      <button class="modal-close" onclick="fecharModalUsuario()">&times;</button>
+    </div>
+    <div class="field-row">
+  <label for="fhtt">FHTT:</label>
+  <input type="text" id="fhtt" />
+</div>
+
+<div class="field-row">
+  <label for="usuario-nome">Usuário:</label>
+  <input type="text" id="usuario-nome" />
+</div>
+
+<div class="field-row">
+  <label for="cidade">Cidade:</label>
+  <input type="text" id="cidade" />
+</div>
+
+<div class="field-row">
+  <label for="autenticacao">Autenticação:</label>
+  <select id="autenticacao">
+    <option value="">Selecione</option>
+    <option value="DHCP">DHCP</option>
+    <option value="PPPOE">PPPOE</option>
+  </select>
+</div>
+
+<div class="field-row">
+  <label for="plano">Plano:</label>
+  <input type="text" id="plano" />
+</div>
+
+<div class="field-row">
+  <label for="endereco">Endereço:</label>
+  <input type="text" id="endereco" />
+</div>
+
+<div class="field-row">
+  <label for="motivo">Verificação:</label>
+  <input type="text" id="motivo" />
+</div>
+
+<div class="field-row">
+  <label for="risco">Oferece risco:</label>
+  <select id="risco">
+    <option value="">Selecione</option>
+    <option value="Sim">Sim</option>
+    <option value="Não">Não</option>
+  </select>
+</div>
+
+<div class="field-row">
+  <label for="cabo-drop">Cabo drop:</label>
+  <select id="cabo-drop">
+    <option value="">Selecione</option>
+    <option value="Sim">Sim</option>
+    <option value="Não">Não</option>
+  </select>
+</div>
+ 
+
+      <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+        <button id="btn-copiar-usuario" class="btn-copiar">Copiar</button>
+        <button id="btn-apagar-usuario" class="btn-apagar">Apagar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  </div> <!-- Fim do .container -->
+</body>
+</html>

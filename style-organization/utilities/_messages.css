@@ -1,0 +1,52 @@
+/*Mensagem de informação dos botões*/
+.copiado-msg {
+  height: 24px; /* reserva espaço mesmo sem mensagem */
+  margin-top: 8px;
+  font-size: 14px;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+.copiado-msg.ativo {
+  opacity: 1;
+}
+
+/* ── Mensagem de cópia ─────────────────────────────── */
+.copiado-msg {
+  margin-top: 15px;
+  color: #8bd3dd;
+  font-weight: bold;
+}
+
+/* ── Tooltip ─────────────────────────────────────── */
+.tooltip {
+  position: absolute;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: pre-wrap;
+  z-index: 1001;
+  max-width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border: 1px solid #333;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.tooltip.show {
+  opacity: 1;
+}
+
+.tooltip::after {
+  content: \'\';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #1a1a1a transparent transparent transparent;
+}
+

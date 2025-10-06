@@ -1,0 +1,204 @@
+/* ── Tema claro ─────────────────────────────────────── */
+body.tema-claro {
+  background: #f5f5f5;
+  color: #232946;
+}
+
+body.tema-claro .container {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body.tema-claro h1 {
+  color: #232946;
+}
+
+body.tema-claro input,
+body.tema-claro textarea {
+  background-color: #ffffff;
+  color: #232946;
+  border: 1px solid #ccc;
+}
+
+body.tema-claro .copiado-msg {
+  color: #0077cc;
+}
+
+body.tema-claro button {
+  background-color: #0077cc;
+  color: #fff;
+}
+
+body.tema-claro button:hover {
+  background-color: #005fa3;
+}
+
+/* ── Correção de botões internos no modo claro ───────────────────────────── */
+body.tema-claro .cpf-wrapper .btn-icon,
+body.tema-claro .titular-wrapper .btn-icon {
+  background-color: #0077cc;
+  color: #ffffff;
+}
+
+body.tema-claro .cpf-wrapper .btn-icon:hover,
+body.tema-claro .titular-wrapper .btn-icon:hover {
+  background-color: #005fa3;
+}
+
+/* ── Modo Claro: deixa imagens dos botões brancas ── */
+body.tema-claro button img {
+  filter: brightness(0) invert(1);
+}
+
+body.tema-claro #btn-tema {
+  background-color: #345995;
+  color: white;
+}
+
+body.tema-claro #btn-tema:hover {
+  background-color: #28487a;
+}
+
+body.tema-claro #btn-faster-desk {
+  background-color: #c82333;
+  color: #ffffff;
+}
+
+body.tema-claro #btn-faster-desk:hover {
+  background-color: rgb(210, 8, 1);
+}
+
+body.tema-claro #btn-mp {
+  background-color: #563d7c;
+  color: #ffffff;
+}
+
+body.tema-claro #btn-mp:hover {
+  background-color: #483368;
+}
+
+body.tema-claro #btn-mpdesk {
+  background-color: #1c86ee;
+  color: #ffffff;
+}
+
+body.tema-claro #btn-mpdesk:hover {
+  background-color: #166fc2;
+}
+
+/* Modo claro: texto das checkboxes */
+body.tema-claro .checkboxes label {
+  color: #232946; /* cor escura visível no fundo claro */
+}
+
+body.tema-claro #btn-lgpd {
+  background-color: #0077cc;
+  color: #ffffff;
+}
+
+body.tema-claro #btn-lgpd:hover {
+  background-color: #005fa3;
+}
+
+/* ── Modal M.P. - Modo Claro ─────────────────────────── */
+body.tema-claro .modal-content {
+  background: #ffffff;
+  border: 1px solid #ddd;
+}
+
+body.tema-claro .modal-header {
+  background: #f8f9fa;
+  border-bottom: 2px solid #A9A9A9;
+}
+
+body.tema-claro .modal-header h3 {
+  color: #232946;
+}
+
+body.tema-claro .modal-close {
+  color: #232946;
+}
+
+body.tema-claro .modal-close:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+body.tema-claro .categoria h4 {
+  color: #0077cc;
+  border-bottom: 1px solid #A9A9A9;
+}
+
+body.tema-claro .categoria button {
+  background-color: #0077cc;
+  color: #ffffff;
+}
+
+body.tema-claro .categoria button:hover {
+  background-color: #005fa3;
+}
+
+/* ── Tooltip - Modo Claro ─────────────────────────── */
+body.tema-claro .tooltip {
+  background-color: #f8f9fa;
+  color: #232946;
+  border: 1px solid #ddd;
+}
+
+body.tema-claro .tooltip::after {
+  border-color: #f8f9fa transparent transparent transparent;
+}
+
+/* Tema claro para o modal de fatura */
+body.tema-claro #modal-fatura .modal-content {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+}
+
+body.tema-claro #modal-fatura .grid-header {
+  color: #232946;
+}
+
+body.tema-claro #btn-copiar-faturas {
+  background-color: #007bff;
+}
+
+body.tema-claro #btn-copiar-faturas:hover {
+  background-color: #0056b3;
+}
+
+body.tema-claro #btn-transferir-faturas {
+  background-color: #6c757d; /* Cinza para transferir no tema claro */
+}
+
+body.tema-claro #btn-transferir-faturas:hover {
+  background-color: #5a6268;
+}
+
+/* Modo claro */
+body.tema-claro .button-group::after {
+  content: "";
+  position: absolute;
+  bottom: -42px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #A9A9A9;
+}
+
+/* Modo claro: linha divisória */
+body.tema-claro .linha-divisoria {
+  background-color: #A9A9A9; /* mesma cor das outras linhas no modo claro */
+}
+
+/* Modo claro */
+body.tema-claro .top-bar::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #A9A9A9; /* cinza médio para contraste no fundo claro */
+}
+

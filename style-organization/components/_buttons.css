@@ -1,0 +1,539 @@
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   1️⃣ BOTÕES PRINCIPAIS - GRUPO DE BOTÕES
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
+
+/* Container dos botões principais */
+.button-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+/* Estilo base para todos os botões */
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  background-color: #e2870f;
+  color: #1d2136;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Efeito hover para botões gerais */
+button:hover {
+  background-color: #cf6f0d;
+}
+
+/* Imagens dentro dos botões (caso ainda existam) */
+button img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   2️⃣ BOTÕES DA BARRA SUPERIOR
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Botão: Faster Desk ───────────────────────── */
+#btn-faster-desk {
+  font-size: 16px;
+  padding: 12px 20px;
+  background-color: #c82333;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 2px 2px 2px 10px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#btn-faster-desk:hover {
+  background-color: #d21801;
+  transform: scale(1.15);
+}
+
+/* ── Botão: M.P (Roxo) ───────────────────────── */
+#btn-mp {
+  font-size: 16px;
+  padding: 12px 20px;
+  background-color: #563d7c;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 2px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;
+  gap: 8px;
+}
+
+#btn-mp:hover {
+  background-color: #483368;
+  transform: scale(1.17);
+}
+
+/* ── Botão: M.P Desk (Azul) ───────────────────────── */
+#btn-mpdesk {
+  font-size: 16px;
+  padding: 12px 20px;
+  background-color: #1c86ee;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 2px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+#btn-mpdesk:hover {
+  background-color: #166fc2;
+  transform: scale(1.17);
+}
+
+
+/* ── Ajustes para Botões da Linha Superior (Menores) ───────────────────────── */
+.linha-superior #btn-mp,
+.linha-superior #btn-mpdesk {
+  padding: 8px 12px;
+  gap: 4px;
+}
+
+.linha-superior #btn-mp::before,
+.linha-superior #btn-mpdesk::before {
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
+}
+
+/* ── Botão: Tema (Lâmpada) ───────────────────────── */
+#btn-tema {
+  width: 36px;
+  height: 32px;
+  font-size: 18px;
+  background-color: #41424d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  padding: 0;
+  box-sizing: border-box;
+  margin-top: 25px;
+  margin-left: 3px;
+  transition: transform 0.2s ease, background-color 0.3s;
+}
+
+#btn-tema:hover {
+  background-color: #35363f;
+  transform: scale(1.2);
+}
+
+/* ── Botão: Fatura (Cifrão) ───────────────────────── */
+#btn-fatura {
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  background-color: #009037;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  padding: 0;
+  box-sizing: border-box;
+  margin-top: 25px;
+  margin-left: 3px;
+  transition: transform 0.2s ease, background-color 0.3s;
+}
+
+#btn-fatura:hover {
+  transform: scale(1.2);
+  background-color: #00702b;
+}
+
+/* ── Botão: Duplicar ───────────────────────── */
+#btn-duplicar {
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  background-color: #fe9812; /* cor laranja, pode trocar se quiser */
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  padding: 0;
+  box-sizing: border-box;
+  margin-top: 25px;
+  margin-left: 3px;
+  transition: transform 0.2s ease, background-color 0.3s;
+}
+
+#btn-duplicar:hover {
+  background-color: #e47f19;
+  transform: scale(1.2);
+}
+
+/* ── Botão: Verificação com a SUP ───────────────────────── */
+#btn-usuario {
+  width: 32px;
+  height: 32px;
+  background-color: #b02a37; /* vermelho suave */
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  padding: 0;
+  box-sizing: border-box;
+  margin-top: 25px;
+  margin-left: 3px;
+  transition: transform 0.2s ease, background-color 0.3s;
+}
+
+#btn-usuario:hover {
+  background-color: #8f1f2b;
+  transform: scale(1.2);
+}
+
+#btn-usuario i {
+  font-size: 17px;
+  color: #ffffff; /* deixa o ícone branco */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   3️⃣ BOTÕES ICÔNICOS (CPF/CNPJ/TITULAR)
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Botões CPF/CNPJ ───────────────────────── */
+.cpf-wrapper .btn-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -16px;
+  background-color: #2a2f4a;
+  border-radius: 6px;
+  width: 28px;
+  height: 32px;
+  padding: 0;
+  line-height: 32px;
+  text-align: center;
+  font-size: 18px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  z-index: 1;
+}
+
+.cpf-wrapper .btn-icon.left {
+  right: 45px;
+}
+
+.cpf-wrapper .btn-icon.right {
+  right: 10px;
+}
+
+.cpf-wrapper .btn-icon:hover {
+  transform: scale(0.9);
+}
+
+/* ── Botão Titular ───────────────────────── */
+.titular-wrapper .btn-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -16px;
+  right: 10px;
+  background-color: #2a2f4a;
+  border-radius: 6px;
+  padding: 0;
+  width: 28px;
+  height: 32px;
+  font-size: 18px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 32px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.titular-wrapper .btn-icon:hover {
+  transform: scale(0.9);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   4️⃣ BOTÕES DE TAG (HTML)
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
+
+/* Container dos botões de TAG */
+.html-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo dos botões de TAG */
+.html-buttons button {
+  padding: 6px 10px;
+  font-size: 16px;
+  background-color: #4c5270;
+  color: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.html-buttons button:hover {
+  transform: scale(1.08);
+  background-color: #343957;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   5️⃣ BOTÕES DE AÇÃO (LGPD/FATURA)
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Botão: LGPD ───────────────────────── */
+#btn-lgpd {
+  width: 50%;
+  padding: 12px 16px;
+  font-size: 16px;
+  background-color: #4c5270;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#btn-lgpd:hover {
+  background-color: #343957;
+  transform: scale(1.05);
+}
+
+/* ── Botões de Fatura (Copiar/Transferir) ───────────────────────── */
+#btn-copiar-faturas,
+#btn-transferir-faturas {
+  display: block;
+  width: fit-content;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#btn-copiar-faturas {
+  background-color: #28a745;
+}
+
+#btn-copiar-faturas:hover {
+  background-color: #218838;
+}
+
+#btn-transferir-faturas {
+  background-color: #007bff;
+}
+
+#btn-transferir-faturas:hover {
+  background-color: #0056b3;
+}
+
+#btn-apagar-faturas {
+  background-color: #c82333; /* vermelho escuro */
+  color: #ffffff;            /* texto branco */
+}
+
+#btn-apagar-faturas:hover {
+  background-color: #a71d2a; /* tom mais escuro no hover */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   6️⃣ MODO CLARO - AJUSTES PARA TEMA CLARO
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Botão Faster Desk - Modo Claro ───────────────────────── */
+body.tema-claro #btn-faster-desk {
+  background-color: #c82333;
+  color: #ffffff;
+}
+
+body.tema-claro #btn-faster-desk:hover {
+  background-color: #d21801;
+}
+
+/* ── Botões M.P - Modo Claro ───────────────────────── */
+body.tema-claro #btn-mp {
+  background-color: #563d7c;
+  color: #ffffff;
+}
+
+body.tema-claro #btn-mp:hover {
+  background-color: #483368;
+}
+
+body.tema-claro #btn-mpdesk {
+  background-color: #1c86ee;
+  color: #ffffff;
+}
+
+body.tema-claro #btn-mpdesk:hover {
+  background-color: #166fc2;
+}
+
+/* ── Ícones M.P - Modo Claro ───────────────────────── */
+body.tema-claro #btn-mp::before,
+body.tema-claro #btn-mpdesk::before {
+  filter: brightness(0) invert(1); /* Mantém branco no modo claro */
+}
+
+/* ── Botão Tema - Modo Claro ───────────────────────── */
+body.tema-claro #btn-tema {
+  background-color: #345995;
+  color: white;
+}
+
+body.tema-claro #btn-tema:hover {
+  background-color: #28487a;
+}
+
+/* ── Botões Icônicos - Modo Claro ───────────────────────── */
+body.tema-claro .cpf-wrapper .btn-icon,
+body.tema-claro .titular-wrapper .btn-icon {
+  background-color: #0077cc;
+  color: #ffffff;
+}
+
+body.tema-claro .cpf-wrapper .btn-icon:hover,
+body.tema-claro .titular-wrapper .btn-icon:hover {
+  background-color: #005fa3;
+}
+
+/* ── Botão LGPD - Modo Claro ───────────────────────── */
+body.tema-claro #btn-lgpd {
+  background-color: #0077cc;
+  color: #ffffff;
+}
+
+body.tema-claro #btn-lgpd:hover {
+  background-color: #005fa3;
+}
+
+/* ── Botões de Fatura - Modo Claro ───────────────────────── */
+body.tema-claro #btn-copiar-faturas {
+  background-color: #007bff;
+}
+
+body.tema-claro #btn-copiar-faturas:hover {
+  background-color: #0056b3;
+}
+
+body.tema-claro #btn-transferir-faturas {
+  background-color: #6c757d;
+}
+
+body.tema-claro #btn-transferir-faturas:hover {
+  background-color: #5a6268;
+}
+
+/*BEFORE ORGANIZAÇÃO DOS BOTÕES M.P________________________________*/
+#btn-mp img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  margin-right: 8px;
+  filter: brightness(0) invert(1); /* deixa branco */
+}
+
+#btn-mpdesk img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  margin-right: 8px;
+  filter: brightness(0) invert(1); /* deixa o ícone branco */
+}
+
+/* ── Botão: Multa ───────────────────────── */
+#btn-multa {
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  background-color: #1babc1; 
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  padding: 0;
+  box-sizing: border-box;
+  margin-top: 25px;
+  margin-left: 3px;
+  transition: transform 0.2s ease, background-color 0.3s;
+}
+
+#btn-multa:hover {
+  background-color: #157f8f;
+  transform: scale(1.2);
+}
+
+/* ── Botão: Ponto Adicional ───────────────────────── */
+#btn-ponto {
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  background-color: #ffc107; 
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  padding: 0;
+  box-sizing: border-box;
+  margin-top: 25px;
+  margin-left: 3px;
+  transition: transform 0.2s ease, background-color 0.3s;
+}
+
+#btn-ponto:hover {
+  background-color: #edb100;
+  transform: scale(1.2);
+}
