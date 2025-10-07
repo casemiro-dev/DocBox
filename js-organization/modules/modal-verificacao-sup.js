@@ -66,8 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (plano) texto += `Plano: ${plano}\n`;
     if (endereco) texto += `Endereço: ${endereco}\n`;
 
-    if (usuario || numero || motivo) {
-      texto += `(${usuario}) nº ${numero}. ${motivo}\n`;
+    if (nome || usuario || numero || motivo) {
+      texto += `${nome} (${usuario}) nº ${numero}. ${motivo}\n`;
     }
 
     if (risco) texto += `Apresenta risco de acidente: ${risco}\n`;
