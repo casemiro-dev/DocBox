@@ -89,10 +89,10 @@ h1 {
 /*_____________________________________________________________________________*/
 
 .agendamento-wrapper {
-  margin-top: 30px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 19px;
   padding-bottom: 18px;  /*Controla a distância da linha de baixo.*/
 }
 
@@ -162,6 +162,12 @@ input#doc-id {
 
 textarea#anotacoes {
   margin-top: 10px;
+  min-height: 230px;
+  max-height: 230px;     /* trava a altura para evitar expansão */
+  overflow-y: auto;      /* ativa rolagem interna */
+  resize: vertical;      /* permite ajuste manual se necessário */
+  width: 100%;           /* garante que ocupe toda a largura disponível */
+  box-sizing: border-box; /* evita ultrapassar o contêiner */
 }
 
 .info-grid .protocols-row {
@@ -245,6 +251,26 @@ body.tema-claro #modal-fatura .fatura-linha input {
   color: #232946;
   border: 1px solid #ccc;
 }
+
+/* ── Mensagens de confirmação após clicar nos botões ─────────────────────────────── */
+.mensagem {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  height: 24px;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  color: #00ff3c;
+  font-weight: bold;
+}
+
+.mensagem.visivel {
+  visibility: visible;
+  opacity: 1;
+}
+
 
 /* ═══════════════════════════════════════════════════════════════════════════════════════
    5️⃣ WRAPPERS E CONTAINERS ESPECIAIS
@@ -1101,13 +1127,15 @@ button img {
 
 #modal-multa ul li {
   font-size: 17px; /* ou 16px, 17px... conforme seu gosto */
+  line-height: 1.4;
 }
 
 #modal-multa h2 {
   font-size: 20px;
   font-weight: 600;
   margin-top: 0;
-  margin-bottom: 4px;
+  margin-bottom: 25px;
+  padding-top: 0;   
 }
 
 .linha-divisoria {
@@ -1118,7 +1146,7 @@ button img {
 .linha-campo {
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 11px; /*Distancia estre as caixas*/
 }
 
 .linha-campo span {
@@ -1136,12 +1164,13 @@ button img {
 }
 
 .linha-campo input[type="number"] {
-  width: 100px; /* ou 70px, se quiser ainda menor */
+  width: 95px; /* ou 70px, se quiser ainda menor */
   padding: 4px;
 }
 
 .linha-campo label {
-  font-size: 14px;
+  font-size: 16px; 
+  line-height: 1.4; 
 }
 
 .bloco-texto {
@@ -1208,29 +1237,63 @@ button img {
 
 
 /* ═══════════════════════════════════════════════════════════════════════════════════════
-   1️⃣2️⃣ MENSAGENS E TOOLTIPS
+   MENSAGENS E TOOLTIPS - VERSÃO CORRIGIDA
    ═══════════════════════════════════════════════════════════════════════════════════════ */
 
-/*Mensagem de informação dos botões*/
-.copiado-msg {
-  height: 24px; /* reserva espaço mesmo sem mensagem */
-  margin-top: 8px;
+/* Área dos botões e mensagem */
+.button-area {
+  position: relative;
+  width: 100%; /* ocupa toda a largura disponível */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Grupo dos botões */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Área unificada para mensagens */
+.mensagem-area {
+  position: relative;
+  width: 100%;
+  height: 40px; /* Reserva espaço fixo para mensagens */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1px;
+}
+
+/* Estilo para mensagens dinâmicas */
+.mensagem {
+  position: absolute;
+  background-color: #28a745;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
   font-size: 14px;
-  text-align: center;
-  transition: opacity 0.3s ease;
-}
-.copiado-msg.ativo {
-  opacity: 1;
-}
-
-/* ── Mensagem de cópia ─────────────────────────────── */
-.copiado-msg {
-  margin-top: 15px;
-  color: #8bd3dd;
   font-weight: bold;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  transform: translateY(-10px);
 }
 
-/* ── Tooltip ─────────────────────────────────────── */
+/* Quando a mensagem está visível */
+.mensagem.visivel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ── Tooltip (mantido igual) ─────────────────────────────────────── */
 .tooltip {
   position: absolute;
   background-color: #1a1a1a;
@@ -1262,6 +1325,7 @@ button img {
   border-style: solid;
   border-color: #1a1a1a transparent transparent transparent;
 }
+
 
 /* ═══════════════════════════════════════════════════════════════════════════════════════
    1️⃣3️⃣ SEPARADORES E LINHAS
