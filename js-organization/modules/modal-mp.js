@@ -3,7 +3,12 @@ import { mostrarMensagem } from '../utils/helpers.js';
 export function abrirModalMP() {
   const modal = document.getElementById('modal-mp');
   modal.classList.add('active');
+ const conteudo = modal.querySelector('.modal-content');
+  if (conteudo) {
+    conteudo.scrollTop = 0;
+  }
 }
+
 
 export function fecharModalMP() {
   const modal = document.getElementById('modal-mp');
