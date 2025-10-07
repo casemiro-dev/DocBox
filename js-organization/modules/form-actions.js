@@ -10,7 +10,6 @@ export function apagar() {
     "telefone",
     "doc-id",
     "anotacoes",
-    "mensagem-copiado",
     "periodo-agendamento",
     "data1",
     "data2",
