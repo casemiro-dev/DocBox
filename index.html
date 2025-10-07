@@ -75,15 +75,31 @@
     </div>
     
 
-    <!-- Grupo de Botões de Ação -->
-    <div class="button-group">
-      <button id="btn-copiar-protocolo">Protocolo <img src="assets/protocolo.png" alt="Protocolo" class="btn-icon" /></button>
-      <button id="btn-copiar-atendimento">Copiar <img src="assets/copiar.png" alt="Copiar" class="btn-icon" /></button>
-      <button id="btn-transferir">Transferir <img src="assets/transferir.png" alt="Transferir" class="btn-icon" /></button>
-      <button id="btn-apagar">Apagar <img src="assets/excluir.png" alt="Apagar" class="btn-icon" /></button>
-    </div>
+    <!-- Trecho do HTML corrigido - substituir a seção button-area -->
+     
+<!-- Grupo de Botões de Ação -->
+<div class="button-area">
+  <div class="button-group">
+    <button id="btn-copiar-protocolo">
+      Protocolo <img src="assets/protocolo.png" alt="Protocolo" class="btn-icon" />
+    </button>
+    <button id="btn-copiar-atendimento">
+      Copiar <img src="assets/copiar.png" alt="Copiar" class="btn-icon" />
+    </button>
+    <button id="btn-transferir">
+      Transferir <img src="assets/transferir.png" alt="Transferir" class="btn-icon" />
+    </button>
+    <button id="btn-apagar">
+      Apagar <img src="assets/excluir.png" alt="Apagar" class="btn-icon" />
+    </button>
+  </div>
 
-    <p id="mensagem-copiado" class="copiado-msg"></p>
+  <!-- Área unificada para mensagens -->
+  <div id="mensagem-area" class="mensagem-area">
+    <!-- As mensagens serão inseridas aqui dinamicamente -->
+  </div>
+</div>
+
 
     <!-- Seção de Agendamento -->
     <div class="agendamento-wrapper">
@@ -420,7 +436,7 @@ O e-mail foi repassado para:
 <div id="modal-multa" class="modal modal-overlay">
   <div class="modal-content">
     <span class="modal-close">×</span>
-    <h2>Cálculo da Multa por Quebra de Fidelidade Contratual</h2>
+    <h2>Cálculo da multa por quebra de fidelidade contratual</h2>
     <div class="linha-divisoria"></div>
 
     <form id="form-multa">
@@ -432,7 +448,7 @@ O e-mail foi repassado para:
 
       <div class="linha-campo">
         <input type="date" id="data-instalacao" />
-        <label for="data-instalacao">. Data de instalação (ou da mudança de ponto)</label>
+        <label for="data-instalacao">. Data de instalação (ou da mudança de plano)</label>
       </div>
 
       <div class="linha-campo">
@@ -442,34 +458,31 @@ O e-mail foi repassado para:
       <div class="linha-divisoria"></div>
     </form>
 
-    <div class="bloco-texto">
-      <strong>Observações:</strong>
-      <ul>
-        <li> Multa rescisória de 30% dos meses restantes.</li>
-        <li> Verificar se houve mudança de plano no mês.</li>
-        <li> NÃO deve ser considerado o dia da contratação, e SIM o dia em que o cliente começou a usufruir do plano que o cliente solicitou o cancelamento.</li>
-        <li> Clientes que solicitaram o cancelamento dentro do prazo de 7 dias de instalação NÃO TEM MULTA.</li>
-      </ul>
-    </div>
+    <h5>Observações</h5>
+    <ul>
+      <li>Multa rescisória de 30% dos meses restantes.</li>
+      <li>Verificar se houve mudança de plano no impr.</li>
+      <li><u>NÃO</u> deve ser considerado o dia da contratação, e <u>SIM</u> o dia em que ocorreu a instalação até a data do dia que cliente solicitou o cancelamento.</li>
+      <li>Clientes que solicitarem o cancelamento dentro do prazo de 7 dias de utilização <u>NÃO TEM MULTA</u>.</li>
+    </ul>
     <div class="linha-divisoria"></div>
 
-    <div class="bloco-texto">
-      <strong>Isenção da multa contratual:</strong>
-      <ul>
-        <li> Falecimento do titular do serviço.</li>
-        <li> Sinal indisponível por área de cobertura.</li>
-        <li> Cliente transfere titularidade e o seu contrato para o nome de outra pessoa.</li>
-      </ul>
-    </div>
+    <h5>Isenção da multa contratual</h5>
+    <ul>
+      <li>Falecimento do titular do serviço.</li>
+      <li>Sinal indisponível ou perda de visada.</li>
+      <li>Cliente deseja transferir o seu contrato para o nome de outra pessoa.</li>
+    </ul>
     <div class="linha-divisoria"></div>
 
+    <h5>Detalhes da multa</h5>
     <div class="bloco-texto">
-      <strong>Detalhes da multa:</strong>
     </div>
     <div class="linha-divisoria"></div>
 
     <button id="btn-inserir-script" class="btn-verde">Inserir no script</button>
   </div>
+</div>
 </div>
 
 
