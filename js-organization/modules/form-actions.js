@@ -2,22 +2,25 @@ import { formatarTelefone, mostrarMensagem } from '../utils/helpers.js';
 
 export function apagar() {
   // Campos principais
-  document.getElementById("chat-protocolo").value = "";
-  document.getElementById("prot-gerado").value = "";
-  document.getElementById("prot-ref-adm").value = "";
-  document.getElementById("cliente-nome").value = "";
-  document.getElementById("telefone").value = "";
-  document.getElementById("doc-id").value = "";
-  document.getElementById("anotacoes").value = "";
-  document.getElementById("mensagem-copiado").textContent = "";
-
-  // Campos de agendamento
-  document.getElementById("periodo-agendamento").value = "";
-  document.getElementById("data1").value = "";
-  document.getElementById("data2").value = "";
-  document.getElementById("data3").value = "";
-  document.getElementById("disponibilidade").value = "";
-  document.getElementById("referencia").value = "";
+  [
+    "chat-protocolo",
+    "prot-gerado",
+    "prot-ref-adm",
+    "cliente-nome",
+    "telefone",
+    "doc-id",
+    "anotacoes",
+    "mensagem-copiado",
+    "periodo-agendamento",
+    "data1",
+    "data2",
+    "data3",
+    "disponibilidade",
+    "referencia"
+  ].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = "";
+  });
 
   // Checkboxes da seção de agendamento
   document.querySelectorAll(".checkboxes input[type='checkbox']").forEach(checkbox => {
