@@ -365,57 +365,56 @@ O e-mail foi repassado para:
       <button class="modal-close" onclick="fecharModalUsuario()">&times;</button>
     </div>
     <div class="field-row">
-  <label for="fhtt">FHTT:</label>
-  <input type="text" id="fhtt" />
+  <input type="text" id="fhtt" placeholder="FHTT" />
 </div>
 
 <div class="field-row">
-  <label for="usuario-nome">Usuário:</label>
-  <input type="text" id="usuario-nome" />
+  <input type="text" id="usuario-nome" placeholder="Usuário" />
 </div>
 
 <div class="field-row">
-  <label for="cidade">Cidade:</label>
-  <input type="text" id="cidade" />
+  <input type="text" id="cidade" placeholder="Cidade" />
 </div>
 
 <div class="field-row">
-  <label for="autenticacao">Autenticação:</label>
   <select id="autenticacao">
-    <option value="">Selecione</option>
+    <option value="">Autenticação</option>
     <option value="DHCP">DHCP</option>
     <option value="PPPOE">PPPOE</option>
   </select>
 </div>
 
 <div class="field-row">
-  <label for="plano">Plano:</label>
-  <input type="text" id="plano" />
+  <input type="text" id="plano" placeholder="Plano" />
 </div>
 
 <div class="field-row">
-  <label for="endereco">Endereço:</label>
-  <input type="text" id="endereco" />
+  <input type="text" id="endereco" placeholder="Endereço" />
 </div>
 
 <div class="field-row">
-  <label for="motivo">Verificação:</label>
-  <input type="text" id="motivo" />
+  <input type="text" id="motivo" placeholder="Motivo da verificação" />
 </div>
 
 <div class="field-row">
-  <label for="risco">Oferece risco:</label>
+  <input type="text" id="nome" placeholder="Nome do cliente" />
+</div>
+
+<div class="field-row">
+  <input type="text" id="numero" placeholder="N° de telefone do cliente" />
+</div>
+
+<div class="field-row">
   <select id="risco">
-    <option value="">Selecione</option>
+    <option value="">Oferece risco</option>
     <option value="Sim">Sim</option>
     <option value="Não">Não</option>
   </select>
 </div>
 
 <div class="field-row">
-  <label for="cabo-drop">Cabo drop:</label>
   <select id="cabo-drop">
-    <option value="">Selecione</option>
+    <option value="">Cabo drop</option>
     <option value="Sim">Sim</option>
     <option value="Não">Não</option>
   </select>
@@ -436,7 +435,7 @@ O e-mail foi repassado para:
 <div id="modal-multa" class="modal modal-overlay">
   <div class="modal-content">
     <span class="modal-close">×</span>
-    <h2>Cálculo da multa por quebra de fidelidade contratual (APENAS PARA A FASTERNET)</h2>
+    <h2>Cálculo da multa por quebra de fidelidade contratual</h2>
     <div class="linha-divisoria"></div>
 
     <form id="form-multa">
