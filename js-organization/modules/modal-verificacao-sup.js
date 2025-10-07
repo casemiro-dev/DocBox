@@ -28,7 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Apagar campos
   document.getElementById("btn-apagar-usuario")?.addEventListener("click", () => {
-    ["fhtt", "usuario-nome", "cidade", "autenticacao", "plano", "endereco", "motivo", "risco", "cabo-drop"].forEach(id => {
+    [
+      "fhtt", "usuario-nome", "cidade", "autenticacao", "plano", "endereco",
+      "motivo", "nome", "numero", "risco", "cabo-drop"
+    ].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.value = "";
     });
@@ -37,38 +40,38 @@ document.addEventListener("DOMContentLoaded", () => {
   // Copiar dados
   document.getElementById("btn-copiar-usuario")?.addEventListener("click", () => {
     const hora = new Date().getHours();
-    let saudacao = hora >= 18 ? "Boa noite!" : hora >= 12 ? "Boa tarde!" : "Bom dia!";
+    const saudacao = hora >= 18
+      ? "Olá boa noite, pode verificar?"
+      : hora >= 12
+      ? "Olá boa tarde, pode verificar?"
+      : "Olá bom dia, pode verificar?";
 
-    const campos = {
-      fhtt: "FHTT",
-      usuario: "Usuário",
-      cidade: "Cidade",
-      autenticacao: "Autenticação",
-      plano: "Plano",
-      endereco: "Endereço",
-      motivo: "Motivo da verificação",
-      risco: "Oferece risco",
-      cabo: "Cabo drop"
-    };
+    const fhtt = document.getElementById("fhtt").value.trim();
+    const usuario = document.getElementById("usuario-nome").value.trim();
+    const cidade = document.getElementById("cidade").value.trim();
+    const autenticacao = document.getElementById("autenticacao").value;
+    const plano = document.getElementById("plano").value.trim();
+    const endereco = document.getElementById("endereco").value.trim();
+    const motivo = document.getElementById("motivo").value.trim();
+    const nome = document.getElementById("nome").value.trim();
+    const numero = document.getElementById("numero").value.trim();
+    const risco = document.getElementById("risco").value;
+    const cabo = document.getElementById("cabo-drop").value;
 
-    const valores = {
-      fhtt: document.getElementById("fhtt").value.trim(),
-      usuario: document.getElementById("usuario-nome").value.trim(),
-      cidade: document.getElementById("cidade").value.trim(),
-      autenticacao: document.getElementById("autenticacao").value,
-      plano: document.getElementById("plano").value.trim(),
-      endereco: document.getElementById("endereco").value.trim(),
-      motivo: document.getElementById("motivo").value.trim(),
-      risco: document.getElementById("risco").value,
-      cabo: document.getElementById("cabo-drop").value
-    };
+    let texto = `${saudacao}\n\n`;
 
-    let texto = `${saudacao} Poderia verificar o caso, por gentileza?\n\n`;
-    for (const key in valores) {
-      if (valores[key]) {
-        texto += `${campos[key]}: ${valores[key]}\n`;
-      }
+    if (fhtt) texto += `SN: ${fhtt}\n`;
+    if (cidade) texto += `Cidade: ${cidade}\n`;
+    if (autenticacao) texto += `Autenticação: ${autenticacao}\n`;
+    if (plano) texto += `Plano: ${plano}\n`;
+    if (endereco) texto += `Endereço: ${endereco}\n`;
+
+    if (usuario || numero || motivo) {
+      texto += `Kid bengala(${usuario}) nº ${numero}. ${motivo}\n`;
     }
+
+    if (risco) texto += `Apresenta risco de acidente: ${risco}\n`;
+    if (cabo) texto += `Cabo drop: ${cabo}`;
 
     navigator.clipboard.writeText(texto).then(() => {
       alert("Informações copiadas com sucesso!");
