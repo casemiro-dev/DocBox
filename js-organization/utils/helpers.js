@@ -1,3 +1,5 @@
+// helpers.js - VERSÃO CORRIGIDA
+
 export function formatarTelefone(numero) {
   // Remove tudo que não for número
   let numeros = numero.replace(/\D/g, '');
@@ -41,10 +43,31 @@ export function copiarTexto(texto) {
   mostrarMensagem("Copiado! Verifique antes de colar as informações no ADM!");
 }
 
-export function mostrarMensagem(texto) {
-  const msg = document.getElementById("mensagem-copiado");
+// FUNÇÃO CORRIGIDA
+export function mostrarMensagem(texto, cor = "#28a745") {
+  let msg = document.getElementById("mensagem-dinamica");
+
+  if (!msg) {
+    msg = document.createElement("div");
+    msg.id = "mensagem-dinamica";
+    msg.classList.add("mensagem");
+
+    const destino = document.getElementById("mensagem-area");
+    if (destino) {
+      destino.appendChild(msg);
+    } else {
+      console.error("Elemento 'mensagem-area' não encontrado!");
+      return;
+    }
+  }
+
   msg.textContent = texto;
-  setTimeout(() => { msg.textContent = ""; }, 3000);
+  msg.style.backgroundColor = cor;
+  msg.classList.add("visivel");
+
+  setTimeout(() => {
+    msg.classList.remove("visivel");
+  }, 3000);
 }
 
 export function formatarData(dataISO) {
@@ -60,4 +83,3 @@ export function formatarTurno(turno) {
     default: return turno;
   }
 }
-
