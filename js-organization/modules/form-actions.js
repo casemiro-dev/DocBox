@@ -19,9 +19,10 @@ export function apagar() {
   document.getElementById("disponibilidade").value = "";
   document.getElementById("referencia").value = "";
 
-  // Checkboxes
-  const checkboxes = document.querySelectorAll(".checkboxes input");
-  checkboxes.forEach(checkbox => checkbox.checked = false);
+  // Checkboxes da seção de agendamento
+  document.querySelectorAll(".checkboxes input[type='checkbox']").forEach(checkbox => {
+    checkbox.checked = false;
+  });
 }
 
 export function transferir() {
