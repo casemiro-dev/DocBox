@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (endereco) texto += `Endereço: ${endereco}\n`;
 
     if (usuario || numero || motivo) {
-      texto += `Kid bengala(${usuario}) nº ${numero}. ${motivo}\n`;
+      texto += `(${usuario}) nº ${numero}. ${motivo}\n`;
     }
 
     if (risco) texto += `Apresenta risco de acidente: ${risco}\n`;
