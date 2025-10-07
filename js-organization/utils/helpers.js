@@ -63,10 +63,21 @@ export function mostrarMensagem(texto, cor = "#28a745") {
 
   msg.textContent = texto;
   msg.style.backgroundColor = cor;
+
+  // 👇 Centraliza o texto vertical e horizontalmente via JS
+  msg.style.display = "flex";
+  msg.style.alignItems = "center";
+  msg.style.justifyContent = "center";
+
   msg.classList.add("visivel");
 
   setTimeout(() => {
     msg.classList.remove("visivel");
+
+    // 👇 Limpa os estilos inline após desaparecer
+    msg.style.display = "";
+    msg.style.alignItems = "";
+    msg.style.justifyContent = "";
   }, 3000);
 }
 
