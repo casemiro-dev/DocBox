@@ -1,7 +1,8 @@
 import { formatarTelefone, mostrarMensagem } from '../utils/helpers.js';
+import { formatarTelefone, mostrarMensagem, atualizarTituloPagina } from '../utils/helpers.js';
 
 export function apagar() {
-  // Campos principais
+  // Limpa todos os campos de entrada principais
   [
     "chat-protocolo",
     "prot-gerado",
@@ -21,15 +22,19 @@ export function apagar() {
     if (el) el.value = "";
   });
 
-  // Checkboxes da seção de agendamento
+  // Desmarca todas as checkboxes
   document.querySelectorAll(".checkboxes input[type='checkbox']").forEach(checkbox => {
     checkbox.checked = false;
   });
+
+  // Atualiza o título da página para o padrão
+  atualizarTituloPagina();
 }
 
 export function transferir() {
   navigator.clipboard.readText()
     .then(texto => {
+      // Extrai dados da área de transferência usando expressões regulares
       const protocoloMatch = texto.match(/Número de protocolo:\s*(\d{8,})/);
       const protocolo = protocoloMatch ? protocoloMatch[1] : "";
 
@@ -50,20 +55,27 @@ export function transferir() {
       let cpfRaw = cpfMatch ? cpfMatch[1] : "";
       cpfRaw = cpfRaw.replace(/\D/g, "");
 
+      // Preenche os campos do formulário com os dados extraídos
       document.getElementById("chat-protocolo").value = protocolo;
       document.getElementById("cliente-nome").value = nome;
       document.getElementById("telefone").value = telefone;
       document.getElementById("doc-id").value = cpfRaw;
 
+      // ATUALIZAÇÃO: Chama a função para mudar o título da página
+      atualizarTituloPagina();
+
       mostrarMensagem("Dados transferidos com sucesso!");
     })
     .catch(err => {
       console.error("Erro ao ler a área de transferência:", err);
+      mostrarMensagem("Falha ao ler dados da área de transferência.", "#ff0019ff");
     });
 }
 
 export function titular() {
   const inputNome = document.getElementById("cliente-nome");
   inputNome.value = "Titular";
-}
 
+  // ATUALIZAÇÃO: Garante que o título mude para "Titular"
+  atualizarTituloPagina();
+}
