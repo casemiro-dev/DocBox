@@ -485,12 +485,48 @@ O e-mail foi repassado para:
 </div>
 
 
-<!-- Modal Ponto adicional______________________________________ -->
-<div id="modal-ponto" class="modal modal-overlay">
+<!-- Modal PONTO ADICIONAL -->
+<div id="modal-ponto-adicional" class="modal-overlay">
   <div class="modal-content">
-    <span class="modal-close">×</span>
-    <h2>Ponto Adicional</h2>
-    <p>Conteúdo do modal de ponto aqui...</p>
+    <div class="modal-header">
+      <h3>PONTO ADICIONAL</h3>
+      <button class="modal-close" onclick="fecharModalPontoAdicional()">&times;</button>
+    </div>
+
+    <div class="field-row">
+      <label for="pontos-adicionais">Selecione a quantidade de pontos adicionais</label>
+      <select id="pontos-adicionais">
+        <option value=""></option>
+        <option value="1">1 ponto adicional | R$29,90/mês</option>
+        <option value="2">2 pontos adicionais | R$49,90/mês</option>
+        <option value="3">3 pontos adicionais | R$69,90/mês</option>
+        <option value="4">4 pontos adicionais | R$89,90/mês</option>
+        <option value="5">5 pontos adicionais | R$109,90/mês</option>
+      </select>
+    </div>
+
+    <div class="field-row">
+  <label>Velocidade e valor do plano</label>
+  <div class="input-group">
+    <input type="number" id="plano-velocidade" placeholder="200" min="0" max="8000" />
+    <select id="plan-tipo">
+      <option value="MEGA">MEGA</option>
+      <option value="GIGA">GIGA</option>
+    </select>
+    <span>R$</span>
+    <input type="number" id="valor-plano-adc" placeholder="00,00" min="0" max="999" />
+  </div>
+</div>
+
+    <div class="linha-divisoria"></div>
+
+    <div class="obs-text">
+    <strong>Obs.:</strong> Quando o cliente tem um plano de internet com valor desatualizado, ao contratar o ponto adicional wi-fi, o plano será migrado para o valor comercializado atualmente.
+   </div>   
+
+    <div class="button-container">
+      <button id="btn-inserir-ponto" class="btn-verde" onclick="calcularPontoAdicional()">Inserir no script</button>
+    </div>
   </div>
 </div>
 
