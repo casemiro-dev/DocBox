@@ -5,10 +5,10 @@ import { abrirModalMP, fecharModalMP, inserirTextoComTooltip } from './modules/m
 import { abrirModalFatura, fecharModalFatura, copiarFaturas, transferirFaturasParaRegistro } from './modules/modal-fatura.js';
 import { criarTooltip, removerTooltip } from './modules/tooltip.js';
 import "./modules/modal-verificacao-sup.js";
-// CORREÇÃO 1 de 2: A importação de 'atualizarTituloPagina' foi REMOVIDA daqui.
 import { formatarTelefone } from './utils/helpers.js';
 import { abrirModalMulta, fecharModalMulta } from './modules/modal-multa.js';
-import { abrirModalPonto, fecharModalPonto } from './modules/modal-ponto.js';
+// ADIÇÃO 1 de 4: Importa as funções do novo módulo de ponto adicional.
+import { abrirModalPontoAdicional, fecharModalPontoAdicional } from './modules/modal-ponto.js';
 
 
 // FUNÇÃO PARA AS TAGS HTML FUNCIONAREM
@@ -103,8 +103,10 @@ document.getElementById("btn-multa")?.addEventListener("click", abrirModalMulta)
 document.querySelector("#modal-multa .modal-close")?.addEventListener("click", fecharModalMulta);
 
 // 📡 Modal Ponto
-document.getElementById("btn-ponto")?.addEventListener("click", abrirModalPonto);
-document.querySelector("#modal-ponto .modal-close")?.addEventListener("click", fecharModalPonto);
+// ADIÇÃO 2 de 4: O código original para o modal de ponto foi substituído por este, que usa as novas funções.
+document.getElementById("btn-ponto")?.addEventListener("click", abrirModalPontoAdicional);
+// O seu HTML já tem um onclick para fechar, mas podemos adicionar este por consistência, se necessário.
+// document.querySelector("#modal-ponto-adicional .modal-close")?.addEventListener("click", fecharModalPontoAdicional);
 
 
   // Aplica formatação ao campo #telefone após transferência
@@ -183,7 +185,7 @@ document.querySelector("#modal-ponto .modal-close")?.addEventListener("click", f
   // Botão de transferir faturas para o registro
   document.getElementById("btn-transferir-faturas")?.addEventListener("click", transferirFaturasParaRegistro);
 
-  // CORREÇÃO 2 de 2: O código original foi restaurado. Ele funciona e não causa o erro.
+  // Lógica original para atualizar o título ao digitar
   document.getElementById('cliente-nome')?.addEventListener('input', function() {
   const nomeCliente = this.value.trim();
 
@@ -205,7 +207,8 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     fecharModalMP();
     fecharModalMulta();
-    fecharModalPonto();
+    // ADIÇÃO 3 de 4: Fecha o modal de ponto com a tecla ESC.
+    fecharModalPontoAdicional();
     fecharModalFatura();
   }
 });
@@ -219,8 +222,9 @@ document.getElementById("modal-multa")?.addEventListener("click", (e) => {
 });
 
 // Fechar modal Ponto ao clicar no overlay
-document.getElementById("modal-ponto")?.addEventListener("click", (e) => {
+// ADIÇÃO 4 de 4: Adiciona o fechamento do modal de ponto ao clicar fora.
+document.getElementById("modal-ponto-adicional")?.addEventListener("click", (e) => {
   if (e.target.classList.contains("modal-overlay")) {
-    fecharModalPonto();
+    fecharModalPontoAdicional();
   }
 });
