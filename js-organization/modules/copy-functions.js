@@ -11,10 +11,12 @@ export function copiarProtocolo() {
   const pontoFinal = anotacoes.indexOf(".");
   const textoInicial = pontoFinal !== -1 ? anotacoes.slice(0, pontoFinal + 1) : anotacoes;
 
+  // Adiciona o texto inicial e o primeiro separador <hr>
   let resultado = `${textoInicial}<hr>`;
 
   if (protocoloChat !== "") {
-    resultado += `<hr><b><font color="blue">Protocolo do Chat: ${protocoloChat}</b></font><hr>`;
+    // CORREÇÃO: Removido o <hr> do início desta linha.
+    resultado += `<b><font color="blue">Protocolo do Chat: ${protocoloChat}</b></font><hr>`;
   }
 
   if (empresarial) {
