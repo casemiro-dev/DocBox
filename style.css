@@ -253,36 +253,22 @@ body.tema-claro #modal-fatura .fatura-linha input {
 }
 
 /* ── Mensagens de confirmação após clicar nos botões ─────────────────────────────── */
-/* Estilo para mensagens dinâmicas */
 .mensagem {
-  position: relative;
-  background-color: #28a745;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: bold;
-  opacity: 0;
   visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  white-space: nowrap;
-  transform: translateY(-10px);
-  margin: auto;
-
-   /* 👇 Adiciona centralização via flex */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  height: 24px;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  color: #00ff3c;
+  font-weight: bold;
 }
 
-/* Quando a mensagem está visível */
 .mensagem.visivel {
-  opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  opacity: 1;
 }
 
 
@@ -1219,47 +1205,162 @@ button img {
 
 
 /* MODAL DE PONTO ADICIONAL ________________________________________________________*/
-/* Estilo exclusivo para o modal de ponto */
-#modal-ponto {
-  display: none;
+/* MODAL DE PONTO ADICIONAL (VERSÃO ATUALIZADA) */
+
+/* Estilo geral do overlay do modal */
+#modal-ponto-adicional {
+  display: none; /* Escondido por padrão */
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  background: rgba(0, 0, 0, 0.6); /* Fundo escuro semi-transparente */
+  z-index: 1000;
   justify-content: center;
   align-items: center;
 }
-#modal-ponto.active {
+
+/* Mostra o modal quando a classe 'active' é adicionada */
+#modal-ponto-adicional.active {
   display: flex;
 }
-#modal-ponto .modal-content {
-  background: #fff;
-  padding: 20px;
-  max-width: 600px;
-  max-height: 80vh;
-  overflow-y: auto;
+
+/* Conteúdo interno do modal */
+#modal-ponto-adicional .modal-content {
+  background: #ffffff; /* Fundo branco */
+  color: #000000; /* Cor do texto escura */
+  padding: 25px;
+  max-width: 550px; /* Largura máxima do modal */
+  width: 90%;
   border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   position: relative;
+  font-family: 'Inter', sans-serif; /* Garante a mesma fonte do resto do app */
 }
-#modal-ponto .modal-close {
-  position: absolute;
-  top: 10px; right: 15px;
+
+/* Cabeçalho do modal (Título e botão de fechar) */
+#modal-ponto-adicional .modal-header {
+   background-color: #232946; /* Azul escuro fixo */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ffffff; /* Linha divisória sutil */
+}
+
+#modal-ponto-adicional .modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Botão de fechar (X) */
+#modal-ponto-adicional .modal-close {
+  background: none;
+  border: none;
   font-size: 24px;
+  color: #ffffff;
   cursor: pointer;
+  padding: 0 5px;
+  line-height: 1;
+}
+#modal-ponto-adicional .modal-close:hover {
+  color: #000;
 }
 
-#modal-ponto .modal-content {
-  background: #fff;
-  padding: 20px;
-  max-width: 600px;
-  max-height: 80vh;
-  overflow-y: auto;
-  border-radius: 8px;
-  position: relative;
-  color: #2980b9; /* 🔵 cor do texto dentro do modal de ponto */
+/* Estilo para as linhas de campos (label + input) */
+#modal-ponto-adicional .field-row {
+  display: flex;
+  flex-direction: column; /* Empilha label e input por padrão */
+  margin-bottom: 18px;
+  gap: 8px; /* Espaço entre label e input */
 }
 
+/* Estilo para as labels (textos descritivos) */
+#modal-ponto-adicional .field-row label {
+  font-size: 14px;
+  color: rgb(50, 50, 50);
+  font-weight: 500;
+}
+
+/* Estilo para a linha que agrupa múltiplos inputs (Flexbox) */
+#modal-ponto-adicional .input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espaço entre os inputs na mesma linha */
+}
+
+/* Estilo geral para inputs e selects dentro do modal */
+#modal-ponto-adicional input,
+#modal-ponto-adicional select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: #ffffff;
+  color: #282828;
+}
+
+/* Ajustes de largura para campos específicos */
+#modal-ponto-adicional #pontos-adicionais {
+  width: 100%; /* Ocupa toda a largura */
+}
+#modal-ponto-adicional #plano-velocidade {
+  width: 80px; /* Largura fixa para a velocidade */
+}
+#modal-ponto-adicional #valor-plano-adc {
+  width: 100px; /* Largura fixa para o valor */
+}
+
+/* Estilo para o texto "R$" */
+#modal-ponto-adicional .input-group span {
+  font-weight: 500;
+  color: #555;
+}
+
+/* Estilo para o texto de observação */
+#modal-ponto-adicional .obs-text {
+  font-size: 16px;
+  color: #222222;
+  line-height: 1.5;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Container do botão principal para centralizá-lo */
+#modal-ponto-adicional .button-container {
+  display: flex;
+  justify-content: flex-end; /* Alinha o botão à direita */
+  margin-top: 20px;
+}
+
+/* Estilo para o botão verde "Inserir no script" */
+#modal-ponto-adicional .btn-verde {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+#modal-ponto-adicional .btn-verde:hover {
+  background-color: #219150;
+}
+
+@media (max-width: 480px) {
+  #modal-ponto-adicional .modal-content {
+    padding: 15px;
+  }
+  #modal-ponto-adicional .input-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════════════════
    MENSAGENS E TOOLTIPS - VERSÃO CORRIGIDA
@@ -1293,9 +1394,10 @@ button img {
   margin-top: 1px;
 }
 
+/* ── Mensagens de confirmação após clicar nos botões ─────────────────────────────── */
 /* Estilo para mensagens dinâmicas */
 .mensagem {
-  position: absolute;
+  position: relative;
   background-color: #28a745;
   color: #fff;
   padding: 8px 16px;
@@ -1309,6 +1411,13 @@ button img {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   white-space: nowrap;
   transform: translateY(-10px);
+  margin: auto;
+
+   /* 👇 Adiciona centralização via flex */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 /* Quando a mensagem está visível */
@@ -1687,5 +1796,3 @@ body.tema-claro #btn-transferir-faturas:hover {
 /* ═══════════════════════════════════════════════════════════════════════════════════════
    FIM DO ARQUIVO CSS UNIFICADO
    ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-
