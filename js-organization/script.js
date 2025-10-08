@@ -5,7 +5,8 @@ import { abrirModalMP, fecharModalMP, inserirTextoComTooltip } from './modules/m
 import { abrirModalFatura, fecharModalFatura, copiarFaturas, transferirFaturasParaRegistro } from './modules/modal-fatura.js';
 import { criarTooltip, removerTooltip } from './modules/tooltip.js';
 import "./modules/modal-verificacao-sup.js";
-import { formatarTelefone } from './utils/helpers.js';
+// ATUALIZAÇÃO 1 de 2: Importa a função 'atualizarTituloPagina' junto com as outras.
+import { formatarTelefone, atualizarTituloPagina } from './utils/helpers.js';
 import { abrirModalMulta, fecharModalMulta } from './modules/modal-multa.js';
 import { abrirModalPonto, fecharModalPonto } from './modules/modal-ponto.js';
 
@@ -182,16 +183,8 @@ document.querySelector("#modal-ponto .modal-close")?.addEventListener("click", f
   // Botão de transferir faturas para o registro
   document.getElementById("btn-transferir-faturas")?.addEventListener("click", transferirFaturasParaRegistro);
 
-  // ATUALIZAÇÃO DINÂMICA DO TÍTULO DA PÁGINA
-  document.getElementById('cliente-nome')?.addEventListener('input', function() {
-  const nomeCliente = this.value.trim();
-
-  if (nomeCliente) {
-    document.title = nomeCliente;
-  } else {
-    document.title = 'DocBox'; // ou deixe vazio: ''
-  }
-});
+  // ATUALIZAÇÃO 2 de 2: O código original é substituído para usar a função importada.
+  document.getElementById('cliente-nome')?.addEventListener('input', atualizarTituloPagina);
 
 //Duplicar a página_________________________________________
 document.getElementById("btn-duplicar")?.addEventListener("click", () => {
