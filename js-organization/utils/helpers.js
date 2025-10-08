@@ -94,3 +94,17 @@ export function formatarTurno(turno) {
     default: return turno;
   }
 }
+
+// helpers.js
+
+// ... (outras funções como formatarTelefone, mostrarMensagem, etc.)
+
+export function atualizarTituloPagina() {
+  const nomeCliente = document.getElementById("cliente-nome")?.value.trim();
+
+  if (nomeCliente) {
+    document.title = nomeCliente;
+  } else {
+    document.title = 'DocBox'; // Título padrão quando o campo está vazio
+  }
+}
