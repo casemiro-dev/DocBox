@@ -1,9 +1,4 @@
 /* ═══════════════════════════════════════════════════════════════════════════════════════
-   ARQUIVO CSS UNIFICADO - CONSOLIDADO
-   Arquivo criado pela consolidação de múltiplos arquivos CSS fragmentados
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-/* ═══════════════════════════════════════════════════════════════════════════════════════
    1️⃣ GLOBAIS E BASE
    ═══════════════════════════════════════════════════════════════════════════════════════ */
 
@@ -110,10 +105,13 @@ h1 {
   margin-bottom: -1px; /* 👈 isso desce os campos de data */
 }
 
+/* Modificação na classe lgpd-wrapper para suportar dois botões */
 .lgpd-wrapper {
   display: flex;
   justify-content: flex-start; /* alinha à esquerda */
+  gap: 10px; /* espaço entre os botões */
   margin-top: 9px;
+  flex-wrap: wrap; /* permite quebra de linha em telas menores */
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════════════
@@ -723,6 +721,47 @@ button img {
   transform: scale(1.05);
 }
 
+.lgpd-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* ou defina uma largura fixa, tipo 400px */
+  flex-wrap: nowrap; /* impede quebra de linha */
+}
+
+/* Estilo específico para o botão Salvar Atendimento */
+#btn-salvar-atendimento {
+  background-color: #4c5270; /* verde para indicar ação de salvar */
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  font-weight: 500;
+}
+
+#btn-salvar-atendimento:hover {
+  background-color: #343957; /* verde mais escuro no hover */
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+#btn-salvar-atendimento:active {
+  transform: translateY(0); /* remove a elevação quando clicado */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+#btn-lgpd,
+#btn-salvar-atendimento {
+  width: 50%;
+  box-sizing: border-box; /* evita que padding ultrapasse os 50% */
+}
+
+
 /* ── Botões de Fatura (Copiar/Transferir) ───────────────────────── */
 #btn-copiar-faturas,
 #btn-transferir-faturas {
@@ -963,7 +1002,7 @@ button img {
   position: absolute;
   top: 10px;
   right: 15px;
-  color: #aaa;
+  color: #ffffff;
   font-size: 28px;
   font-weight: bold;
   background: none;
@@ -1792,6 +1831,7 @@ body.tema-claro #btn-transferir-faturas {
 body.tema-claro #btn-transferir-faturas:hover {
   background-color: #5a6268;
 }
+
 
 /* ═══════════════════════════════════════════════════════════════════════════════════════
    FIM DO ARQUIVO CSS UNIFICADO
