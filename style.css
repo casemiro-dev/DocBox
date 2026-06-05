@@ -1,1838 +1,515 @@
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   1️⃣ GLOBAIS E BASE
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
+:root {
+  --bg-body: #0f1117;
+  --bg-input: #202438;
+  --bg-input-hover: #262a42;
+  --text-primary: #e8eaf0;
+  --text-secondary: #9498b0;
+  --text-muted: #5c6080;
+  --border: #2e3350;
+  --border-focus: #6c63ff;
+  --accent: #6c63ff;
+  --accent-hover: #5a52e0;
+  --accent-soft: rgba(108, 99, 255, 0.15);
+  --success: #34d399;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --radius: 10px;
+  --radius-sm: 8px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-/* ── Globais ───────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background: #2C2E3E;
-  font-weight: 300;
-  margin: 0;
-  padding: 20px;
-  color: #ffffff;
-}
-
-textarea { /*Fonte da caixa de registro*/
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px; /* opcional */
-  color: #333;     /* cor do texto digitado */
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   2️⃣ TIPOGRAFIA
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-h1 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #ffffff;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   3️⃣ LAYOUT E GRID
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-/* ── Grid ─────────────────────────────────────────────── */
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  margin-top: 55px;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-}
-
-/*Organização do container e botões___________________________________________*/
-.container {
-  max-width: 730px;
-  margin: auto;
-  background: #2a2f4a;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  border: 1px solid #1e2238;
-  margin-top: 0px;
-}
-
-.top-bar {  /*Organização dos botões superiores*/
-  display: flex;
-  flex-direction: column; /* 👉 agora empilha verticalmente */
-  align-items: center;    /* centraliza no meio do container */
-  gap: 12px;              /* espaço entre as duas linhas */
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.linha-superior {
+  font-family: var(--font);
+  background: var(--bg-body);
+  color: var(--text-primary);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  gap: 2px; /* espaço entre os 3 botões */
+  padding: 24px;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: contain;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.linha-inferior {
-  display: flex;
-  justify-content: center;
-  gap: 4px; /* espaço entre os 2 ícones */
-}
-/*_____________________________________________________________________________*/
-
-.agendamento-wrapper {
-  margin-top: 10px;
+.app {
+  max-width: 580px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 19px;
-  padding-bottom: 18px;  /*Controla a distância da linha de baixo.*/
+  gap: 14px;
 }
 
-.agendamento-top {
+/* ── Header ── */
+.app-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 3px; /* 👈 isso desce o bloco inteiro */
-  margin-bottom: -6px; /* 👈 reduz o espaço entre esse bloco e os campos abaixo */
+  justify-content: space-between;
+  padding: 4px 2px;
+  margin-bottom: 4px;
 }
 
-.blocos-data {
+.header-left {
   display: flex;
-  gap: 8px;
-  margin-bottom: -1px; /* 👈 isso desce os campos de data */
-}
-
-/* Modificação na classe lgpd-wrapper para suportar dois botões */
-.lgpd-wrapper {
-  display: flex;
-  justify-content: flex-start; /* alinha à esquerda */
-  gap: 10px; /* espaço entre os botões */
-  margin-top: 9px;
-  flex-wrap: wrap; /* permite quebra de linha em telas menores */
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   4️⃣ FORMULÁRIOS E INPUTS
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-/* ── Inputs & Textareas ───────────────────────────────── */
-input,
-textarea {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ced4da;
-  border-radius: 6px;
-  background-color: #f3f3f3;
-  color: #232946;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: #6c757d;
-}
-
-textarea {      /*Tamanho da caixa de registro de atendimento*/
-  min-height: 230px;
-  resize: vertical;
-}
-
-/* ── Campos específicos ─────────────────────────────── */
-input#telefone {
-  background-color: #f3f3f3 !important;
-  color: #232946;
-}
-
-input#chat-protocolo {
-  color: #007bff;
-  font-weight: 300;
-}
-
-input#doc-id {
-  background-color: #f3f3f3;
-  color: #232946;
-  font-size: 16px;
-  border: 1px solid #ced4da;
-  border-radius: 6px;
-}
-
-textarea#anotacoes {
-  margin-top: 10px;
-  min-height: 230px;
-  max-height: 230px;     /* trava a altura para evitar expansão */
-  overflow-y: auto;      /* ativa rolagem interna */
-  resize: vertical;      /* permite ajuste manual se necessário */
-  width: 100%;           /* garante que ocupe toda a largura disponível */
-  box-sizing: border-box; /* evita ultrapassar o contêiner */
-}
-
-.info-grid .protocols-row {
-  display: flex;
-  justify-content: flex-end;
+  align-items: center;
   gap: 10px;
 }
 
-input#prot-gerado {
-  width: calc(50% - 5px);
-  margin-right: auto;
-  color: #dc3545;
-  font-weight: 300;
+.logo {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-input#prot-ref-adm {
-  width: calc(50% - 5px);
+.header-right {
+  display: flex;
+  gap: 2px;
 }
 
-/* Caixa de turno */
-#periodo-agendamento {
-  padding: 8px 12px;
+.btn-icon-only {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
   font-size: 15px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: #f3f3f3;
-  color: #232946;
+  transition: all var(--transition);
 }
 
-/* Blocos de data */
-.blocos-data input[type="date"] {
-  padding: 8px 12px;
-  font-size: 15px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: #f3f3f3;
-  color: #232946;
+.btn-icon-only:hover {
+  color: var(--text-primary);
+  background: var(--bg-input);
+  border-color: var(--border);
 }
 
-/* Campos de texto abaixo */
-.field.full-width input[type="text"] {
+/* ── Inputs ── */
+input, textarea {
   width: 100%;
-  padding: 10px 12px;
-  font-size: 15px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: #f3f3f3;
-  color: #232946;
-  margin-bottom: -7px; /* 👈 isso desce os campos de texto */
-}
-
-/* Checkboxes (mantidos como estão) */
-.checkboxes label {
-  color: #ffffff;
-  font-size: 15px;
-  margin-bottom: 8px;
-  display: block;
-  margin-bottom: 15px;
-}
-/* Modo claro: texto das checkboxes */
-body.tema-claro .checkboxes label {
-  color: #232946; /* cor escura visível no fundo claro */
-}
-
-#modal-fatura .fatura-linha input {
-  padding: 8px;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  background-color: #f3f3f3;
-  color: #232946;
+  padding: 14px 16px;
+  font-family: var(--font);
   font-size: 14px;
+  font-weight: 400;
+  color: var(--text-primary);
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: all var(--transition);
 }
 
-#modal-fatura .fatura-linha input::placeholder {
-  color: #6c757d;
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
 }
 
-/* Tema claro para o modal de fatura */
-body.tema-claro #modal-fatura .fatura-linha input {
-  background-color: #ffffff;
-  color: #232946;
-  border: 1px solid #ccc;
+input:hover, textarea:hover {
+  background: var(--bg-input-hover);
+  border-color: rgba(108, 99, 255, 0.2);
 }
 
-/* ── Mensagens de confirmação após clicar nos botões ─────────────────────────────── */
-.mensagem {
-  visibility: hidden;
+input:focus, textarea:focus {
+  border-color: var(--accent);
+  background: var(--bg-input-hover);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+textarea {
+  min-height: 180px;
+  max-height: none;
+  resize: vertical;
+  line-height: 1.6;
+  border-radius: var(--radius);
+  transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+}
+
+.inputs-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-line {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-line.duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-wrap {
+  position: relative;
+  display: flex;
+}
+
+.input-wrap input {
+  padding-right: 42px;
+}
+
+.input-wrap.two-btns input {
+  padding-right: 80px;
+}
+
+.btn-inset {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  bottom: 4px;
+  width: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all var(--transition);
+}
+
+.input-wrap.two-btns .btn-inset:nth-child(2) {
+  right: 42px;
+}
+
+.input-wrap.two-btns .btn-inset:nth-child(3) {
+  right: 4px;
+}
+
+.btn-inset:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* ── Textarea section ── */
+.textarea-section {
+  margin-top: 2px;
+}
+
+/* ── Actions ── */
+.actions-section {
+  display: flex;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.btn-primary, .btn-secondary, .btn-danger {
+  flex: 1;
+  padding: 13px 16px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.25);
+}
+
+.btn-secondary {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-input-hover);
+  border-color: var(--accent);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: var(--danger-hover);
+}
+
+.btn-primary:active, .btn-secondary:active, .btn-danger:active {
+  transform: scale(0.97);
+}
+
+.btn-primary::after, .btn-secondary::after, .btn-danger::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.25) 0%, transparent 60%);
   opacity: 0;
-  transition: opacity 0.3s ease;
-  height: 24px;
-  margin-top: 8px;
-  font-size: 15px;
-  font-weight: 500;
-  text-align: center;
-  color: #00ff3c;
-  font-weight: bold;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.btn-primary:active::after,
+.btn-secondary:active::after,
+.btn-danger:active::after {
+  opacity: 1;
+  transition: 0s;
+}
+
+/* ── Mensagem ── */
+.mensagem-area {
+  height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.mensagem {
+  background: var(--success);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(52, 211, 153, 0.2);
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 .mensagem.visivel {
-  visibility: visible;
   opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
-
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   5️⃣ WRAPPERS E CONTAINERS ESPECIAIS
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-/* ── Campo CPF/CNPJ ─────────────────────────────────── */
-.cpf-wrapper {
-  position: relative;
-  margin-bottom: 0px;
-  overflow: hidden;
+/* ── Auto-save ── */
+.auto-save-indicator {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-input);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+  pointer-events: none;
 }
 
-.field {
-  margin-bottom: 2px;
+.auto-save-indicator.visible {
+  opacity: 1;
+  visibility: visible;
 }
 
-.cpf-wrapper input#doc-id {
-  width: 100%;
-  padding-left: 10px;
-  padding-right: 75px;
-  height: 40px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-/* ── Campo Nome com botão Titular ────────────────────── */
-.titular-wrapper {
-  position: relative;
-  margin-bottom: 2px;
-  overflow: hidden;
-}
-
-.titular-wrapper input#cliente-nome {
-  width: 100%;
-  padding-left: 10px;
-  padding-right: 45px;
-  height: 40px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   6️⃣ BOTÕES - ESTILOS GERAIS
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-/* Container dos botões principais */
-.button-group {
+/* ── Footer ── */
+.app-footer {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-  flex-wrap: wrap;
-  position: relative;
+  padding: 8px 4px 4px;
 }
 
-/* Estilo base para todos os botões */
-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 16px;
-  font-size: 14px;
-  background-color: #e2870f;
-  color: #1d2136;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-}
-
-/* Efeito hover para botões gerais */
-button:hover {
-  background-color: #cf6f0d;
-}
-
-/* Imagens dentro dos botões (caso ainda existam) */
-button img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   7️⃣ BOTÕES DA BARRA SUPERIOR
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-/* ── Botão: Faster Desk ───────────────────────── */
-#btn-faster-desk {
-  font-size: 16px;
-  padding: 12px 20px;
-  background-color: #c82333;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin: 2px 2px 2px 10px;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-#btn-faster-desk:hover {
-  background-color: #d21801;
-  transform: scale(1.15);
-}
-
-/* ── Botão: M.P (Roxo) ───────────────────────── */
-#btn-mp {
-  font-size: 16px;
-  padding: 12px 20px;
-  background-color: #563d7c;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin: 2px;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 70px;
-  gap: 8px;
-}
-
-#btn-mp:hover {
-  background-color: #483368;
-  transform: scale(1.17);
-}
-
-/* ── Botão: M.P Desk (Azul) ───────────────────────── */
-#btn-mpdesk {
-  font-size: 16px;
-  padding: 12px 20px;
-  background-color: #1c86ee;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin: 2px;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-#btn-mpdesk:hover {
-  background-color: #166fc2;
-  transform: scale(1.17);
-}
-
-/* ── Ajustes para Botões da Linha Superior (Menores) ───────────────────────── */
-.linha-superior #btn-mp,
-.linha-superior #btn-mpdesk {
-  padding: 8px 12px;
-  gap: 4px;
-}
-
-.linha-superior #btn-mp::before,
-.linha-superior #btn-mpdesk::before {
-  width: 14px;
-  height: 14px;
-  margin-right: 4px;
-}
-
-/* ── Botão: Tema (Lâmpada) ───────────────────────── */
-#btn-tema {
-  width: 36px;
-  height: 32px;
-  font-size: 18px;
-  background-color: #41424d;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  padding: 0;
-  box-sizing: border-box;
-  margin-top: 25px;
-  margin-left: 3px;
-  transition: transform 0.2s ease, background-color 0.3s;
-}
-
-#btn-tema:hover {
-  background-color: #35363f;
-  transform: scale(1.2);
-}
-
-/* ── Botão: Fatura (Cifrão) ───────────────────────── */
-#btn-fatura {
-  width: 32px;
-  height: 32px;
-  font-size: 18px;
-  background-color: #009037;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  padding: 0;
-  box-sizing: border-box;
-  margin-top: 25px;
-  margin-left: 3px;
-  transition: transform 0.2s ease, background-color 0.3s;
-}
-
-#btn-fatura:hover {
-  transform: scale(1.2);
-  background-color: #00702b;
-}
-
-/* ── Botão: Duplicar ───────────────────────── */
-#btn-duplicar {
-  width: 32px;
-  height: 32px;
-  font-size: 18px;
-  background-color: #fe9812; /* cor laranja, pode trocar se quiser */
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  padding: 0;
-  box-sizing: border-box;
-  margin-top: 25px;
-  margin-left: 3px;
-  transition: transform 0.2s ease, background-color 0.3s;
-}
-
-#btn-duplicar:hover {
-  background-color: #e47f19;
-  transform: scale(1.2);
-}
-
-/* ── Botão: Verificação com a SUP ───────────────────────── */
-#btn-usuario {
-  width: 32px;
-  height: 32px;
-  background-color: #b02a37; /* vermelho suave */
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  padding: 0;
-  box-sizing: border-box;
-  margin-top: 25px;
-  margin-left: 3px;
-  transition: transform 0.2s ease, background-color 0.3s;
-}
-
-#btn-usuario:hover {
-  background-color: #8f1f2b;
-  transform: scale(1.2);
-}
-
-#btn-usuario i {
-  font-size: 17px;
-  color: #ffffff; /* deixa o ícone branco */
-}
-
-/* ── Botão: Multa ───────────────────────── */
-#btn-multa {
-  width: 32px;
-  height: 32px;
-  font-size: 18px;
-  background-color: #1babc1; 
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  padding: 0;
-  box-sizing: border-box;
-  margin-top: 25px;
-  margin-left: 3px;
-  transition: transform 0.2s ease, background-color 0.3s;
-}
-
-#btn-multa:hover {
-  background-color: #157f8f;
-  transform: scale(1.2);
-}
-
-/*Botão de dentro do modal multa*/
-.btn-verde {
-  background-color: #27ae60;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.btn-verde:hover {
-  background-color: #219150;
-}
-
-/* ── Botão: Ponto Adicional ───────────────────────── */
-#btn-ponto {
-  width: 32px;
-  height: 32px;
-  font-size: 18px;
-  background-color: #ffc107; 
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  padding: 0;
-  box-sizing: border-box;
-  margin-top: 25px;
-  margin-left: 3px;
-  transition: transform 0.2s ease, background-color 0.3s;
-}
-
-#btn-ponto:hover {
-  background-color: #edb100;
-  transform: scale(1.2);
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   8️⃣ BOTÕES ICÔNICOS (CPF/CNPJ/TITULAR)
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-/* ── Botões CPF/CNPJ ───────────────────────── */
-.cpf-wrapper .btn-icon {
-  position: absolute;
-  top: 50%;
-  margin-top: -16px;
-  background-color: #2a2f4a;
-  border-radius: 6px;
-  width: 28px;
-  height: 32px;
-  padding: 0;
-  line-height: 32px;
-  text-align: center;
-  font-size: 18px;
-  color: #ffffff;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  z-index: 1;
-}
-
-.cpf-wrapper .btn-icon.left {
-  right: 45px;
-}
-
-.cpf-wrapper .btn-icon.right {
-  right: 10px;
-}
-
-.cpf-wrapper .btn-icon:hover {
-  transform: scale(0.9);
-}
-
-/* ── Botão Titular ───────────────────────── */
-.titular-wrapper .btn-icon {
-  position: absolute;
-  top: 50%;
-  margin-top: -16px;
-  right: 10px;
-  background-color: #2a2f4a;
-  border-radius: 6px;
-  padding: 0;
-  width: 28px;
-  height: 32px;
-  font-size: 18px;
-  color: #ffffff;
-  text-align: center;
-  line-height: 32px;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.titular-wrapper .btn-icon:hover {
-  transform: scale(0.9);
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   9️⃣ BOTÕES DE TAG (HTML)
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-/* Container dos botões de TAG */
-.html-buttons {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-top: 5px;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Estilo dos botões de TAG */
-.html-buttons button {
-  padding: 6px 10px;
-  font-size: 16px;
-  background-color: #4c5270;
-  color: #ffffff;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.html-buttons button:hover {
-  transform: scale(1.08);
-  background-color: #343957;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   🔟 BOTÕES DE AÇÃO (LGPD/FATURA)
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-/* ── Botão: LGPD ───────────────────────── */
 #btn-lgpd {
-  width: 50%;
-  padding: 12px 16px;
-  font-size: 16px;
-  background-color: #4c5270;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
+  padding: 8px 22px;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 500;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition);
 }
 
 #btn-lgpd:hover {
-  background-color: #343957;
-  transform: scale(1.05);
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+  background: var(--bg-input);
 }
 
-.lgpd-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%; /* ou defina uma largura fixa, tipo 400px */
-  flex-wrap: nowrap; /* impede quebra de linha */
+/* ── Tema toggle rotation ── */
+#btn-tema i {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Estilo específico para o botão Salvar Atendimento */
-#btn-salvar-atendimento {
-  background-color: #4c5270; /* verde para indicar ação de salvar */
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  padding: 12px 16px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  font-weight: 500;
+body.tema-claro #btn-tema i {
+  transform: rotate(180deg);
 }
 
-#btn-salvar-atendimento:hover {
-  background-color: #343957; /* verde mais escuro no hover */
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+/* ── Tema Claro ── */
+body.tema-claro {
+  --bg-body: #e8ecf2;
+  --bg-input: #ffffff;
+  --bg-input-hover: #f0f2f6;
+  --text-primary: #1a1d2e;
+  --text-secondary: #5c6080;
+  --text-muted: #a0a4be;
+  --border: #d0d4dc;
+  --accent: #6c63ff;
+  --accent-hover: #5a52e0;
+  --accent-soft: rgba(108, 99, 255, 0.1);
 }
 
-#btn-salvar-atendimento:active {
-  transform: translateY(0); /* remove a elevação quando clicado */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+body.tema-claro .btn-primary {
+  box-shadow: 0 2px 8px rgba(108, 99, 255, 0.15);
 }
 
-#btn-lgpd,
-#btn-salvar-atendimento {
-  width: 50%;
-  box-sizing: border-box; /* evita que padding ultrapasse os 50% */
+body.tema-claro .btn-primary:hover {
+  box-shadow: 0 4px 16px rgba(108, 99, 255, 0.25);
 }
 
-
-/* ── Botões de Fatura (Copiar/Transferir) ───────────────────────── */
-#btn-copiar-faturas,
-#btn-transferir-faturas {
-  display: block;
-  width: fit-content;
-  padding: 10px 20px;
-  font-size: 16px;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-#btn-copiar-faturas {
-  background-color: #28a745;
-}
-
-#btn-copiar-faturas:hover {
-  background-color: #218838;
-}
-
-#btn-transferir-faturas {
-  background-color: #007bff;
-}
-
-#btn-transferir-faturas:hover {
-  background-color: #0056b3;
-}
-
-#btn-apagar-faturas {
-  background-color: #c82333; /* vermelho escuro */
-  color: #ffffff;            /* texto branco */
-}
-
-#btn-apagar-faturas:hover {
-  background-color: #a71d2a; /* tom mais escuro no hover */
-}
-
-/*BEFORE ORGANIZAÇÃO DOS BOTÕES M.P________________________________*/
-#btn-mp img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  margin-right: 8px;
-  filter: brightness(0) invert(1); /* deixa branco */
-}
-
-#btn-mpdesk img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  margin-right: 8px;
-  filter: brightness(0) invert(1); /* deixa o ícone branco */
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   1️⃣1️⃣ MODAIS
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-/* ── MODAL M.P. ─────────────────────────────────────── */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-overlay.active {
-  display: flex;
-}
-
-#modal-mp .modal-content {
-  background: #2a2f4a;
-  border-radius: 12px;
-  padding: 0;
-  max-width: 600px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  border: 1px solid #1e2238;
-  position: relative;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 25px;
-  border-bottom: 2px solid #5c7a9c;
-  background: #232946;
-  border-radius: 12px 12px 0 0;
-}
-
-.modal-header h3 {
-  margin: 0;
-  color: #ffffff;
-  font-size: 20px;
-  font-weight: 400;
-}
-
-.modal-close {
-  background: none;
-  border: none;
-  font-size: 28px;
-  color: #ffffff;
-  cursor: pointer;
-  padding: 0;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
-}
-
-.modal-close:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.modal-body {
-  padding: 25px;
-}
-
-.categoria {
-  margin-bottom: 30px;
-}
-
-.categoria h4 {
-  color: #8bd3dd;
-  font-size: 18px;
-  margin-bottom: 15px;
-  font-weight: 400;
-  border-bottom: 1px solid #5c7a9c;
-  padding-bottom: 8px;
-}
-
-.categoria {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.categoria-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.categoria button {
-  flex: 1;
-  min-width: 150px;
-  max-width: 200px;
-  padding: 12px 16px;
-  background-color: #563d7c;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  text-align: center;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  position: relative;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.categoria button:hover {
-  background-color: #483368;
-  transform: translateY(-1px);
-}
-
-.categoria button:active {
-  transform: translateY(0);
-}
-
-/* Ajustes para os botões do modal M.P. */
-.modal-body .categoria-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px; /* Espaçamento entre os botões */
-  justify-content: flex-start; /* Alinha os botões ao início */
-}
-
-.modal-body .categoria-buttons button {
-  flex: 0 0 auto; /* Não cresce, não encolhe, largura automática */
-  max-width: 100%; /* Garante que o botão não ultrapasse a largura do contêiner */
-  white-space: normal; /* Permite que o texto quebre linha */
-  word-break: break-word; /* Quebra palavras longas */
-  text-align: center; /* Centraliza o texto */
-  padding: 8px 12px; /* Ajusta o padding para melhor visualização */
-  height: auto; /* Altura automática para acomodar o texto */
-}
-
-/* ── Modal Fatura ─────────────────────────────────────── */
-#modal-fatura {
-  display: none; /* Escondido por padrão */
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.6);
-  justify-content: center;
-  align-items: center;
-}
-
-#modal-fatura.active {
-  display: flex;
-}
-
-#modal-fatura .modal-content {
-  background-color: #2a2f4a;
-  margin: auto;
-  padding: 20px;
-  padding-top: 40px; /* Ajusta o padding superior para o botão de fechar */
-  border: 1px solid #1e2238;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 700px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  position: relative;
-}
-
-#modal-fatura .modal-close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: #ffffff;
-  font-size: 28px;
-  font-weight: bold;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-#modal-fatura .modal-close:hover,
-#modal-fatura .modal-close:focus {
-  color: #ffffff;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-#modal-fatura .modal-body {
-  padding-top: 10px; /* Espaçamento para o botão de fechar */
-}
-
-#modal-fatura .fatura-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 2fr; /* Data, Valor, Link */
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-#modal-fatura .grid-header {
-  font-weight: bold;
-  color: #ffffff;
-  padding: 8px;
-  text-align: center;
-}
-
-#modal-fatura .fatura-linha {
-  display: contents; /* Faz com que os inputs se comportem como células da grid */
-}
-
-/* ── MODAL VERIFICAÇÃO COM A SUP ───────────────────────────── */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(20, 20, 20, 0.85);
-  z-index: 999;
-  overflow-y: auto; /* ← permite rolar o modal inteiro */
-}
-
-/* Conteúdo interno do modal */
-.modal-content {
-  max-height: 90vh; /* ← limita a altura do conteúdo */
-  overflow-y: auto; /* ← ativa rolagem interna */
-  background-color: #fff;
-  padding: 20px;
-  margin: auto;
-  border-radius: 8px;
-}
-
-/* ── Modal Content ───────────────────────── */
-#modal-usuario .modal-content {
-  background-color: #2a2f4a; /* fundo branco interno */
-  margin: 10% auto;
-  padding: 20px;
-  width: 90%;
-  max-width: 500px;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  font-family: 'Inter', sans-serif;
-}
-
-/* ── Cabeçalho ───────────────────────── */
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.modal-header h3 {
-  margin: 0;
-  font-size: 20px;
-  color: #c7c7c7;
-}
-
-.modal-close {
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-/* ── Campos com rótulo lateral ───────────────────────── */
-.field-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-  gap: 10px;
-}
-
-.field-row label {
-  min-width: 130px;
-  font-weight: 500;
-  color: #ffffff;
-}
-
-.field-row input,
-.field-row select {
-  flex: 1;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  background-color: #ffffff;
-  color: #333;
-  transition: border-color 0.2s ease;
-}
-
-.field-row input:focus,
-.field-row select:focus {
-  border-color: #345995;
-  outline: none;
-}
-
-/* ── Botões ───────────────────────── */
-.btn-copiar {
-  padding: 8px 16px;
-  background-color: #048500;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-copiar:hover {
-  background-color: #036700;
-  transform: scale(1.05);
-}
-
-.btn-apagar {
-  padding: 8px 16px;
-  background-color: #c42020;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-apagar:hover {
-  background-color: #bb0000;
-  transform: scale(1.05);
-}
-
-/* MODAL CALCULO DE MULTA CONTRATUAL ________________________________________________________*/
-/* Estilo exclusivo para o modal de multa */
-#modal-multa .modal-content {
-  background: #fff;
-  padding: 10px 20px 20px 20px;
-  max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
-  border-radius: 8px;
-  position: relative;
-  font-size: 20px;
-  font-family: sans-serif;
-  color: #333;
-}
-
-#modal-multa ul li {
-  font-size: 17px; /* ou 16px, 17px... conforme seu gosto */
-  line-height: 1.4;
-}
-
-#modal-multa h2 {
-  font-size: 20px;
-  font-weight: 600;
-  margin-top: 0;
-  margin-bottom: 25px;
-  padding-top: 0;   
-}
-
-.linha-divisoria {
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 16px;
-}
-
-.linha-campo {
-  display: flex;
-  align-items: center;
-  margin-bottom: 11px; /*Distancia estre as caixas*/
-}
-
-.linha-campo span {
-  margin-right: 6px;
-  font-weight: bold;
-}
-
-.linha-campo input[type="number"],
-.linha-campo input[type="date"] {
-  width: 125px;
-  padding: 4px;
-  margin-right: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+body.tema-claro .btn-secondary {
+  border-color: var(--border);
 }
 
-.linha-campo input[type="number"] {
-  width: 95px; /* ou 70px, se quiser ainda menor */
-  padding: 4px;
+/* ── Animação de entrada ── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.linha-campo label {
-  font-size: 16px; 
-  line-height: 1.4; 
+.inputs-section, .textarea-section, .actions-section {
+  animation: fadeSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.bloco-texto {
-  margin-top: 20px;
-}
-
-.bloco-texto strong {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
-.bloco-texto ul {
-  padding-left: 16px;
-}
-
-.bloco-texto li {
-  margin-bottom: 6px;
-  font-size: 14px;
-}
-
-
-/* MODAL DE PONTO ADICIONAL ________________________________________________________*/
-/* MODAL DE PONTO ADICIONAL (VERSÃO ATUALIZADA) */
-
-/* Estilo geral do overlay do modal */
-#modal-ponto-adicional {
-  display: none; /* Escondido por padrão */
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* Fundo escuro semi-transparente */
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Mostra o modal quando a classe 'active' é adicionada */
-#modal-ponto-adicional.active {
-  display: flex;
-}
-
-/* Conteúdo interno do modal */
-#modal-ponto-adicional .modal-content {
-  background: #ffffff; /* Fundo branco */
-  color: #000000; /* Cor do texto escura */
-  padding: 25px;
-  max-width: 550px; /* Largura máxima do modal */
-  width: 90%;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  position: relative;
-  font-family: 'Inter', sans-serif; /* Garante a mesma fonte do resto do app */
-}
-
-/* Cabeçalho do modal (Título e botão de fechar) */
-#modal-ponto-adicional .modal-header {
-   background-color: #232946; /* Azul escuro fixo */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #ffffff; /* Linha divisória sutil */
-}
-
-#modal-ponto-adicional .modal-header h3 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-  color: #ffffff;
-}
+.textarea-section { animation-delay: 0.05s; }
+.actions-section { animation-delay: 0.1s; }
 
-/* Botão de fechar (X) */
-#modal-ponto-adicional .modal-close {
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #ffffff;
-  cursor: pointer;
-  padding: 0 5px;
-  line-height: 1;
-}
-#modal-ponto-adicional .modal-close:hover {
-  color: #000;
-}
-
-/* Estilo para as linhas de campos (label + input) */
-#modal-ponto-adicional .field-row {
-  display: flex;
-  flex-direction: column; /* Empilha label e input por padrão */
-  margin-bottom: 18px;
-  gap: 8px; /* Espaço entre label e input */
-}
-
-/* Estilo para as labels (textos descritivos) */
-#modal-ponto-adicional .field-row label {
-  font-size: 14px;
-  color: rgb(50, 50, 50);
-  font-weight: 500;
-}
-
-/* Estilo para a linha que agrupa múltiplos inputs (Flexbox) */
-#modal-ponto-adicional .input-group {
-  display: flex;
-  align-items: center;
-  gap: 8px; /* Espaço entre os inputs na mesma linha */
-}
-
-/* Estilo geral para inputs e selects dentro do modal */
-#modal-ponto-adicional input,
-#modal-ponto-adicional select {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
-  background-color: #ffffff;
-  color: #282828;
-}
-
-/* Ajustes de largura para campos específicos */
-#modal-ponto-adicional #pontos-adicionais {
-  width: 100%; /* Ocupa toda a largura */
-}
-#modal-ponto-adicional #plano-velocidade {
-  width: 80px; /* Largura fixa para a velocidade */
-}
-#modal-ponto-adicional #valor-plano-adc {
-  width: 100px; /* Largura fixa para o valor */
-}
+/* ── Responsivo ── */
+@media (max-width: 640px) {
+  body {
+    padding: 16px;
+  }
 
-/* Estilo para o texto "R$" */
-#modal-ponto-adicional .input-group span {
-  font-weight: 500;
-  color: #555;
-}
-
-/* Estilo para o texto de observação */
-#modal-ponto-adicional .obs-text {
-  font-size: 16px;
-  color: #222222;
-  line-height: 1.5;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  font-weight: bold;
-}
+  .input-line.duo {
+    grid-template-columns: 1fr;
+  }
 
-/* Container do botão principal para centralizá-lo */
-#modal-ponto-adicional .button-container {
-  display: flex;
-  justify-content: flex-end; /* Alinha o botão à direita */
-  margin-top: 20px;
-}
+  .actions-section {
+    flex-direction: column;
+  }
 
-/* Estilo para o botão verde "Inserir no script" */
-#modal-ponto-adicional .btn-verde {
-  background-color: #27ae60;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-#modal-ponto-adicional .btn-verde:hover {
-  background-color: #219150;
+  .btn-primary, .btn-secondary, .btn-danger {
+    padding: 14px;
+    min-height: 48px;
+  }
 }
 
 @media (max-width: 480px) {
-  #modal-ponto-adicional .modal-content {
-    padding: 15px;
+  body {
+    padding: 10px;
   }
-  #modal-ponto-adicional .input-group {
-    flex-direction: column;
-    align-items: stretch;
+
+  .app {
+    gap: 8px;
+  }
+
+  input, textarea {
+    padding: 13px 14px;
+    font-size: 16px;
+  }
+
+  textarea {
+    min-height: 140px;
+    max-height: none;
+  }
+
+  .btn-icon-only {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+  }
+
+  .btn-inset {
+    width: 38px;
+    font-size: 15px;
+  }
+
+  .input-wrap input {
+    padding-right: 48px;
+  }
+
+  .input-wrap.two-btns input {
+    padding-right: 88px;
+  }
+
+  .input-wrap.two-btns .btn-inset:nth-child(2) {
+    right: 46px;
+  }
+
+  .input-wrap.two-btns .btn-inset:nth-child(3) {
+    right: 4px;
+  }
+
+  .btn-primary, .btn-secondary, .btn-danger {
+    min-height: 48px;
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   MENSAGENS E TOOLTIPS - VERSÃO CORRIGIDA
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-/* Área dos botões e mensagem */
-.button-area {
-  position: relative;
-  width: 100%; /* ocupa toda a largura disponível */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Grupo dos botões */
-.button-group {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-}
-
-/* Área unificada para mensagens */
-.mensagem-area {
-  position: relative;
-  width: 100%;
-  height: 40px; /* Reserva espaço fixo para mensagens */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1px;
-}
-
-/* ── Mensagens de confirmação após clicar nos botões ─────────────────────────────── */
-/* Estilo para mensagens dinâmicas */
-.mensagem {
-  position: relative;
-  background-color: #28a745;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: bold;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  white-space: nowrap;
-  transform: translateY(-10px);
-  margin: auto;
-
-   /* 👇 Adiciona centralização via flex */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-
-/* Quando a mensagem está visível */
-.mensagem.visivel {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-/* ── Tooltip (mantido igual) ─────────────────────────────────────── */
-.tooltip {
-  position: absolute;
-  background-color: #1a1a1a;
-  color: #ffffff;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 12px;
-  white-space: pre-wrap;
-  z-index: 1001;
-  max-width: 300px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  border: 1px solid #333;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.tooltip.show {
-  opacity: 1;
-}
-
-.tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #1a1a1a transparent transparent transparent;
-}
-
-
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   1️⃣3️⃣ SEPARADORES E LINHAS
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-/* ── Linha de separação abaixo dos botões principais ───────────── */
-
-/* Modo escuro */
-body:not(.tema-claro) .button-group::after {
-  content: "";
-  position: absolute;
-  bottom: -42px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #ffffff;
-}
-
-/* ── Linha de separação superior ───────────────────────────── */
-
-/* Modo escuro */
-body:not(.tema-claro) .top-bar::after {
-  content: "";
-  position: absolute;
-  bottom: -30px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #5c7a9c; /* azul acinzentado com contraste */
-}
-
-/*Linha de baixo do agendamento:__________________*/
-.linha-divisoria {
-  width: 100%;
-  height: 2px;
-  background-color: #ffffff; /* ou a cor que você usou na linha de cima */
-  margin-top: 40px;
-  margin: 16px 0; /* espaçamento acima e abaixo */
-  margin-bottom: 10px;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   1️⃣4️⃣ TEMA CLARO - AJUSTES COMPLETOS
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
-
-/* ── Tema claro ─────────────────────────────────────── */
-body.tema-claro {
-  background: #f5f5f5;
-  color: #232946;
-}
-
-body.tema-claro .container {
-  background: #ffffff;
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-body.tema-claro h1 {
-  color: #232946;
-}
-
-body.tema-claro input,
-body.tema-claro textarea {
-  background-color: #ffffff;
-  color: #232946;
-  border: 1px solid #ccc;
-}
-
-body.tema-claro .copiado-msg {
-  color: #0077cc;
-}
-
-body.tema-claro button {
-  background-color: #0077cc;
-  color: #fff;
-}
-
-body.tema-claro button:hover {
-  background-color: #005fa3;
-}
-
-/* ── Correção de botões internos no modo claro ───────────────────────────── */
-body.tema-claro .cpf-wrapper .btn-icon,
-body.tema-claro .titular-wrapper .btn-icon {
-  background-color: #0077cc;
-  color: #ffffff;
-}
-
-body.tema-claro .cpf-wrapper .btn-icon:hover,
-body.tema-claro .titular-wrapper .btn-icon:hover {
-  background-color: #005fa3;
-}
-
-/* ── Modo Claro: deixa imagens dos botões brancas ── */
-body.tema-claro button img {
-  filter: brightness(0) invert(1);
-}
-
-body.tema-claro #btn-tema {
-  background-color: #345995;
-  color: white;
-}
-
-body.tema-claro #btn-tema:hover {
-  background-color: #28487a;
-}
-
-body.tema-claro #btn-faster-desk {
-  background-color: #c82333;
-  color: #ffffff;
-}
-
-body.tema-claro #btn-faster-desk:hover {
-  background-color: rgb(210, 8, 1);
-}
-
-body.tema-claro #btn-mp {
-  background-color: #563d7c;
-  color: #ffffff;
-}
-
-body.tema-claro #btn-mp:hover {
-  background-color: #483368;
-}
-
-body.tema-claro #btn-mpdesk {
-  background-color: #1c86ee;
-  color: #ffffff;
-}
-
-body.tema-claro #btn-mpdesk:hover {
-  background-color: #166fc2;
-}
-
-/* Modo claro: texto das checkboxes */
-body.tema-claro .checkboxes label {
-  color: #232946; /* cor escura visível no fundo claro */
-}
-
-body.tema-claro #btn-lgpd {
-  background-color: #0077cc;
-  color: #ffffff;
-}
-
-body.tema-claro #btn-lgpd:hover {
-  background-color: #005fa3;
-}
-
-/* ── Modal M.P. - Modo Claro ─────────────────────────── */
-body.tema-claro .modal-content {
-  background: #ffffff;
-  border: 1px solid #ddd;
+@media (max-width: 360px) {
+  body {
+    padding: 6px;
+  }
+
+  input, textarea {
+    padding: 11px 12px;
+    font-size: 15px;
+  }
+
+  textarea {
+    min-height: 120px;
+  }
+
+  .btn-icon-only {
+    width: 38px;
+    height: 38px;
+  }
+
+  .btn-primary, .btn-secondary, .btn-danger {
+    font-size: 13px;
+    padding: 12px;
+    min-height: 44px;
+  }
 }
-
-body.tema-claro .modal-header {
-  background: #f8f9fa;
-  border-bottom: 2px solid #A9A9A9;
-}
-
-body.tema-claro .modal-header h3 {
-  color: #232946;
-}
-
-body.tema-claro .modal-close {
-  color: #232946;
-}
-
-body.tema-claro .modal-close:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-body.tema-claro .categoria h4 {
-  color: #0077cc;
-  border-bottom: 1px solid #A9A9A9;
-}
-
-body.tema-claro .categoria button {
-  background-color: #0077cc;
-  color: #ffffff;
-}
-
-body.tema-claro .categoria button:hover {
-  background-color: #005fa3;
-}
-
-/* ── Tooltip - Modo Claro ─────────────────────────── */
-body.tema-claro .tooltip {
-  background-color: #f8f9fa;
-  color: #232946;
-  border: 1px solid #ddd;
-}
-
-body.tema-claro .tooltip::after {
-  border-color: #f8f9fa transparent transparent transparent;
-}
-
-/* Tema claro para o modal de fatura */
-body.tema-claro #modal-fatura .modal-content {
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-}
-
-body.tema-claro #modal-fatura .grid-header {
-  color: #232946;
-}
-
-body.tema-claro #btn-copiar-faturas {
-  background-color: #007bff;
-}
-
-body.tema-claro #btn-copiar-faturas:hover {
-  background-color: #0056b3;
-}
-
-body.tema-claro #btn-transferir-faturas {
-  background-color: #6c757d; /* Cinza para transferir no tema claro */
-}
-
-body.tema-claro #btn-transferir-faturas:hover {
-  background-color: #5a6268;
-}
-
-/* Modo claro */
-body.tema-claro .button-group::after {
-  content: "";
-  position: absolute;
-  bottom: -42px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #A9A9A9;
-}
-
-/* Modo claro: linha divisória */
-body.tema-claro .linha-divisoria {
-  background-color: #A9A9A9; /* mesma cor das outras linhas no modo claro */
-}
-
-/* Modo claro */
-body.tema-claro .top-bar::after {
-  content: "";
-  position: absolute;
-  bottom: -30px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #A9A9A9; /* cinza médio para contraste no fundo claro */
-}
-
-/* ── Botão Faster Desk - Modo Claro ───────────────────────── */
-body.tema-claro #btn-faster-desk {
-  background-color: #c82333;
-  color: #ffffff;
-}
-
-body.tema-claro #btn-faster-desk:hover {
-  background-color: #d21801;
-}
-
-/* ── Botões M.P - Modo Claro ───────────────────────── */
-body.tema-claro #btn-mp {
-  background-color: #563d7c;
-  color: #ffffff;
-}
-
-body.tema-claro #btn-mp:hover {
-  background-color: #483368;
-}
-
-body.tema-claro #btn-mpdesk {
-  background-color: #1c86ee;
-  color: #ffffff;
-}
-
-body.tema-claro #btn-mpdesk:hover {
-  background-color: #166fc2;
-}
-
-/* ── Ícones M.P - Modo Claro ───────────────────────── */
-body.tema-claro #btn-mp::before,
-body.tema-claro #btn-mpdesk::before {
-  filter: brightness(0) invert(1); /* Mantém branco no modo claro */
-}
-
-/* ── Botão Tema - Modo Claro ───────────────────────── */
-body.tema-claro #btn-tema {
-  background-color: #345995;
-  color: white;
-}
-
-body.tema-claro #btn-tema:hover {
-  background-color: #28487a;
-}
-
-/* ── Botões Icônicos - Modo Claro ───────────────────────── */
-body.tema-claro .cpf-wrapper .btn-icon,
-body.tema-claro .titular-wrapper .btn-icon {
-  background-color: #0077cc;
-  color: #ffffff;
-}
-
-body.tema-claro .cpf-wrapper .btn-icon:hover,
-body.tema-claro .titular-wrapper .btn-icon:hover {
-  background-color: #005fa3;
-}
-
-/* ── Botão LGPD - Modo Claro ───────────────────────── */
-body.tema-claro #btn-lgpd {
-  background-color: #0077cc;
-  color: #ffffff;
-}
-
-body.tema-claro #btn-lgpd:hover {
-  background-color: #005fa3;
-}
-
-/* ── Botões de Fatura - Modo Claro ───────────────────────── */
-body.tema-claro #btn-copiar-faturas {
-  background-color: #007bff;
-}
-
-body.tema-claro #btn-copiar-faturas:hover {
-  background-color: #0056b3;
-}
-
-body.tema-claro #btn-transferir-faturas {
-  background-color: #6c757d;
-}
-
-body.tema-claro #btn-transferir-faturas:hover {
-  background-color: #5a6268;
-}
-
-
-/* ═══════════════════════════════════════════════════════════════════════════════════════
-   FIM DO ARQUIVO CSS UNIFICADO
-   ═══════════════════════════════════════════════════════════════════════════════════════ */
