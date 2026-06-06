@@ -509,6 +509,38 @@ body.tema-claro .sidebar {
   margin-bottom: 10px;
 }
 
+.sidebar-cor-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-cor-wrap input[type="color"] {
+  width: 40px;
+  height: 34px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.sidebar-cor-wrap input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.sidebar-cor-wrap input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 4px;
+}
+
+.sidebar-cor-wrap input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: 4px;
+}
+
 .sidebar-bg-input-wrap {
   display: flex;
   gap: 6px;
