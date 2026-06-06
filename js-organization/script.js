@@ -107,6 +107,82 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(chaveTema, temaClaro ? "claro" : "escuro");
   });
 
+  // Sidebar
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("sidebar-overlay");
+  const btnMenu = document.getElementById("btn-menu");
+  const btnFechar = document.getElementById("btn-fechar-sidebar");
+
+  function abrirSidebar() {
+    sidebar?.classList.add("open");
+    overlay?.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function fecharSidebar() {
+    sidebar?.classList.remove("open");
+    overlay?.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  btnMenu?.addEventListener("click", abrirSidebar);
+  btnFechar?.addEventListener("click", fecharSidebar);
+  overlay?.addEventListener("click", fecharSidebar);
+
+  // Background personalizado
+  const CHAVE_BG = "docbox_bg_url";
+  const inputBg = document.getElementById("bg-url");
+  const btnAplicarBg = document.getElementById("btn-aplicar-bg");
+  const btnRemoverBg = document.getElementById("btn-remover-bg");
+
+  function aplicarBackground(url) {
+    if (!url || url.trim() === "") {
+      removerBackground();
+      return;
+    }
+    const img = new Image();
+    img.onload = () => {
+      document.body.classList.add("has-bg");
+      document.body.style.setProperty("--bg-url", `url("${url}")`);
+      const style = document.createElement("style");
+      style.id = "bg-style";
+      style.textContent = `body.has-bg::after { background-image: var(--bg-url); }`;
+      const existing = document.getElementById("bg-style");
+      if (existing) existing.remove();
+      document.head.appendChild(style);
+      localStorage.setItem(CHAVE_BG, url);
+    };
+    img.onerror = () => {
+      mostrarMensagem("URL de imagem inválida", "#ef4444");
+    };
+    img.src = url;
+  }
+
+  function removerBackground() {
+    document.body.classList.remove("has-bg");
+    document.body.style.removeProperty("--bg-url");
+    const existing = document.getElementById("bg-style");
+    if (existing) existing.remove();
+    localStorage.removeItem(CHAVE_BG);
+    if (inputBg) inputBg.value = "";
+  }
+
+  btnAplicarBg?.addEventListener("click", () => {
+    if (inputBg) aplicarBackground(inputBg.value.trim());
+  });
+
+  inputBg?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") aplicarBackground(inputBg.value.trim());
+  });
+
+  btnRemoverBg?.addEventListener("click", removerBackground);
+
+  const bgSalvo = localStorage.getItem(CHAVE_BG);
+  if (bgSalvo) {
+    if (inputBg) inputBg.value = bgSalvo;
+    aplicarBackground(bgSalvo);
+  }
+
   document.getElementById("cliente-nome")?.addEventListener("input", function () {
     document.title = this.value.trim() || "DocBox";
   });
