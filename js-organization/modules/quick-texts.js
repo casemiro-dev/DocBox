@@ -11,7 +11,7 @@ const TEXTOS_FIXOS = [
   { id: 'normalizado', label: 'Normalizado', text: 'Conexão normalizada. Sem mais.', categoria: 'suporte' },
   { id: 'transf-endereco', label: 'Transf. endereço', text: 'Solicita mudança de endereço. Aberto O.S.\n\nNovo endereço:', categoria: 'sac' },
   { id: 'mud-plano', label: 'Mud. Plano', text: 'Plano alterado para XX Mega R$XX Por X meses. Após, R$XX. Renovar a fidelidade por mais 12 meses.', categoria: 'sac' },
-  { id: 'mud-ponto', label: 'Mud. Ponto', text: 'Solicita mudança de ponto intero/externo. Aberto O.S.', categoria: 'sac' },
+  { id: 'mud-ponto', label: 'Mud. Ponto', text: 'Solicita mudança de ponto interno/externo. Aberto O.S.', categoria: 'sac' },
   { id: 'massivo', label: 'Massivo', text: 'Identificado problema massivo. Enviado o formulário e informado o prazo de normalização. Cliente orientado aguardar.', categoria: 'suporte' },
   { id: 'orientado-visita', label: 'Orientado visita', text: 'Cliente orientado sobre o dia e horário da visita. Sem mais.', categoria: 'suporte' },
   { id: 'cancelamento', label: 'Cancelamento', text: '► Motivo:\n► Ofertado:\n► Sem Sucesso nas ofertas.\n► Transferido para a retenção.', categoria: 'sac' },
