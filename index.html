@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DocBox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="js-organization/script.js"></script>
+</head>
+<body>
+  <div class="app">
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">Links</span>
+        <button id="btn-fechar-sidebar" class="btn-icon-only" title="Fechar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <ul class="sidebar-links">
+        <li>
+          <a href="https://chromewebstore.google.com/detail/atalhos-omini-desktop/lkhkepkcophddeaojhccllemjjobfdak?utm_source=item-share-cb" target="_blank" rel="noopener" class="sidebar-link">
+            <i class="fab fa-chrome"></i>
+            <span>Extensão Chrome</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://casemiro-dev.github.io/Painel-de-Scripts/" target="_blank" rel="noopener" class="sidebar-link">
+            <i class="fas fa-table"></i>
+            <span>Planilha de Atalhos</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://docbox-pro.vercel.app/" target="_blank" rel="noopener" class="sidebar-link">
+            <i class="fas fa-external-link-alt"></i>
+            <span>DocBox Pro</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://trello.com/b/1zcmGoxE/garrafao-de-conhecimentos-desktop" target="_blank" rel="noopener" class="sidebar-link">
+            <i class="fab fa-trello"></i>
+            <span>Garrafão de Conhecimento</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://sup-paciente.vercel.app/" target="_blank" rel="noopener" class="sidebar-link">
+            <i class="fas fa-user-md"></i>
+            <span>SupPaciente</span>
+          </a>
+        </li>
+      </ul>
+      <div class="sidebar-info">
+        <p class="sidebar-aviso">Esta é uma versão antiga do DocBox. Experimente o <a href="https://docbox-pro.vercel.app/" target="_blank" rel="noopener">DocBox Pro</a> com novos recursos!</p>
+      </div>
+      <div class="sidebar-section">
+        <span class="sidebar-section-title">Cor do Tema</span>
+        <div class="sidebar-cor-wrap">
+          <input type="color" id="cor-tema" value="#6c63ff" />
+          <button id="btn-restaurar-cor" class="btn-bg-sm" title="Restaurar padrão">
+            <i class="fas fa-undo"></i>
+          </button>
+        </div>
+      </div>
+      <div class="sidebar-section sidebar-bg-section">
+        <span class="sidebar-section-title">Personalizar Fundo</span>
+        <div class="sidebar-bg-input-wrap">
+          <input type="text" id="bg-url" placeholder="URL da imagem ou GIF..." />
+          <button id="btn-aplicar-bg" class="btn-bg-sm" title="Aplicar">
+            <i class="fas fa-check"></i>
+          </button>
+        </div>
+        <button id="btn-remover-bg" class="btn-bg-remover">
+          <i class="fas fa-trash-alt"></i> Remover fundo
+        </button>
+      </div>
+      <div class="sidebar-footer">
+        <span class="sidebar-credito">Desenvolvido por Casemiro Alves</span>
+      </div>
+    </nav>
+    <header class="app-header">
+      <div class="header-left">
+        <button id="btn-menu" class="btn-icon-only" title="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <span class="logo">DocBox</span>
+      </div>
+      <div class="header-right">
+        <button id="btn-atalhos" class="btn-icon-only" title="Atalhos">
+          <i class="fas fa-bolt"></i>
+        </button>
+        <button id="btn-nova-aba" class="btn-icon-only" title="Nova aba">
+          <i class="fas fa-plus"></i>
+        </button>
+        <button id="btn-tema" class="btn-icon-only" title="Alternar tema">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <div id="auto-save-indicator" class="auto-save-indicator"></div>
+
+    <section class="inputs-section">
+      <div class="input-line">
+        <div class="input-group">
+          <input type="text" id="chat-protocolo" placeholder="Protocolo" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="input-line duo">
+        <div class="input-group">
+          <div class="input-wrap">
+            <input type="text" id="cliente-nome" placeholder="Nome do cliente" autocomplete="off" />
+            <button type="button" id="btn-titular" class="btn-inset" title="Titular">
+              <i class="fas fa-user-check"></i>
+            </button>
+          </div>
+        </div>
+        <div class="input-group">
+          <input type="tel" id="telefone" placeholder="Telefone" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="input-line">
+        <div class="input-group">
+          <div class="input-wrap two-btns">
+            <input type="text" id="doc-id" placeholder="CPF ou CNPJ" autocomplete="off" />
+            <button type="button" id="btn-validar" class="btn-inset" title="Validar e copiar formatado">
+              <i class="fas fa-check"></i>
+            </button>
+            <button type="button" id="btn-limpar" class="btn-inset" title="Copiar sem pontuação">
+              <i class="fas fa-eraser"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="textarea-section">
+      <textarea id="anotacoes" placeholder="Registre o atendimento..."></textarea>
+    </section>
+
+    <section class="actions-section">
+      <button id="btn-copiar-atendimento" class="btn-primary">
+        <i class="fas fa-clipboard"></i> Copiar
+      </button>
+      <button id="btn-transferir" class="btn-secondary">
+        <i class="fas fa-paste"></i> Transferir
+      </button>
+      <button id="btn-apagar" class="btn-danger">
+        <i class="fas fa-eraser"></i> Apagar
+      </button>
+    </section>
+
+    <div id="mensagem-area" class="mensagem-area" role="status" aria-live="polite"></div>
+
+    <div id="quick-texts-modal" class="modal-overlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="qt-modal-title">Atalhos</h2>
+          <div class="modal-header-actions">
+            <button type="button" id="btn-editar-textos" class="btn-icon-only" title="Gerenciar textos personalizados">
+              <i class="fas fa-cog"></i>
+            </button>
+            <button type="button" id="btn-fechar-modal" class="btn-icon-only" title="Fechar">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div id="qt-atalhos-view">
+            <div id="qt-categories-container"></div>
+            <div class="qt-aviso">
+              <i class="fas fa-info-circle"></i>
+              <span>Os textos personalizados são salvos apenas neste navegador. Para acessar seus atalhos de qualquer lugar com sua conta, use o <a href="https://docbox-pro.vercel.app/" target="_blank" rel="noopener">DocBox Pro</a>.</span>
+            </div>
+            <button type="button" id="btn-fechar-atalhos" class="btn-secondary">Fechar</button>
+          </div>
+          <div id="qt-editor-view" style="display:none">
+            <button type="button" id="btn-voltar-atalhos" class="btn-secondary voltar-btn">
+              <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+            <div id="quick-texts-list" class="quick-texts-list"></div>
+            <div class="quick-texts-form">
+              <h3 id="qt-form-title">Adicionar novo texto</h3>
+              <input type="text" id="qt-label" placeholder="Nome do botão (ex: Fatura chat)" autocomplete="off" />
+              <textarea id="qt-text" placeholder="Conteúdo do texto..." rows="4"></textarea>
+              <div class="form-actions">
+                <button type="button" id="btn-cancelar-edit" class="btn-secondary" style="display:none">Cancelar</button>
+                <button type="button" id="btn-salvar-qt" class="btn-primary">Adicionar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="app-footer">
+      <button id="btn-lgpd" onclick="window.open('https://casemiro-dev.github.io/LGPD/', '_blank')">
+        <i class="fas fa-shield-alt"></i> LGPD
+      </button>
+    </footer>
+  </div>
+</body>
+</html>
