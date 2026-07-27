@@ -14,7 +14,7 @@ export function apagar() {
 export function transferir() {
   navigator.clipboard.readText()
     .then(texto => {
-      const protocoloMatch = texto.match(/Número de protocolo:\s*(\d{8,})/);
+      const protocoloMatch = texto.match(/N.mero de protocolo:\s*(\d{8,})/i);
       const protocolo = protocoloMatch ? protocoloMatch[1] : "";
 
       const nomeMatch = texto.match(/Nome:\s*([\s\S]*?)(?=Telefone:)/);
