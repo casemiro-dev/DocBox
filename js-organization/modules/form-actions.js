@@ -17,7 +17,7 @@ export function transferir() {
       const protocoloMatch = texto.match(/N.mero de protocolo:\s*(\d{8,})/i);
       const protocolo = protocoloMatch ? protocoloMatch[1] : "";
 
-      const nomeMatch = texto.match(/Nome:\s*([\s\S]*?)(?=Telefone:)/);
+      const nomeMatch = texto.match(/Nome:\s*(.*?)(?=Telefone:|$)/i);
       const nome = nomeMatch ? nomeMatch[1].trim() : "";
 
       const telMatch = texto.match(/Telefone:\s*(\d+)/);
