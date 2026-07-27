@@ -14,13 +14,14 @@ export function apagar() {
 export function transferir() {
   navigator.clipboard.readText()
     .then(texto => {
-      const protocoloMatch = texto.match(/N.mero de protocolo:\s*(\d{8,})/i);
+      // Usa [\s\S]*? para ignorar espaços e quebras de linha no meio
+      const protocoloMatch = texto.match(/N[\s\S]*?mero\s*de\s*protocolo:\s*(\d{8,})/i);
       const protocolo = protocoloMatch ? protocoloMatch[1] : "";
 
-      const nomeMatch = texto.match(/Nome:\s*(.*?)(?=Telefone:|$)/i);
+      const nomeMatch = texto.match(/Nome:\s*([\s\S]*?)(?=Telefone:|$)/i);
       const nome = nomeMatch ? nomeMatch[1].trim() : "";
 
-      const telMatch = texto.match(/Telefone:\s*(\d+)/);
+      const telMatch = texto.match(/Telefone:\s*(\d+)/i);
       let telefone = telMatch ? formatarTelefone(telMatch[1]) : "";
 
       const cpfMatch = texto.match(/(?:cpf|cnpj)\s*Cliente:\s*([\d.-]+)|CPF:\s*([\d.-]+)/i);
